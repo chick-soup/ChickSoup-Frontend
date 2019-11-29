@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="../common/reset.css">
+    <title>Chick Soup: 회원가입</title>
+</head>
+<body>
+    <main id="register">
+        <div id="register_header">
+            <h1 id="register_chicksoup">Chick Soup</h1>
+            <h2 id="register_register">회원가입</h2>
+        </div>
+        <div id="register_input_box_wrap">
+            <div class="register_input_box">
+                <input type="text" id="register_input_email" placeholder="이메일(최대 30자)">
+                <button class="register_email_button">확인</button>
+            </div>
+            <div class="register_input_box">
+                <input type="text" id="register_input_email_check" placeholder="인증 번호 입력">
+                <button class="register_email_button">인증</button>
+            </div>
+            <div class="register_input_box">
+                <input type="text" id="register_input_password" placeholder="비밀번호(최소 8자)">
+            </div>
+            <div class="register_input_box">
+                <input type="text" id="register_input_password_check" placeholder="비밀번호 확인">
+            </div>
+        </div>
+        <button id="next_button">
+            <a href="../userInfo/userInfo.html">다음</a>
+        </button>
+    </main>
+    <script src="register.js"></script>
+</body>
+</html>

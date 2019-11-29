@@ -1,0 +1,42 @@
+#header_header {
+    position: relative;
+    z-index: 100;
+}
+#setting > #header_header {
+    background-color: white;
+}
+#header_header > main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1220px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+#setting > #header_header > main {
+    background-color: inherit;
+}
+#header_chicksoup {
+    font-size: 30px;
+}
+#header_nav > ul {
+    display: flex;
+    align-items: center;
+}
+#header_nav > ul > li {
+    margin: 0 20px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+#header_nav_setting {
+    width: 20px;
+}
+#go_back {
+    position: absolute;
+    top: 90px;
+}
+#go_back > img {
+    width: 30px;
+    cursor: pointer;
+}

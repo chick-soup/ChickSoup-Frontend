@@ -1,0 +1,53 @@
+body {
+    background-color: #FEE100;
+    z-index: -1;
+}
+body::before {
+    content: "";
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../img/identifyBackImg.svg');
+    background-size: 1500px;
+    background-position: 50% 0;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+#identify {
+    width: 1220px;
+    margin: 0 auto;
+    text-align: center;
+}
+#identify > section {
+    padding-top: 150px;
+}
+#identify_title {
+    font-size: 60px;
+    font-weight: bold;
+    color: #3B1C1C;
+    user-select: none;
+}
+#identify_show_id {
+    font-size: 25px;
+    font-weight: bold;
+    color: black;
+}
+#identify_show_id > p {
+    width: 500px;
+    padding: 50px 20px;
+    margin: 30px auto;
+    border-radius: 10px;
+    background-color: white;
+}
+#identify_change_id {
+    width: 400px;
+    height: 40px;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    background-color: #3B1C1C;
+    font-size: 17px;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+}
