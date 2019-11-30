@@ -24,7 +24,7 @@ const childNodesOne = document.body.childNodes[1],
 childNodesOne.insertAdjacentHTML("afterbegin", header);
 
 function IsSetting() {
-    if (childNodesId === "friendList" || childNodesId === "setting" || childNodesId === "identify")
+    if (childNodesId === "friendList" || childNodesId === "setting" || childNodesId === "identify" || childNodesId === "searchFriend")
         return true;
     return false;
 }
