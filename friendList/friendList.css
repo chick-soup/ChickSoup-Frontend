@@ -35,9 +35,6 @@
     background-color: inherit;
     outline: none;
 }
-#friendList_body {
-    border: 1px solid red;
-}
 #friendList_body > * {
     margin-left: 16px;
 }
@@ -48,29 +45,29 @@
     width: 16px;
     margin-top: 16px
 }
-#friendList_viewprofile {
-    border: 1px solid black;
-}
-#friendList_myprofile {
-    border: 1px solid blue;
-}
 #friendList_myprofile > div > h1 {
     font-size: 20px;
 }
 #friendList_myprofile .friendList_profile_list {
     border-bottom: 2px solid #FAE100;
 }
-#friendList_myprofile .friendList_profile_list {
+#friendList_otherprofile .friendList_profile_list {
     border-bottom: 2px solid #393939;
 }
+#friendList_otherprofile {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
 .friendList_profile_list {
+    position: relative;
+    width: 500px;
     display: flex;
     align-items: center;
-    width: 500px;
     padding: 24px 0 32px 0;
 }
 .friendList_profile_list > img {
-    width: 50px;
+    width: 70px;
     margin-right: 8px;
     border-radius: 16px;
 }
@@ -79,7 +76,50 @@
     align-items: center;
     justify-content: space-around;
 }
+.friendList_profile_userInfo > div > img {
+    cursor: pointer;
+}
 .friendList_profile_userInfo > p {
     font-size: 13px;
     font-weight: 600;
+}
+.friendList_details {
+    position: absolute;
+    right: 0;
+}
+.friendList_details > img {
+    width: 40px;
+    height: 50px;
+    cursor: pointer;
+}
+.friendList_details_nav {
+    position: relative;
+    display: none;
+}
+.showDetails {
+    display: block;
+}
+.friendList_details_nav > ul {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    padding: 20px;
+    border-radius: 10px;
+    color: #ffffff;
+    background-image: url('../img/friendDegailBackImg.svg');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.friendList_details_nav_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 24px 0;
+    cursor: pointer;
+}
+.friendList_details_nav_item > span {
+    font-size: 12px;
 }
