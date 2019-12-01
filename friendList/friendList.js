@@ -17,6 +17,90 @@ const friendListObj = [
         "phone": "010-2222-4444",
         "block": true,
         "hide": false,
+    }, {
+        "profileImg": "face.svg",
+        "bookmark": false,
+        "name": "용석현",
+        "phone": "010-2222-4444",
+        "block": true,
+        "hide": true,
+    }, {
+        "profileImg": "face.svg",
+        "bookmark": false,
+        "name": "손민기",
+        "phone": "010-2222-4444",
+        "block": false,
+        "hide": false,
+    }, {
+        "profileImg": "face.svg",
+        "bookmark": true,
+        "name": "이성진",
+        "phone": "010-2222-4444",
+        "block": true,
+        "hide": false,
+    }, {
+        "profileImg": "face.svg",
+        "bookmark": true,
+        "name": "김어진",
+        "phone": "010-2222-4444",
+        "block": true,
+        "hide": false,
+    }, {
+        "profileImg": "face.svg",
+        "bookmark": true,
+        "name": "이지수",
+        "phone": "010-2222-4444",
+        "block": true,
+        "hide": false,
+    }, {
+        "profileImg": "face.svg",
+        "bookmark": true,
+        "name": "박진홍",
+        "phone": "010-2222-4444",
+        "block": true,
+        "hide": true,
+    }, {
+        "profileImg": "face.svg",
+        "bookmark": true,
+        "name": "박진홍",
+        "phone": "010-2222-4444",
+        "block": true,
+        "hide": true,
+    }, {
+        "profileImg": "face.svg",
+        "bookmark": true,
+        "name": "박진홍",
+        "phone": "010-2222-4444",
+        "block": true,
+        "hide": true,
+    }, {
+        "profileImg": "face.svg",
+        "bookmark": true,
+        "name": "박진홍",
+        "phone": "010-2222-4444",
+        "block": true,
+        "hide": true,
+    }, {
+        "profileImg": "face.svg",
+        "bookmark": true,
+        "name": "박진홍",
+        "phone": "010-2222-4444",
+        "block": true,
+        "hide": true,
+    }, {
+        "profileImg": "face.svg",
+        "bookmark": true,
+        "name": "박진홍",
+        "phone": "010-2222-4444",
+        "block": true,
+        "hide": true,
+    }, {
+        "profileImg": "face.svg",
+        "bookmark": true,
+        "name": "박진홍",
+        "phone": "010-2222-4444",
+        "block": true,
+        "hide": true,
     },
 ];
 
@@ -54,12 +138,34 @@ function friendFrame(profileImg, bookmark, name, phone) {
     return frame;
 }
 
-function setPageTitle(title) {
-    friendList.pageTitle.innerHTML = title;
+function friendFrameTwo(profileImg, name, phone, title) {
+    let frame =
+        `<li class="friendList_profile_list">
+            <img src="../img/${profileImg}" alt="profileImage">
+            <div class="friendList_profile_userInfo">
+                <div>
+                    <h3 class="friendList_profile_userInfo_name">${name}</h3>
+                </div>
+                <p class="friendList_profile_userInfo_phonenum">${phone}</p>
+            </div>
+            <div class="friendList_details">
+                <img src="../img/details.svg" alt="friendListDetails" onclick="detailImgInit(this);">
+                <nav class="friendList_details_nav">
+                    <ul>
+                        <li class="friendList_details_nav_item">
+                            <img src="../img/blockFriend.svg" alt="block">
+                            <span>${title} 해제하기</span>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </li>`;
+    return frame;
 }
 
 function makeBookmarkFriendList(list) {
-    friendList.otherprofile.innerHTML = "";
+    removeOtherprofileInnerHTML();
+    setPageTitle("내 친구 보기");
     friendListObj.filter(IsOnBookmark).map((datas) => {
         friendList.otherprofile.insertAdjacentHTML(
             "beforeend",
@@ -68,21 +174,35 @@ function makeBookmarkFriendList(list) {
     });
 }
 
+function makeHideFriendList(list) {
+    // friendListObj -> list
+    removeOtherprofileInnerHTML();
+    defaultStar();
+    setPageTitle("숨김 목록 보기");
+    friendListObj.filter(IsHided).map((datas) => {
+        friendList.otherprofile.insertAdjacentHTML(
+            "beforeend",
+            friendFrameTwo(datas.profileImg, datas.name, datas.phone, "숨김")
+        );
+    });
+}
+
 function makeBlockFriendList(list) {
     // friendListObj -> list
-    friendList.otherprofile.innerHTML = "";
+    removeOtherprofileInnerHTML();
+    defaultStar();
     setPageTitle("차단 목록 보기");
     friendListObj.filter(IsBlocked).map((datas) => {
         friendList.otherprofile.insertAdjacentHTML(
             "beforeend",
-            friendFrame(datas.profileImg, datas.bookmark, datas.name, datas.phone)
+            friendFrameTwo(datas.profileImg, datas.name, datas.phone, "차단")
         );
     });
 }
 
 function makeFriendList(list) {
     // friendListObj -> list
-    friendList.otherprofile.innerHTML = "";
+    removeOtherprofileInnerHTML();
     setPageTitle("내 친구 보기");
     friendListObj.map((datas) => {
         friendList.otherprofile.insertAdjacentHTML(
@@ -90,6 +210,10 @@ function makeFriendList(list) {
             friendFrame(datas.profileImg, datas.bookmark, datas.name, datas.phone)
         );
     });
+}
+
+function removeOtherprofileInnerHTML() {
+    friendList.otherprofile.innerHTML = "";
 }
 
 function showDetails(el) {
@@ -102,8 +226,23 @@ function defaultDetails() {
     })
 }
 
+function defaultStar() {
+    let star = document.querySelector("#friendList_bookmark");
+    star.setAttribute("src", "../img/star.svg");
+}
+
+function setPageTitle(title) {
+    friendList.pageTitle.innerHTML = title;
+}
+
 function disShowDetails(el) {
     el.parentNode.childNodes[3].classList.remove("showDetails");
+}
+
+function IsHided(data) {
+    if(data.hide)
+        return true;
+    return false;
 }
 
 function IsBlocked(data) {
@@ -112,14 +251,14 @@ function IsBlocked(data) {
     return false;
 }
 
-function IsOnDetails(el) {
-    if (el.parentNode.childNodes[3].classList[1])
+function IsOnBookmark(data) {
+    if (data.bookmark)
         return true;
     return false;
 }
 
-function IsOnBookmark(data) {
-    if (data.bookmark)
+function IsOnDetails(el) {
+    if (el.parentNode.childNodes[3].classList[1])
         return true;
     return false;
 }

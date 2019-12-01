@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="friendList.css">
     <title>Chick Soup: 친구 리스트</title>
 </head>
+
 <body>
     <main id="friendList">
         <nav id="friendList_head">
@@ -17,19 +19,20 @@
             </div>
             <div id="friendList_searchmyfriend">
                 <label for="friendList_searchmyfriend_input">
-                    <img src="../img/search.svg"
-                    alt="magnifier">
+                    <img src="../img/search.svg" alt="magnifier">
                 </label>
-                <input type="text" 
-                id="friendList_searchmyfriend_input" 
-                placeholder="친구 검색">
+                <input type="text" id="friendList_searchmyfriend_input" placeholder="친구 검색">
             </div>
         </nav>
         <div id="friendList_body">
             <nav id="friendList_sideicon">
                 <img src="../img/star.svg" id="friendList_bookmark" onclick="bookmarkInit();" alt="bookmark">
-                <img src="../img/addFriend.svg" id="friendList_addfriend" alt="addAsAFriend" onclick="location.href='../AddFriendList/AddFriendList.html'">
-                <img src="../img/blockFriend.svg" alt="blockFriend" onclick="makeBlockFriendList();">
+                <img src="../img/blockFriend.svg" id="friendList_blockfriend" onclick="makeBlockFriendList();"
+                    alt="blockFriend">
+                <img src="../img/hideFriend.svg" id="friendList_hidefriend" onclick="makeHideFriendList();"
+                    alt="hideFriend">
+                <img src="../img/addFriend.svg" id="friendList_addfriend"
+                    onclick="location.href='../AddFriendList/AddFriendList.html'" alt="addAsAFriend">
             </nav>
             <section id="friendList_viewprofile">
                 <div id="friendList_myprofile">
@@ -39,7 +42,6 @@
                             <img src="../img/face.svg" alt="profileImage">
                             <div class="friendList_profile_userInfo">
                                 <div>
-                                    <img src="../img/star.svg" alt="bookmark">
                                     <h3 class="friendList_profile_userInfo_name">유재민</h3>
                                 </div>
                                 <p class="friendList_profile_userInfo_phonenum">010-1111-3333</p>
@@ -54,4 +56,5 @@
     <script src="friendList.js"></script>
     <script src="../common/header.js"></script>
 </body>
+
 </html>
