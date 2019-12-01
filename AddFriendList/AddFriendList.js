@@ -57,3 +57,7 @@ addFriendList.searchInput.addEventListener("keyup", (e) => {
         setTitle(e.target.value);
     }
 });
+
+window.onload = () => {
+    makeAddFrinedList();
+}

@@ -59,6 +59,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding-bottom: 32px;
 }
 .friendList_profile_list {
     position: relative;
@@ -102,7 +103,6 @@
 }
 .friendList_details_nav > ul {
     position: absolute;
-    top: -20px;
     left: 50%;
     transform: translateX(-50%);
     width: 120px;
@@ -111,8 +111,9 @@
     color: #ffffff;
     background-image: url('../img/friendDegailBackImg.svg');
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
+    z-index: 1;
 }
 .friendList_details_nav_item {
     display: flex;
