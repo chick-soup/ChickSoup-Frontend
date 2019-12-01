@@ -146,3 +146,4 @@ window.onload = () => {
     friendList.bookmark = document.querySelector("#friendList_bookmark");
     friendList.addfriend = document.querySelector("#friendList_addfriend");
 }
+// asdsd
