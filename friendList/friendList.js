@@ -1,5 +1,6 @@
 const friendList = {
     "otherprofile": document.querySelector("#friendList_otherprofile"),
+    "pageTitle": document.querySelector("#friendList_seemyfriend > h1"),
 };
 const friendListObj = [
     {
@@ -53,6 +54,10 @@ function friendFrame(profileImg, bookmark, name, phone) {
     return frame;
 }
 
+function setPageTitle(title) {
+    friendList.pageTitle.innerHTML = title;
+}
+
 function makeBookmarkFriendList(list) {
     friendList.otherprofile.innerHTML = "";
     friendListObj.filter(IsOnBookmark).map((datas) => {
@@ -66,7 +71,8 @@ function makeBookmarkFriendList(list) {
 function makeBlockFriendList(list) {
     // friendListObj -> list
     friendList.otherprofile.innerHTML = "";
-    friendListObj.filter().map((datas) => {
+    setPageTitle("차단 목록 보기");
+    friendListObj.filter(IsBlocked).map((datas) => {
         friendList.otherprofile.insertAdjacentHTML(
             "beforeend",
             friendFrame(datas.profileImg, datas.bookmark, datas.name, datas.phone)
@@ -77,6 +83,7 @@ function makeBlockFriendList(list) {
 function makeFriendList(list) {
     // friendListObj -> list
     friendList.otherprofile.innerHTML = "";
+    setPageTitle("내 친구 보기");
     friendListObj.map((datas) => {
         friendList.otherprofile.insertAdjacentHTML(
             "beforeend",
@@ -146,4 +153,3 @@ window.onload = () => {
     friendList.bookmark = document.querySelector("#friendList_bookmark");
     friendList.addfriend = document.querySelector("#friendList_addfriend");
 }
-// asdsd
