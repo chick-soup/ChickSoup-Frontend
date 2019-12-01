@@ -27,8 +27,8 @@
         </nav>
         <div id="friendList_body">
             <nav id="friendList_sideicon">
-                <img src="../img/star.svg" alt="bookmark">
-                <img src="../img/addFriend.svg" alt="addAsAFriend">
+                <img src="../img/star.svg" id="friendList_bookmark" onclick="bookmarkInit();" alt="bookmark">
+                <img src="../img/addFriend.svg" id="friendList_addfriend" alt="addAsAFriend">
             </nav>
             <section id="friendList_viewprofile">
                 <div id="friendList_myprofile">
@@ -46,18 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="friendList_otherprofile">
-                    <div class="friendList_profile_list">
-                        <img src="../img/face.svg" alt="profileImage">
-                        <div class="friendList_profile_userInfo">
-                            <div>
-                                <img src="../img/star.svg" alt="bookmark">
-                                <h3 class="friendList_profile_userInfo_name">유재민</h3>
-                            </div>
-                            <p class="friendList_profile_userInfo_phonenum">010-1111-3333</p>
-                        </div>
-                    </div>
-                </div>
+                <ul id="friendList_otherprofile"></ul>
             </section>
         </div>
     </main>
