@@ -74,21 +74,18 @@
 #editprofile_change_info > input::placeholder {
     color: black;
 }
-
-
-
-#myprofile_userinfo_nav > ul {
+#editprofile_userinfo_nav > ul {
     display: flex;
 }
-#myprofile_userinfo_nav > ul > li {
+#editprofile_userinfo_nav > ul > li {
     margin: 10px 30px;
     cursor: pointer;
 }
-#myprofile_userinfo_nav > ul > li > img {
+#editprofile_userinfo_nav > ul > li > img {
     display: block;
     width: 50px;
     margin: 10px auto;
 }
-#myprofile_userinfo_nav > ul > li > p {
+#editprofile_userinfo_nav > ul > li > p {
     font-size: 13px;
 }
