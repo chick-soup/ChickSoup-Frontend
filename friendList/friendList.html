@@ -27,8 +27,8 @@
         </nav>
         <div id="friendList_body">
             <nav id="friendList_sideicon">
-                <img src="../img/star.svg" alt="bookmark">
-                <img src="../img/addFriend.svg" alt="addAsAFriend">
+                <img src="../img/star.svg" id="friendList_bookmark" onclick="bookmarkInit();" alt="bookmark">
+                <img src="../img/addFriend.svg" id="friendList_addfriend" alt="addAsAFriend">
             </nav>
             <section id="friendList_viewprofile">
                 <div id="friendList_myprofile">
@@ -46,70 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <ul id="friendList_otherprofile">
-
-                    <li class="friendList_profile_list">
-                        <img src="../img/face.svg" alt="profileImage">
-                        <div class="friendList_profile_userInfo">
-                            <div>
-                                <img src="../img/star.svg" alt="bookmark">
-                                <h3 class="friendList_profile_userInfo_name">유재민</h3>
-                            </div>
-                            <p class="friendList_profile_userInfo_phonenum">010-1111-3333</p>
-                        </div>
-                        <div class="friendList_details">
-                            <img src="../img/details.svg" alt="friendListDetails" onclick="">
-                            <nav class="friendList_details_nav">
-                                <ul>
-                                    <li class="friendList_details_nav_item">
-                                        <img src="../img/removeFriend.svg" alt="remove">
-                                        <span>친구 삭제하기</span>
-                                    </li>
-                                    <li class="friendList_details_nav_item">
-                                        <img src="../img/blockFriend.svg" alt="block">
-                                        <span>차단하기</span>
-                                    </li>
-                                    <li class="friendList_details_nav_item">
-                                        <img src="../img/hideFriend.svg" alt="hide">
-                                        <span>숨기기</span>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </li>
-
-
-                    <li class="friendList_profile_list">
-                        <img src="../img/face.svg" alt="profileImage">
-                        <div class="friendList_profile_userInfo">
-                            <div>
-                                <img src="../img/starYellow.svg" alt="bookmark">
-                                <h3 class="friendList_profile_userInfo_name">김어진</h3>
-                            </div>
-                            <p class="friendList_profile_userInfo_phonenum">010-1111-3333</p>
-                        </div>
-                        <div class="friendList_details">
-                            <img src="../img/details.svg" alt="friendListDetails" onclick="">
-                            <nav class="friendList_details_nav">
-                                <ul>
-                                    <li class="friendList_details_nav_item">
-                                        <img src="../img/removeFriend.svg" alt="remove">
-                                        <span>친구 삭제하기</span>
-                                    </li>
-                                    <li class="friendList_details_nav_item">
-                                        <img src="../img/blockFriend.svg" alt="block">
-                                        <span>차단하기</span>
-                                    </li>
-                                    <li class="friendList_details_nav_item">
-                                        <img src="../img/hideFriend.svg" alt="hide">
-                                        <span>숨기기</span>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </li>
-
-                </ul>
+                <ul id="friendList_otherprofile"></ul>
             </section>
         </div>
     </main>
