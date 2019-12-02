@@ -1,34 +1,35 @@
-body::after {
+/* *myprofile */
+#myprofile {
+    color: #ffffff;
+}
+#myprofile::after {
     content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
     background-image: url('../img/myprofileBackImg.svg');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: -2;
     filter: blur(15px);
 }
-body::before {
+#myprofile::before {
     content: "";
     position: absolute;
     min-width: 100vw;
     min-height: 100vh;
-    opacity: 1;
+    opacity: 0.5;
     z-index: -1;
-    background-color: rgba(0, 0, 0, 0.7);
-}
-#myprofile {
-    color: #ffffff;
+    background-color: black;
 }
 #myprofile_content {
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     padding-top: 150px;
 }
 #myprofile_content > img {
@@ -59,5 +60,61 @@ body::before {
     margin: 10px auto;
 }
 #myprofile_userinfo_nav > ul > li > p {
+    font-size: 13px;
+}
+/* *editprofile */
+#editprofile_change_photo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#editprofile_change_photo > label {
+    margin: 15px 20px;
+    padding: 8px 9px;
+    border-radius: 8px;
+    border: 1px solid #707070;
+    color: black;
+    background-color: hsla(0, 0%, 100%, 0.8);
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: bold;
+}
+#editprofile_change_photo > input {
+    display: none;
+}
+#editprofile_change_info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#editprofile_change_info > input {
+    width: 290px;
+    margin: 15px auto 0;
+    padding: 10px 13px;
+    border: 0;
+    border-radius: 13px;
+    color: black;
+    background-color: hsla(0, 0%, 100%, 0.8);
+    font-size: 13px;
+    font-weight: bold;
+    outline: none;
+}
+#editprofile_change_info > input::placeholder {
+    color: black;
+}
+#editprofile_userinfo_nav > ul {
+    display: flex;
+}
+#editprofile_userinfo_nav > ul > li {
+    margin: 10px 30px;
+    cursor: pointer;
+}
+#editprofile_userinfo_nav > ul > li > img {
+    display: block;
+    width: 50px;
+    margin: 10px auto;
+}
+#editprofile_userinfo_nav > ul > li > p {
     font-size: 13px;
 }
