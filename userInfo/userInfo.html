@@ -21,9 +21,11 @@
                 </label>
                 <input type="file" id="userInfo_profileimage_input">
             </div>
-            <div class="userInfo_input_box">
-                <input type="text" id="userInfo_input_nickname" placeholder="닉네임">
-            </div>
+            <label class="userInfo_input_box">
+                <input type="text" onkeyup="checkNicknameLength(this.value.length);" 
+                id="userInfo_input_nickname" placeholder="닉네임(최대 12자)">
+            </label>
+            <span class="errorText"></span>
         </div>
         <button id="join_button">
             <a href="../login/login.html">회원가입</a>

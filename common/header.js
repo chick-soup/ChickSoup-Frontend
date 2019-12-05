@@ -1,3 +1,4 @@
+const server = "http://chicksoup.pythonanywhere.com";
 const childNodesOne = document.body.childNodes[1],
     childNodesId = childNodesOne.getAttribute("id"),
     goBack = `<div id="go_back">

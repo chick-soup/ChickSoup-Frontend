@@ -22,6 +22,7 @@ body {
     padding: 20px 0;
 }
 .register_input_box {
+    display: block;
     position: relative;
     margin: 10px auto 0;
     padding: 10px 20px;
@@ -32,7 +33,7 @@ body {
     margin-top: 10px;
 }
 .register_input_box > input {
-    width: 100%;
+    width: 85%;
     height: 15px;
     font-size: 13px;
     border: 0;
@@ -50,9 +51,8 @@ body {
     border-radius: 17px;
     transform: translateY(-50%);
     background-color: #3B1C1C;
-    color: #ffffff;
+    color: white;
     font-weight: bold;
-    outline: none;
     cursor: pointer;
 }
 #next_button {
@@ -63,6 +63,8 @@ body {
     border-radius: 5px;
     background-color: hsl(0, 36%, 17%);
     box-shadow: 0 0 5px hsl(0, 0%, 43%);
+    color: white;
+    cursor: pointer;
 }
 #next_button > a {
     display: inline-block;
@@ -70,4 +72,13 @@ body {
     color: #ffffff;
     font-size: 17px;
     text-decoration: none;
+}
+.errorText {
+    display: none;
+    color: red;
+    font-size: 8px;
+    margin-left: 16px;
+}
+.goodText {
+    color: #005aff;
 }
