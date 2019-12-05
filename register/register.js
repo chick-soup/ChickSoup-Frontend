@@ -5,7 +5,7 @@ const register = {
     "inputPassword": document.querySelector("#register_input_password"),
     "inputPasswordCheck": document.querySelector("#register_input_password_check"),
     "passwordNotMath": document.querySelector("#passwordNotMatch"),
-    "errorText": document.querySelectorAll(".errorText"),
+    "errorText": document.querySelectorAll(".error_text"),
 }
 
 function registerEmailCheck() {
@@ -40,7 +40,7 @@ function registerEmailAuth() {
     };
     axiosPost(url, data).then(() => {
         errorText.innerHTML = "인증에 성공했습니다."
-        errorText.classList.add("goodText");
+        errorText.classList.add("good_text");
     }).catch((error) => {
         const state = error.response.status;
         setTextDisplay(errorText, "inline");
