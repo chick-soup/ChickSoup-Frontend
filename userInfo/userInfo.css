@@ -89,7 +89,7 @@ body {
     box-shadow: 0 0 5px hsl(0, 0%, 43%);
     cursor: pointer;
 }
-.errorText {
+.error_text {
     display: none;
     color: red;
     font-size: 12px;
