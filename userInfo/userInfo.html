@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="userInfo.css">
     <link rel="stylesheet" href="../common/reset.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Chick Soup: 유저 정보 입력</title>
 </head>
 <body>
@@ -19,7 +20,7 @@
                 <label for="userInfo_profileimage_input" id="userInfo_profileimage_input_label">
                     <img src="../img/profileBaclkWhite.svg" alt="profileImage">
                 </label>
-                <input type="file" id="userInfo_profileimage_input">
+                <input type="file" id="userInfo_profileimage_input" onchange="encodeImageFileAsURL(this);">
             </div>
             <label class="userInfo_input_box">
                 <input type="text" onkeyup="checkNicknameLength(this.value.length);" 
@@ -27,9 +28,7 @@
             </label>
             <span class="errorText"></span>
         </div>
-        <button id="join_button">
-            <a href="../login/login.html">회원가입</a>
-        </button>
+        <button id="join_button" onclick="signup();">완료</button>
     </main>
     <script src="userInfo.js"></script>
 </body>

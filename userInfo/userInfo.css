@@ -26,20 +26,19 @@ body {
 }
 #userInfo_profileimage_input_label {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     width: 350px;
     height: 300px;
     line-height: 350px;
-    border: 2px solid black;
     border-radius: 15px;
+    border: 2px solid black;
+    cursor: pointer;
 }
 #userInfo_profileimage_input_label > img {
     min-width: 30%;
     max-width: 100%;
     max-height: 100%;
-    border-radius: 50%;
-    cursor: pointer;
 }
 #userInfo_profileimage_input {
     display: none;
@@ -85,15 +84,10 @@ body {
     padding: 10px 20px;
     border: 0;
     border-radius: 5px;
+    color: white;
     background-color: hsl(0, 36%, 17%);
     box-shadow: 0 0 5px hsl(0, 0%, 43%);
-}
-#join_button > a {
-    display: inline-block;
-    width: 100%;
-    color: #ffffff;
-    font-size: 17px;
-    text-decoration: none;
+    cursor: pointer;
 }
 .errorText {
     display: none;
