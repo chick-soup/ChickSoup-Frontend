@@ -45,6 +45,7 @@ body {
     display: none;
 }
 .userInfo_input_box {
+    display: block;
     position: relative;
     margin: 10px auto 0;
     padding: 10px 20px;
@@ -93,4 +94,10 @@ body {
     color: #ffffff;
     font-size: 17px;
     text-decoration: none;
+}
+.errorText {
+    display: none;
+    color: red;
+    font-size: 12px;
+    margin-left: 16px;
 }
