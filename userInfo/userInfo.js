@@ -3,7 +3,7 @@ const userInfo = {
     "nickname": document.querySelector("#userInfo_input_nickname"),
     "img": document.querySelector("#userInfo_profileimage_input_label > img"),
     "imgInput": document.querySelector("#userInfo_profileimage_input"),
-    "errorText": document.querySelectorAll(".errorText"),
+    "errorText": document.querySelectorAll(".error_text"),
 }
 
 const signup = () => {
