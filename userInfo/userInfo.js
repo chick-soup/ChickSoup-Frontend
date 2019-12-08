@@ -3,11 +3,7 @@ const userInfo = {
     "errorText": document.querySelectorAll(".errorText"),
     "nickname": document.querySelector("#userInfo_input_nickname"),
     "imgInput": document.querySelector("#userInfo_profileimage_input"),
-<<<<<<< Updated upstream
     "errorText": document.querySelectorAll(".error_text"),
-=======
-    "img": document.querySelector("#userInfo_profileimage_input_label > img"),
->>>>>>> Stashed changes
 }
 
 const setTextDisplay = (el, dis) => {
