@@ -57,8 +57,7 @@ const registerEmailAuth = () => {
     setTextDisplay(errorText, "inline");
     errorText.innerHTML = "인증코드를 전송 중입니다.";
     axiosPost(url, data).then(() => {
-        errorText.innerHTML = "인증에 성공했습니다."
-        errorText.classList.add("goodText");
+        errorText.innerHTML = "인증에 성공했습니다.";
     }).catch((error) => {
         const state = error.response.status;
         if(state === 470) {
@@ -73,7 +72,7 @@ const registerEmailAuth = () => {
 
 const signup = () => {
     const errorText = register.errorText[2];
-    const url = "/user/signup";
+    const url = "/signup";
     const data = {
         "email": register.inputEmail.value.trim(),
         "password": register.inputPassword.value.trim(),

@@ -1,13 +1,25 @@
-const server = "http://chicksoup.pythonanywhere.com";
+const server = "http://ec2-13-209-99-114.ap-northeast-2.compute.amazonaws.com:8080";
 const login = {
     "email": document.querySelector("#login_input_email"),
     "password": document.querySelector("#login_input_password"),
     "errorText" : document.querySelectorAll(".error_text"),
 };
 
-function signin() {
+const setTextDisplay = (el, dis) => {
+    el.style.display = dis;
+}
+
+const axiosPost = (url, data) => {
+    return axios({
+        method: "POST",
+        url: `${server}${url}`,
+        data: data,
+    })
+}
+
+const signin = () => {
     const errorText = login.errorText[0];
-    const url = "/user/login";
+    const url = "/login";
     const data = {
         "email": login.email.value.trim(),
         "password": login.password.value.trim(),
@@ -24,16 +36,4 @@ function signin() {
             errorText.innerHTML = "이메일과 비밀번호가 일치하지 않습니다.";
         }
     })
-}
-
-function axiosPost(url, data) {
-    return axios({
-        method: "POST",
-        url: `${server}${url}`,
-        data: data,
-    })
-}
-
-function setTextDisplay(el, dis) {
-    el.style.display = dis;
 }

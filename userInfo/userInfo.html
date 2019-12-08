@@ -20,11 +20,12 @@
                 <label for="userInfo_profileimage_input" id="userInfo_profileimage_input_label">
                     <img src="https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/14.png" alt="profileImage">
                 </label>
-                <input type="file" id="userInfo_profileimage_input" onchange="convertImageFileAsFormData(this);"> <!-- encodeImageFileAsURL(this); -->
+                <input type="file" id="userInfo_profileimage_input"
+                    onchange="encodeImageFileAsURL(this);">
             </div>
             <label class="userInfo_input_box">
-                <input type="text" onkeyup="checkNicknameLength(this.value.length);" 
-                id="userInfo_input_nickname" placeholder="닉네임(최대 12자)">
+                <input type="text" onkeyup="checkNicknameLength();" 
+                    id="userInfo_input_nickname" placeholder="닉네임(최대 12자)">
             </label>
             <span class="error_text"></span>
         </div>

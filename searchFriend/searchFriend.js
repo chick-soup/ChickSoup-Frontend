@@ -1,12 +1,19 @@
 const searchFriend = {
     "result": document.querySelector("#search_result"),
-    "input": document.querySelector("#search_div > input"),
-    "searchButton": document.querySelector("#search_div > img"),
+    "input": document.querySelector("#search_div_div > input"),
+    "searchButton": document.querySelector("#search_div_div > img"),
     
 };
 const searchResult = {
     "img": "unknownProfile.svg",
     "name": "이지수",
+};
+
+const shakeElement = (el) => {
+    el.classList.add("shake");
+    setTimeout(() => {
+        elclassList.remove("shake");
+    }, 1000);
 };
 
 const resultFrame = (name, img) => {
@@ -28,7 +35,8 @@ const showSearchResult = (e) => {
     if(searchFriend.input.value === "이지수") {
         searchFriend.result.innerHTML = resultFrame(searchResult.name, searchResult.img);
     } else {
-        
+        searchFriend.result.innerHTML = "";
+        shakeElement(searchFriend.input.parentNode);
     }
 };
 
