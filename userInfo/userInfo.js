@@ -3,11 +3,7 @@ const userInfo = {
     "errorText": document.querySelectorAll(".errorText"),
     "nickname": document.querySelector("#userInfo_input_nickname"),
     "imgInput": document.querySelector("#userInfo_profileimage_input"),
-<<<<<<< Updated upstream
     "errorText": document.querySelectorAll(".error_text"),
-=======
-    "img": document.querySelector("#userInfo_profileimage_input_label > img"),
->>>>>>> Stashed changes
 }
 
 const setTextDisplay = (el, dis) => {
@@ -59,7 +55,7 @@ const encodeImageFileAsURL = (el) => {
         userInfo.img.setAttribute("src", e.target.result);
     }
     reader.readAsDataURL(file);
-    // ? convertImageFileAsFormData를 사용하기 위해서 
+    // ? profile이 있을 경우 사용자의 이미지를 서버로 전달하기 위해
     sessionStorage.setItem("profile", true);
 };
 
