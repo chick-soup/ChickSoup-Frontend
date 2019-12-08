@@ -39,10 +39,7 @@ body {
     min-width: 30%;
     max-width: 100%;
     max-height: 100%;
-<<<<<<< Updated upstream
-=======
     cursor: pointer;
->>>>>>> Stashed changes
 }
 #userInfo_profileimage_input {
     display: none;

@@ -75,8 +75,7 @@ body {
 }
 .errorText {
     display: none;
-    color: red;
-    font-size: 8px;
+    font-size: 12px;
     margin-left: 16px;
 }
 .goodText {
