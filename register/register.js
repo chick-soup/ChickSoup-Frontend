@@ -4,7 +4,7 @@ const register = {
     "inputEmailCheck": document.querySelector("#register_input_email_check"),
     "inputPassword": document.querySelector("#register_input_password"),
     "inputPasswordCheck": document.querySelector("#register_input_password_check"),
-    "errorText": document.querySelectorAll(".errorText"),
+    "errorText": document.querySelectorAll(".error_text"),
 }
 
 const axiosPost = (url, data) => {
@@ -58,7 +58,6 @@ const registerEmailAuth = () => {
     errorText.innerHTML = "인증코드를 전송 중입니다.";
     axiosPost(url, data).then(() => {
         errorText.innerHTML = "인증에 성공했습니다.";
-        errorText.classList.add("goodText");
     }).catch((error) => {
         const state = error.response.status;
         if(state === 470) {
@@ -73,7 +72,7 @@ const registerEmailAuth = () => {
 
 const signup = () => {
     const errorText = register.errorText[2];
-    const url = "/user/signup";
+    const url = "/signup";
     const data = {
         "email": register.inputEmail.value.trim(),
         "password": register.inputPassword.value.trim(),

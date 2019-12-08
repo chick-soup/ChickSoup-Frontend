@@ -24,7 +24,10 @@ body {
 #search_div > h2 {
     color: #FEE100;
 }
-#search_div > input {
+#search_div_div {
+    width: 100%;
+}
+#search_div_div > input {
     margin-top: 32px;
     width: 100%;
     height: 70px;
@@ -36,7 +39,7 @@ body {
     font-size: 20px;
     outline: none;
 }
-#search_div > img {
+#search_div_div > img {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -61,4 +64,24 @@ body {
     background-color: white;
     outline: none;
     cursor: pointer;
+}
+
+.shake {
+    /* Start the shake animation and make the animation last for 0.5 seconds */
+    animation: shake 0.5s;
+    /* When the animation is finished, start again */
+    animation-iteration-count: infinite;
+}
+@keyframes shake {
+    0%  { transform: translate(1px, 1px); }
+    10% { transform: translate(-1px, -2px); }
+    20% { transform: translate(-3px, 0px); }
+    30% { transform: translate(3px, 2px); }
+    40% { transform: translate(1px, -1px); }
+    50% { transform: translate(-1px, 2px); }
+    60% { transform: translate(-3px, 1px); }
+    70% { transform: translate(3px, 1px); }
+    80% { transform: translate(-1px, -1px); }
+    90% { transform: translate(1px, 2px); }
+    100% { transform: translate(1px, -2px); }
 }
