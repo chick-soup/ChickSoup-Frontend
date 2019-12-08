@@ -1,4 +1,4 @@
-const server = "http://chicksoup.pythonanywhere.com";
+const server = "http://ec2-13-209-99-114.ap-northeast-2.compute.amazonaws.com:8080";
 const childNodesOne = document.body.childNodes[1],
     childNodesId = childNodesOne.getAttribute("id"),
     goBack = `<div id="go_back">
@@ -25,7 +25,10 @@ const childNodesOne = document.body.childNodes[1],
 childNodesOne.insertAdjacentHTML("afterbegin", header);
 
 function IsSetting() {
-    if (childNodesId === "friendList" || childNodesId === "setting" || childNodesId === "identify")
+    if (childNodesId === "friendList" 
+        || childNodesId === "setting" 
+        || childNodesId === "identify"
+        || childNodesId === "searchFriend")
         return true;
     return false;
 }

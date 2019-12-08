@@ -125,12 +125,12 @@
     font-size: 12px;
 }
 .friendList_details_button {
+    padding: 8px 16px;
     border-radius: 24px;
     border: 1.5px solid #3B1C1C;
     font-size: 20px;
     font-weight: bold;
     color: #3B1C1C;
-    padding: 8px 16px;
     background-color: white;
     outline: none;
     cursor: pointer;
