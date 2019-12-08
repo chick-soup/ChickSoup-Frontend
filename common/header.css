@@ -2,7 +2,7 @@
     position: relative;
     z-index: 100;
 }
-#setting > #header_header {
+#setting > #header_header, #searchFriend > #header_header {
     background-color: white;
 }
 #header_header > main {
@@ -13,7 +13,7 @@
     margin: 0 auto;
     padding: 20px 0;
 }
-#setting > #header_header > main {
+#setting > #header_header > main, #searchFriend > #header_header > main {
     background-color: inherit;
 }
 #header_chicksoup {

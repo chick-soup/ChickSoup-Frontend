@@ -73,12 +73,11 @@ body {
     font-size: 17px;
     text-decoration: none;
 }
-.errorText {
+.error_text {
     display: none;
-    color: red;
-    font-size: 8px;
+    font-size: 12px;
     margin-left: 16px;
 }
-.goodText {
+.good_text {
     color: #005aff;
 }
