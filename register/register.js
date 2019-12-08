@@ -7,6 +7,10 @@ const register = {
     "errorText": document.querySelectorAll(".error_text"),
 }
 
+const setTextDisplay = (el, dis) => {
+    el.style.display = dis;
+}
+
 const axiosPost = (url, data) => {
     return axios({
         method: "POST",
@@ -94,10 +98,6 @@ const signup = () => {
             errorText.innerHTML = "오류가 발생하였습니다.";
         }
     })
-}
-
-const setTextDisplay = (el, dis) => {
-    el.style.display = dis;
 }
 
 window.onload = () => {

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="../common/reset.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Chick Soup: 회원가입</title>
+</head>
+
+<body>
+    <main id="register">
+        <div id="register_wrap">
+            <div id="register_header">
+                <h1 id="register_chicksoup">Chick Soup</h1>
+                <h2 id="register_register">회원가입</h2>
+            </div>
+            <div id="register_input_box_wrap">
+                <label class="register_input_box">
+                    <div class="userfakediv">
+                        <input type="text" name="register_input_email" />
+                        <input type="password" name="register_input_email" />
+                    </div>
+                    <input type="text" id="register_input_email" maxlength="30" autocomplete="off"
+                        placeholder="이메일(최대 30자)" />
+                    <button class="register_email_button" onclick="registerEmailCheck();">확인</button>
+                </label>
+                <span class="error_text"></span>
+                <label class="register_input_box register_input_email_check_hide">
+                    <input type="text" id="register_input_email_check" placeholder="인증 번호 입력">
+                    <button class="register_email_button" onclick="registerEmailAuth();">인증</button>
+                </label>
+                <span class="error_text"></span>
+                <label class="register_input_box">
+                    <input type="password" id="register_input_password" placeholder="비밀번호(최소 8자)">
+                </label>
+                <label for="register_input_password_check" class="register_input_box">
+                    <input type="password" id="register_input_password_check" onkeyup="checkPasswordEqual();"
+                        placeholder="비밀번호 확인">
+                </label>
+                <span class="error_text"></span>
+            </div>
+            <button id="next_button">회원가입</button>
+        </div>
+    </main>
+    <main id="userInfo">
+        <div id="userInfo_wrap">
+            <div id="userInfo_header">
+                <h1 id="userInfo_chicksoup">Chick Soup</h1>
+                <h2 id="userInfo_userInfo">회원가입</h2>
+            </div>
+            <div id="userInfo_input_box_wrap">
+                <div class="userInfo_profileimage_box">
+                    <label for="userInfo_profileimage_input" id="userInfo_profileimage_input_label">
+                        <img src="https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/14.png"
+                            alt="profileImage">
+                    </label>
+                    <input type="file" id="userInfo_profileimage_input" onchange="encodeImageFileAsURL(this);">
+                </div>
+                <div class="userfakediv">
+                    <input type="text" name="userInfo_input_nickname"
+                        placeholder="닉네임(최소 3자 최대 12자)">
+                </div>
+                <label class="userInfo_input_box">
+                    <input type="text" onkeyup="checkNicknameLength();" id="userInfo_input_nickname"
+                        placeholder="닉네임(최소 3자 최대 12자)">
+                </label>
+                <span class="error_text"></span>
+            </div>
+            <button id="join_button">완료</button>
+        </div>
+    </main>
+    <script src="signup.js"></script>
+</body>
+
+</html>
