@@ -27,12 +27,13 @@
         <div id="friendList_body">
             <nav id="friendList_sideicon">
                 <img src="../img/star.svg" id="friendList_bookmark" onclick="bookmarkInit();" alt="bookmark">
-                <img src="../img/blockFriend.svg" id="friendList_blockfriend" onclick="makeBlockFriendList();"
+                <img src="../img/blockFriend.svg" id="friendList_blockfriend" onclick="blockInit();"
                     alt="blockFriend">
-                <img src="../img/hideFriend.svg" id="friendList_hidefriend" onclick="makeHideFriendList();"
+                <img src="../img/hideFriend.svg" id="friendList_hidefriend" onclick="hideInit();"
                     alt="hideFriend">
-                <img src="../img/addFriend.svg" id="friendList_addfriend"
-                    onclick="location.href='../AddFriendList/AddFriendList.html'" alt="addAsAFriend">
+                <a href="../searchFriend/searchFriend.html">
+                    <img src="../img/addFriend.svg" id="friendList_addfriend" alt="addAsAFriend" />
+                </a>
             </nav>
             <section id="friendList_viewprofile">
                 <div id="friendList_myprofile">
