@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import * as S from "./style";
-import "../reset.css";
 import axios from "axios";
 import SignupInputBox from "./SignupInputBox";
 
