@@ -1,6 +1,5 @@
 import React from "react";
 import * as S from "./style";
-import "../reset.css";
 
 const Register = ({ type, refer, onEvent, placeholder, buttonText }) => {
     const isKeyupEnter = (e, callback) => {
