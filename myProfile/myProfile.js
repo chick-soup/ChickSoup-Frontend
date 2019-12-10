@@ -13,7 +13,7 @@ const axiosGET = (url) => {
 };
 
 const myFrame = (id, name, message) => {
-    let my = `<div id="myprofile_userinfo">
+    const my = `<div id="myprofile_userinfo">
         <h1 id="myprofile_userinfo_name">${name}</h1>
         <p id="myprofile_userinfo_message">${message}</p>
     </div>
@@ -32,8 +32,20 @@ const myFrame = (id, name, message) => {
     return my;
 };
 
+const otherFrame = () => {
+    const other = `<div id="otherprofile_userinfo_nav">
+        <ul>
+            <li>
+                <img src="../img/chatting.svg" alt="chatting">
+                <p>1 대 1 채팅</p>
+            </li>
+        </ul>
+    </div>`;
+    return other;
+}
+
 const editFrame = (id, name, message) => {
-    let edit = `<div id="editprofile_change_photo">
+    const edit = `<div id="editprofile_change_photo">
         <label for="editprofile_profilephoto">프로필 사진 변경</label>
         <input type="file" onchange="changeImageFile()" id="editprofile_profilephoto">
         <label for="editprofile_backphoto">배경 사진 변경</label>
@@ -111,13 +123,28 @@ const setEditprofile = (id, name, message) => {
 const getUserInfo = () => {
     const url = "/users/my/profile";
     axiosGET(url).then((datas) => {
-        setMyprofile(datas.data.id, datas.data.nickname, datas.data.status_message);
-        console.log(datas);
-    }).catch((error) => {
-        console.log(error);
+        const data = datas.data;
+        axiosGET(`/users/${data.id}`).then((users) => {
+            const user = users.data;
+            if (user.myself) {
+                setMyprofile(user.id, user.nickname, user.status_message);
+            } else {
+                profileObj.nav.innerHTML = otherFrame();
+                console.log("남 프로필 상태");
+            }
+        }).catch((error) => {
+            const state = error.response.status;
+            if(state === 470) {
+                alert("볼 수 없는 프로필 입니다.");
+            } else if(state === 404) {
+                alert("존재하지 않는 유저입니다.");
+            }
+            location.href = "../friendList/friendList.html";
+        })
     })
 };
 
 window.onload = () => {
     getUserInfo();
+    profileObj.nav = document.querySelector("#myprofile_userinfo_nav");
 };
