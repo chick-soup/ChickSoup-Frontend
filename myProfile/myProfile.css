@@ -1,3 +1,7 @@
+#myprofile > header > main {
+    width: auto;
+    max-width: 1220px;
+}
 /* *myprofile */
 #myprofile {
     color: #ffffff;
@@ -99,9 +103,6 @@
     font-size: 13px;
     font-weight: bold;
     outline: none;
-}
-#editprofile_change_info > input::placeholder {
-    color: black;
 }
 #editprofile_userinfo_nav > ul {
     display: flex;
