@@ -7,7 +7,7 @@ const childNodesOne = document.body.childNodes[1],
     header = `<header id="header_header">
         <main>
             <div id="header_chicksoup">
-                <h1>Chick Soup</h1>
+                <h1><a href="../login/login.html">Chick Soup</a></h1>
             </div>
             <nav id="header_nav">
                 <ul>
@@ -32,3 +32,43 @@ function IsSetting() {
         return true;
     return false;
 }
+
+const axiosGETWithToken = (url) => {
+    return axios({
+        method: "GET",
+        url: `${server}${url}`,
+        headers: {
+            "Authorization": localStorage.getItem("access_token"),
+        }
+    })
+};
+
+const axiosGET = (url) => {
+    return axios({
+        method: "GET",
+        url: `${server}${url}`,
+    })
+};
+
+const axiosPOSTWithToken = (url, data) => {
+    return axios({
+        method: "GET",
+        url: `${server}${url}`,
+        data: data,
+        headers: {
+            "Authorization": localStorage.getItem("access_token"),
+        }
+    })
+};
+
+const axiosPOST = (url, data) => {
+    return axios({
+        method: "GET",
+        url: `${server}${url}`,
+        data: data,
+    })
+};
+
+const setTextDisplay = (el, dis) => {
+    el.style.display = dis;
+};

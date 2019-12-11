@@ -14,12 +14,6 @@ const userInfo = {
     "errorText": document.querySelectorAll(".error_text"),
 };
 
-// common
-
-const setTextDisplay = (el, dis) => {
-    el.style.display = dis;
-};
-
 // about register
 
 const axiosPost = (url, data) => {

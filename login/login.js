@@ -17,12 +17,6 @@ const axiosPost = (url, data) => {
     })
 };
 
-const isKeyupEnter = (e, callback) => {
-    if (e.keyCode === 13) {
-        callback();
-    }
-};
-
 const signin = () => {
     const errorText = login.errorText[0];
     const url = "/login";
@@ -33,7 +27,7 @@ const signin = () => {
     errorText.innerHTML = "잠시만 기다려 주세요.";
     axiosPost(url, data).then((datas) => {
         localStorage.setItem("access_token", datas.data.access_token);
-        location.href = "../friendList/friendList.html";
+        location.href = "../myProfile/myProfile.html";
     }).catch((error) => {
         const state = error.response.status;
         if (state === 470) {
@@ -49,7 +43,9 @@ const signin = () => {
 };
 
 window.onload = () => {
-    login.email.addEventListener("keyup", () => {
-        isKeyupEnter(event, signin);
+    login.password.addEventListener("keyup", () => {
+        if (event.keyCode === 13) {
+            signin();
+        }
     });
 };

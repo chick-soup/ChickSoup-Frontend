@@ -1,16 +1,7 @@
 const profileObj = {
+    "myprofile": document.querySelector("#myprofile"),
     "content": document.querySelector("#myprofile_content"),
 }
-
-const axiosGET = (url) => {
-    return axios({
-        method: "GET",
-        url: `${server}${url}`,
-        headers: {
-            "Authorization": localStorage.getItem("access_token"),
-        }
-    })
-};
 
 const myFrame = (id, name, message) => {
     const my = `<div id="myprofile_userinfo">
@@ -54,16 +45,30 @@ const editFrame = (id, name, message) => {
     <div id="editprofile_change_info">
         <input type="text" id="editprofile_change_name" placeholder="이름" value="${name}">
         <input type="text" id="editprofile_change_message" placeholder="상태 메세지" value="${message}">
+        <span class="error_text"></span>
     </div>
     <div id="myprofile_userinfo_nav">
         <ul>
-            <li  onclick="editMyProfile();">
+            <li onclick="checkNicknameLength();">
                 <img src="../img/complete.svg" alt="profileEdit">
                 <p>프로필 수정</p>
             </li>
         </ul>
     </div>`;
     return edit;
+};
+
+const checkNicknameLength = () => {
+    const errorText = profileObj.errorText;
+    const nameLen = profileObj.changeName.value.length;
+    if (nameLen < 2 || nameLen > 13) {
+        setTextDisplay(errorText, "inline");
+        errorText.innerHTML = "닉네임은 최소 3자 최대 12자입니다.";
+        return false;
+    }
+    setTextDisplay(errorText, "none");
+    editMyProfile();
+    return true;
 };
 
 const editMyProfile = () => {
@@ -102,7 +107,7 @@ const changeImageFile = () => {
 };
 
 const setUserImg = (id) => {
-    profileObj.content.innerHTML = `<img src="https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/${id}.png" id="editprofile_userImg" alt="userImage">`;
+    profileObj.content.innerHTML = `<img src="https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${id}.png" id="editprofile_userImg" alt="userImage">`;
 };
 
 const setMyprofile = (id, name, message) => {
@@ -118,13 +123,15 @@ const setEditprofile = (id, name, message) => {
     profileObj.changeName = document.querySelector("#editprofile_change_name");
     profileObj.file = document.querySelector("#editprofile_profilephoto");
     profileObj.photo = document.querySelector("#editprofile_userImg");
+    profileObj.errorText = document.querySelector(".error_text");
 };
 
 const getUserInfo = () => {
     const url = "/users/my/profile";
-    axiosGET(url).then((datas) => {
+    axiosGETWithToken(url).then((datas) => {
         const data = datas.data;
-        axiosGET(`/users/${data.id}`).then((users) => {
+        axiosGETWithToken(`/users/${data.id}`).then((users) => {
+            console.log(users);
             const user = users.data;
             if (user.myself) {
                 setMyprofile(user.id, user.nickname, user.status_message);

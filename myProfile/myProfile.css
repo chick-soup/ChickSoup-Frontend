@@ -2,13 +2,9 @@
     width: auto;
     max-width: 1220px;
 }
-/* *myprofile */
-#myprofile {
-    color: #ffffff;
-}
-#myprofile::after {
+#backImg {
     content: "";
-    background-image: url('../img/myprofileBackImg.svg');
+    background-image: url("../img/myprofileBackImg.svg");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -19,6 +15,10 @@
     bottom: 0;
     z-index: -2;
     filter: blur(15px);
+}
+/* *myprofile */
+#myprofile {
+    color: #ffffff;
 }
 #myprofile::before {
     content: "";
@@ -118,4 +118,7 @@
 }
 #editprofile_userinfo_nav > ul > li > p {
     font-size: 13px;
+}
+.error_text {
+    margin-top: 16px;
 }

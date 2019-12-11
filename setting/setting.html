@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,13 @@
     <link rel="stylesheet" href="../common/header.css">
     <link rel="stylesheet" href="../common/reset.css">
     <link rel="stylesheet" href="setting.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Chick Soup: 설정</title>
+    <link rel=" shortcut icon" href="../img/favicon.ico">
+    <link rel="icon" href="../img/favicon.ico">
 </head>
+
 <body>
     <main id="setting">
         <div id="setting_wrap">
@@ -17,27 +23,44 @@
             </div>
             <nav id="setting_nav">
                 <ul>
-                    <li>
-                        <img src="../img/profileYellow.svg" alt="profileChange">
-                        <p>프로필 변경</p>
-                    </li>
-                    <li>
-                        <img src="../img/friendListControl.svg" alt="block/hideListManage">
-                        <p>차단/숨김 목록 관리</p>
-                    </li>
-                    <li>
+                    <a href="../myProfile/myProfile.html">
+                        <li id="setting_profile">
+                            <img src="../img/profileYellow.svg" alt="profileChange">
+                            <p>프로필 변경</p>
+                        </li>
+                    </a>
+                    <a href="#">
+                        <li id="setting_manage_list">
+                            <img src="../img/friendListControl.svg" alt="block/hideListManage">
+                            <p>차단/숨김 목록 관리</p>
+                        </li>
+                    </a>
+                    <li id="setting_id">
                         <img src="../img/id.svg" alt="idCheckOrChange">
-                        <p>ID 확인 및 변경</p>
+                        <p>ID 확인</p>
                     </li>
-                    <li>
-                        <img src="../img/logout.svg" alt="logout">
-                        <p>로그아웃</p>
-                    </li>
+                    <a href="../login/login.html">  
+                        <li id="setting_logout">
+                            <img src="../img/logout.svg" alt="logout">
+                            <p>로그아웃</p>
+                        </li>
+                    </a>
                 </ul>
             </nav>
+            <div id="setting_modal">
+                <div id="setting_show_id">
+                    <span id="setting_show_id_close" onclick="closeUserIdModal();">
+                        <img src="../img/close.png" alt="closeModal">
+                    </span>
+                    <p>당신의 ID는 "<span id="setting_userId"></span>"입니다.</p>
+                    <span id="setting_show_id_clipboard" data-clipboard-target="#setting_userId">클립보드에 복사하기</span>
+                </div>
+                <div id="setting_show_id_back"></div>
+            </div>
         </div>
     </main>
     <script src="setting.js"></script>
     <script src="../common/header.js"></script>
 </body>
+
 </html>

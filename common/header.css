@@ -19,6 +19,9 @@
 #header_chicksoup {
     font-size: 30px;
 }
+#header_chicksoup a {
+    color: white;
+}
 #header_nav > ul {
     display: flex;
     align-items: center;
