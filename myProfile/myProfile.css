@@ -3,7 +3,6 @@
     max-width: 1220px;
 }
 #backImg {
-    background-image: url("../img/defaultBackImg.png");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
