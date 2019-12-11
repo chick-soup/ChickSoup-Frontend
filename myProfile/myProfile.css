@@ -2,17 +2,12 @@
     width: auto;
     max-width: 1220px;
 }
-#backImg {
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -2;
-    filter: blur(8px);
+#myprofile > header > main {
+    width: auto;
+    max-width: 1220px;
+}
+#myprofile #header_chicksoup a, #myprofile #header_nav > ul > li > a {
+    color: white;
 }
 /* *myprofile */
 #myprofile {
@@ -119,4 +114,16 @@
 }
 .error_text {
     margin-top: 16px;
+}
+#backImg {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -2;
+    filter: blur(8px);
 }
