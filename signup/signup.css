@@ -161,3 +161,8 @@ body {
     outline: none;
     cursor: pointer;
 }
+#already_user {
+    margin-top: 16px;
+    text-align: right;
+    font-size: 14px;
+}

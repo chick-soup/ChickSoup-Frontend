@@ -1,4 +1,5 @@
 const profileObj = {
+    "backImg": document.querySelector("#backImg"),
     "myprofile": document.querySelector("#myprofile"),
     "content": document.querySelector("#myprofile_content"),
 }
@@ -85,7 +86,7 @@ const editMyProfile = () => {
             "Content-Type": "multipart/form-data",
         }
     })
-    location.reload();
+    // location.reload();
 };
 
 const changeImageFile = () => {
@@ -148,6 +149,14 @@ const getUserInfo = () => {
             }
             location.href = "../friendList/friendList.html";
         })
+    })
+};
+
+const getUserBackground = () => {
+    const url = "/users/my/profile";
+    axiosGETWithToken(url).then((datas) => {
+        const data = datas.data;
+        profileObj.backImg.style.backgroundImage = `url("${S3HOST}/media/image/user/background/web/${data.id}.png")`
     })
 };
 
