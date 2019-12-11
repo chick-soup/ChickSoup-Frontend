@@ -20,7 +20,7 @@
     font-size: 30px;
 }
 #header_chicksoup a {
-    color: white;
+    color: black;
 }
 #header_nav > ul {
     display: flex;
@@ -31,6 +31,9 @@
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
+}
+#header_nav > ul > li > a {
+    color: black;
 }
 #header_nav_setting {
     width: 20px;

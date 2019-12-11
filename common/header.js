@@ -1,7 +1,15 @@
 const server = "http://ec2-13-209-99-114.ap-northeast-2.compute.amazonaws.com:8080";
 const S3HOST = "https://chicksoup.s3.ap-northeast-2.amazonaws.com";
-const childNodesOne = document.body.childNodes[1],
-    childNodesId = childNodesOne.getAttribute("id"),
+const childNodesOne = document.body.childNodes[1];
+const IsSetting = () => {
+    if (childNodesId === "friendList"
+        || childNodesId === "setting"
+        || childNodesId === "identify"
+        || childNodesId === "searchFriend")
+        return true;
+    return false;
+};
+const childNodesId = childNodesOne.getAttribute("id"),
     goBack = `<div id="go_back">
         <img src="../img/${IsSetting() ? "leftArrowBrown" : "leftArrow"}.svg" alt="leftArrow">
     </div>`,
@@ -12,9 +20,9 @@ const childNodesOne = document.body.childNodes[1],
             </div>
             <nav id="header_nav">
                 <ul>
-                    <li><a>친구목록보기</a></li>
+                    <li><a href="../friendList/friendList.html">친구목록보기</a></li>
                     <li><a>채팅하기</a></li>
-                    <li><a><img id="header_nav_setting" 
+                    <li><a href="../setting/setting.html"><img id="header_nav_setting" 
                     src="../img/${IsSetting()
                 ? "settingBlack"
                 : "setting"}.svg" alt="setting"></a></li>
@@ -24,15 +32,6 @@ const childNodesOne = document.body.childNodes[1],
         </main>
     </header>`
 childNodesOne.insertAdjacentHTML("afterbegin", header);
-
-function IsSetting() {
-    if (childNodesId === "friendList" 
-        || childNodesId === "setting" 
-        || childNodesId === "identify"
-        || childNodesId === "searchFriend")
-        return true;
-    return false;
-}
 
 const axiosGETWithToken = (url) => {
     return axios({
@@ -69,6 +68,21 @@ const axiosPOST = (url, data) => {
         data: data,
     })
 };
+
+const axiosRefresh = () => {
+    axios({
+        method: "GET",
+        url: `${server}/refresh`,
+        headers: {
+            "Authorization": localStorage.getItem("refresh_token"),
+        }
+    }).then((datas) => {
+        localStorage.setItem("access_token", datas.data.access_token);
+    }).catch((error) => {
+        console.log("refresh axios Error!");
+        console.log(error);
+    })
+}
 
 const setTextDisplay = (el, dis) => {
     el.style.display = dis;
