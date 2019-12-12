@@ -52,7 +52,7 @@ const axiosGET = (url) => {
 
 const axiosPOSTWithToken = (url, data) => {
     return axios({
-        method: "GET",
+        method: "POST",
         url: `${server}${url}`,
         data: data,
         headers: {
@@ -63,7 +63,7 @@ const axiosPOSTWithToken = (url, data) => {
 
 const axiosPOST = (url, data) => {
     return axios({
-        method: "GET",
+        method: "POST",
         url: `${server}${url}`,
         data: data,
     })
@@ -78,12 +78,18 @@ const axiosRefresh = () => {
         }
     }).then((datas) => {
         localStorage.setItem("access_token", datas.data.access_token);
-    }).catch((error) => {
+    }).catch(() => {
         console.log("refresh axios Error!");
-        console.log(error);
     })
 }
 
 const setTextDisplay = (el, dis) => {
     el.style.display = dis;
+};
+
+window.onload = () => {
+    if(!localStorage.getItem("access_token")) {
+        alert("로그인 후 이용해주시기 바랍니다.");
+        location.href = "../login/login.html";
+    }
 };
