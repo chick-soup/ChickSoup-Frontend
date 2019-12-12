@@ -5,19 +5,7 @@ const login = {
     "errorText": document.querySelectorAll(".error_text"),
 };
 
-const setTextDisplay = (el, dis) => {
-    el.style.display = dis;
-};
-
-const axiosPost = (url, data) => {
-    return axios({
-        method: "POST",
-        url: `${server}${url}`,
-        data: data,
-    })
-};
-
-const signin = () => {
+function signin() {
     const errorText = login.errorText[0];
     const url = "/login";
     const data = {
@@ -41,12 +29,16 @@ const signin = () => {
             errorText.innerHTML = "오류가 발생 하였습니다. 잠시후 다시 시도해주세요.";
         }
     })
-};
+}
 
-window.onload = () => {
-    login.password.addEventListener("keyup", () => {
-        if (event.keyCode === 13) {
-            signin();
-        }
-    });
-};
+function axiosPost(url, data) {
+    return axios({
+        method: "POST",
+        url: `${server}${url}`,
+        data: data,
+    })
+}
+
+function setTextDisplay(el, dis) {
+    el.style.display = dis;
+}
