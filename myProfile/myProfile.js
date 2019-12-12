@@ -157,7 +157,6 @@ const getUserInfo = () => {
     axiosGETWithToken(url).then((datas) => {
         const data = datas.data;
         axiosGETWithToken(`/users/${data.id}`).then((users) => {
-            console.log(users);
             const user = users.data;
             if (user.myself) {
                 setMyprofile(user.id, user.nickname, user.status_message);

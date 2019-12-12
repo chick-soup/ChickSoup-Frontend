@@ -25,7 +25,9 @@ const logout = () => {
 };
 
 window.onload = () => {
+    // ? for Clipboard -> copy user id
     new ClipboardJS("#setting_show_id_clipboard");
     setting.idLi.addEventListener("click", showUserIdModal);
+    setting.logout.addEventListener("click", logout);
     getUserId();
 };

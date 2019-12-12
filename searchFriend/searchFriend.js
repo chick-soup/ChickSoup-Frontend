@@ -72,7 +72,7 @@ const showButtonResult = () => {
         }
         else if (state === 473) {
             shakeElement();
-            setResultText("자기 자신은 검색할 수 없습니다.");
+            setResultText("자기 자신은 친구 추가할 수 없습니다.");
             document.querySelector(".friendList_profile_list").remove();
         }
         else if (state === 471)
