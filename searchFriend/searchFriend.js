@@ -12,8 +12,8 @@ const searchResult = {
 const shakeElement = (el) => {
     el.classList.add("shake");
     setTimeout(() => {
-        elclassList.remove("shake");
-    }, 1000);
+        el.classList.remove("shake");
+    }, 500);
 };
 
 const resultFrame = (name, img) => {

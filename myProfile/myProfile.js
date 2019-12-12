@@ -24,8 +24,12 @@ const myFrame = (id, name, message) => {
     return my;
 };
 
-const otherFrame = () => {
-    const other = `<div id="otherprofile_userinfo_nav">
+const otherFrame = (id, name, message) => {
+    const other = `<div id="myprofile_userinfo">
+        <h1 id="myprofile_userinfo_name">${name}</h1>
+        <p id="myprofile_userinfo_message">${message}</p>
+    </div>
+    <div id="otherprofile_userinfo_nav">
         <ul>
             <li>
                 <img src="../img/chatting.svg" alt="chatting">
@@ -34,7 +38,7 @@ const otherFrame = () => {
         </ul>
     </div>`;
     return other;
-}
+};
 
 const editFrame = (id, name, message) => {
     const edit = `<div id="editprofile_change_photo">
@@ -87,6 +91,9 @@ const editMyProfile = () => {
             "Authorization": localStorage.getItem("access_token"),
             "Content-Type": "multipart/form-data",
         }
+    }).catch((error) => {
+        if(error.response.status === 403)
+            axiosRefresh();
     })
     location.reload();
 };
@@ -117,20 +124,20 @@ const changeBackImageFile = () => {
         return alert("파일 형식은 png, jpg, jpeg만 허용합니다. ");
     }
     let reader = new FileReader();
-    reader.onloadend = (e) => {
-        profileObj.backImg.style.backgroundImage = `url("${e.target.result}")`
-    }
+    reader.onloadend = (e) => profileObj.backImg.style.backgroundImage = `url("${e.target.result}")`
     reader.readAsDataURL(file);
     // ? For editMyProfile
     sessionStorage.setItem("chicksoup_profileBack", true);
 };
 
 const setUserImg = (id) => {
-    profileObj.content.innerHTML = `<img src="https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${id}.png" id="editprofile_userImg" alt="userImage">`;
+    profileObj.content.innerHTML
+        = `<img src="https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${id}.png" id="editprofile_userImg" alt="userImage">`;
 };
 
 const setUserBackImg = (id) => {
-    profileObj.backImg.style.backgroundImage = `url("${S3HOST}/media/image/user/background/web/${id}.png")`
+    profileObj.backImg.style.backgroundImage
+        = `url("${S3HOST}/media/image/user/background/web/${id}.png")`
 }
 
 const setMyprofile = (id, name, message) => {
@@ -140,9 +147,9 @@ const setMyprofile = (id, name, message) => {
 };
 
 const setEditprofile = (id, name, message) => {
+    setUserImg(id);
     sessionStorage.removeItem("chicksoup_profile");
     sessionStorage.removeItem("chicksoup_profileBack");
-    setUserImg(id);
     profileObj.content.insertAdjacentHTML("beforeend", editFrame(id, name, message));
     profileObj.changeMessage = document.querySelector("#editprofile_change_message");
     profileObj.changeName = document.querySelector("#editprofile_change_name");
@@ -152,28 +159,35 @@ const setEditprofile = (id, name, message) => {
     profileObj.errorText = document.querySelector(".error_text");
 };
 
+const setOtherprofile = (id, name, message) => {
+    otherFrame(id, name, message);
+};
+
 const getUserInfo = () => {
     const url = "/users/my/profile";
     axiosGETWithToken(url).then((datas) => {
         const data = datas.data;
         axiosGETWithToken(`/users/${data.id}`).then((users) => {
-            console.log(users);
             const user = users.data;
             if (user.myself) {
                 setMyprofile(user.id, user.nickname, user.status_message);
             } else {
-                profileObj.nav.innerHTML = otherFrame();
+                setOtherprofile(user.id, user.nickname, user.status_message);
                 console.log("남 프로필 상태");
             }
         }).catch((error) => {
             const state = error.response.status;
-            if (state === 470) {
+            if (state === 471)
                 alert("볼 수 없는 프로필 입니다.");
-            } else if (state === 404) {
+            else if (state === 403)
+                axiosRefresh();
+            else if (state === 404)
                 alert("존재하지 않는 유저입니다.");
-            }
-            location.href = "../friendList/friendList.html";
+            // location.href = "../friendList/friendList.html";
         })
+    }).catch((error) => {
+        if (error.response.status === 403)
+            axiosRefresh();
     })
 };
 
@@ -188,3 +202,5 @@ window.onload = () => {
     getUserInfo();
     profileObj.nav = document.querySelector("#myprofile_userinfo_nav");
 };
+
+// 9ralFCE2WvorY7jh
