@@ -41,4 +41,11 @@ const signin = () => {
             errorText.innerHTML = "오류가 발생 하였습니다. 잠시후 다시 시도해주세요.";
         }
     })
+};
+
+window.onload = () => {
+    login.password.addEventListener("keyup", () => {
+        if (event.keyCode === 13)
+            signin();
+    })
 }
