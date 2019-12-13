@@ -78,10 +78,11 @@ const axiosRefresh = () => {
         }
     }).then((datas) => {
         localStorage.setItem("access_token", datas.data.access_token);
+        location.reload();
     }).catch(() => {
         console.log("refresh axios Error!");
     })
-}
+};
 
 const setTextDisplay = (el, dis) => {
     el.style.display = dis;
