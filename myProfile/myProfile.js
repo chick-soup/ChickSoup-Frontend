@@ -126,7 +126,7 @@ const changeBackImageFile = () => {
 };
 
 const setUserImg = (id) => {
-    profileObj.content.innerHTML = `<img src="https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${id}.png" id="editprofile_userImg" alt="userImage">`;
+    profileObj.content.innerHTML = `<img src="https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${id}.png" id="editprofile_userImg" alt="userImage" />`;
 };
 
 const setUserBackImg = (id) => {
