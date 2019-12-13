@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../common/header.css">
     <link rel="stylesheet" href="../common/reset.css">
     <link rel="stylesheet" href="friendList.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Chick Soup: 친구 리스트</title>
     <link rel=" shortcut icon" href="../img/favicon.ico">
     <link rel="icon" href="../img/favicon.ico">
@@ -27,10 +28,6 @@
         <div id="friendList_body">
             <nav id="friendList_sideicon">
                 <img src="../img/star.svg" id="friendList_bookmark" onclick="bookmarkInit();" alt="bookmark">
-                <img src="../img/blockFriend.svg" id="friendList_blockfriend" onclick="blockInit();"
-                    alt="blockFriend">
-                <img src="../img/hideFriend.svg" id="friendList_hidefriend" onclick="hideInit();"
-                    alt="hideFriend">
                 <a href="../searchFriend/searchFriend.html">
                     <img src="../img/addFriend.svg" id="friendList_addfriend" alt="addAsAFriend" />
                 </a>
@@ -40,12 +37,12 @@
                     <div>
                         <h1>내 프로필</h1>
                         <div class="friendList_profile_list">
-                            <img src="../img/face.svg" alt="profileImage">
+                            <img alt="userImage">
                             <div class="friendList_profile_userInfo">
                                 <div>
-                                    <h3 class="friendList_profile_userInfo_name">유재민</h3>
+                                    <h3 class="friendList_profile_userInfo_name"></h3>
                                 </div>
-                                <p class="friendList_profile_userInfo_phonenum">010-1111-3333</p>
+                                <p class="friendList_profile_userInfo_status_message"></p>
                             </div>
                         </div>
                     </div>

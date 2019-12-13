@@ -30,7 +30,8 @@
     padding-top: 150px;
 }
 #myprofile_content > img {
-    width: 150px;
+    min-height: 100px;
+    max-height: 150px;
 }
 #myprofile_userinfo {
     text-align: center;
