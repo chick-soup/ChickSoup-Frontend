@@ -1,52 +1,21 @@
 const friendList = {
-    "otherprofile": document.querySelector("#friendList_otherprofile"),
+    "myprofile": document.querySelector("#friendList_myprofile > div > div"),
     "pageTitle": document.querySelector("#friendList_seemyfriend > h1"),
+    "otherprofile": document.querySelector("#friendList_otherprofile"),
     "block": document.querySelector("#friendList_blockfriend"),
     "hide": document.querySelector("#friendList_hidefriend"),
-
 };
-const friendListObj = [
-    {
-        "profileImg": "face.svg",
-        "bookmark": true,
-        "name": "유재민",
-        "phone": "010-1111-3333",
-        "block": false,
-        "hide": true,
-    }, {
-        "profileImg": "face.svg",
-        "bookmark": false,
-        "name": "김어진",
-        "phone": "010-2222-4444",
-        "block": true,
-        "hide": false,
-    }, {
-        "profileImg": "face.svg",
-        "bookmark": false,
-        "name": "용석현",
-        "phone": "010-2222-4444",
-        "block": true,
-        "hide": true,
-    }, {
-        "profileImg": "face.svg",
-        "bookmark": false,
-        "name": "손민기",
-        "phone": "010-2222-4444",
-        "block": false,
-        "hide": false,
-    },
-];
 
-const friendFrame = (profileImg, bookmark, name, phone) => {
+const friendFrame = (info) => {
     let frame =
         `<li class="friendList_profile_list">
-            <img src="../img/${profileImg}" alt="profileImage">
+            <img src="https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${info.id}.png" alt="userImage" />
             <div class="friendList_profile_userInfo">
                 <div>
-                    <img src="../img/${bookmark ? "starYellow.svg" : "star.svg"}" alt="bookmark">
-                    <h3 class="friendList_profile_userInfo_name">${name}</h3>
+                    <img src="../img/${info.bookmark ? "starYellow.svg" : "star.svg"}" alt="bookmark">
+                    <h3 class="friendList_profile_userInfo_name">${info.nickname}</h3>
                 </div>
-                <p class="friendList_profile_userInfo_phonenum">${phone}</p>
+                <p class="friendList_profile_userInfo_status_message">${info.status_message}</p>
             </div>
             <div class="friendList_details">
                 <img src="../img/details.svg" alt="friendListDetails" onclick="detailImgInit(this);">
@@ -63,31 +32,6 @@ const friendFrame = (profileImg, bookmark, name, phone) => {
                         <li class="friendList_details_nav_item">
                             <img src="../img/hideFriend.svg" alt="hide">
                             <span>숨기기</span>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </li>`;
-    return frame;
-};
-
-const friendFrameTwo = (profileImg, name, phone, title) => {
-    let frame =
-        `<li class="friendList_profile_list">
-            <img src="../img/${profileImg}" alt="profileImage">
-            <div class="friendList_profile_userInfo">
-                <div>
-                    <h3 class="friendList_profile_userInfo_name">${name}</h3>
-                </div>
-                <p class="friendList_profile_userInfo_phonenum">${phone}</p>
-            </div>
-            <div class="friendList_details">
-                <img src="../img/details.svg" alt="friendListDetails" onclick="detailImgInit(this);">
-                <nav class="friendList_details_nav">
-                    <ul>
-                        <li class="friendList_details_nav_item">
-                            <img src="../img/blockFriend.svg" alt="block">
-                            <span>${title} 해제하기</span>
                         </li>
                     </ul>
                 </nav>
@@ -116,19 +60,19 @@ const setPageTitle = (title) => {
 };
 
 const IsHided = (data) => {
-    if (data.hide)
+    if (!data.hidden)
         return true;
     return false;
 };
 
 const IsBlocked = (data) => {
-    if (data.block)
+    if (!data.mute)
         return true;
     return false;
 };
 
 const IsOnBookmark = (data) => {
-    if (data.bookmark)
+    if (!data.bookmark)
         return true;
     return false;
 };
@@ -141,53 +85,33 @@ const IsOnDetails = (el) => {
 
 const makeBookmarkFriendList = (list) => {
     removeOtherprofileInnerHTML();
-    setPageTitle("내 친구 보기");
-    friendListObj.filter(IsOnBookmark).map((datas) => {
-        friendList.otherprofile.insertAdjacentHTML(
-            "beforeend",
-            friendFrame(datas.profileImg, datas.bookmark, datas.name, datas.phone)
-        );
+    Object.keys(list).filter(IsOnBookmark && IsBlocked && IsHided).map((info) => {
+        info !== null
+            && friendList.otherprofile.insertAdjacentHTML(
+                "beforeend",
+                friendFrame(info)
+            );
     });
 };
 
-const makeHideFriendList = (list) => {
-    // friendListObj -> list
-    removeOtherprofileInnerHTML();
-    defaultStar();
-    setPageTitle("숨김 목록 보기");
-    friendList.hide.classList.add("hided");
-    friendListObj.filter(IsHided).map((datas) => {
-        friendList.otherprofile.insertAdjacentHTML(
-            "beforeend",
-            friendFrameTwo(datas.profileImg, datas.name, datas.phone, "숨김")
-        );
-    });
-};
-
-const makeBlockFriendList = (list) => {
-    // friendListObj -> list
-    removeOtherprofileInnerHTML();
-    defaultStar();
-    setPageTitle("차단 목록 보기");
-    friendList.block.classList.add("blocked");
-    friendListObj.filter(IsBlocked).map((datas) => {
-        friendList.otherprofile.insertAdjacentHTML(
-            "beforeend",
-            friendFrameTwo(datas.profileImg, datas.name, datas.phone, "차단")
-        );
-    });
-};
-
-const makeFriendList = (list) => {
-    // friendListObj -> list
+const makeFriendList = (list = {}) => {
     removeOtherprofileInnerHTML();
     setPageTitle("내 친구 보기");
-    friendListObj.map((datas) => {
-        friendList.otherprofile.insertAdjacentHTML(
-            "beforeend",
-            friendFrame(datas.profileImg, datas.bookmark, datas.name, datas.phone)
-        );
+    Object.keys(list).map((key) => {
+        const info = list[key];
+        IsBlocked(info)
+            && IsHided(info)
+            && friendList.otherprofile.insertAdjacentHTML(
+                "beforeend",
+                friendFrame(info)
+            );
     });
+};
+
+const makeMyList = (myData) => {
+    friendList.myprofile.querySelector("img").setAttribute("src", `https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${myData.id}.png`);
+    friendList.myprofile.querySelector(".friendList_profile_userInfo_name").innerHTML = myData.nickname;
+    friendList.myprofile.querySelector(".friendList_profile_userInfo_status_message").innerHTML = myData.status_message;
 };
 
 const showDetails = (el) => {
@@ -211,14 +135,7 @@ const setBookmarkStar = (path) => {
     friendList.bookmark.setAttribute("src", path);
 };
 
-const iconInit = () => {
-    friendList.block.classList.remove("blocked");
-    friendList.hide.classList.remove("hided");
-    defaultStar();
-};
-
 const bookmarkInit = () => {
-    // iconInit();
     if (friendList.bookmark.getAttribute("src").split("/")[2] === "star.svg") {
         setBookmarkStar("../img/starYellow.svg");
         makeBookmarkFriendList();
@@ -228,33 +145,113 @@ const bookmarkInit = () => {
     }
 };
 
-const blockInit = () => {
-    const list = friendList.block.classList;
-    // iconInit();
-    if (list[0] === "blocked") {
-        list.remove("blocked");
-        makeFriendList();
-    } else {
-        list.add("blocked");
-        makeBlockFriendList();
-    }
-};
-
-const hideInit = () => {
-    const list = friendList.hide.classList;
-    // iconInit();
-    if (list[0] === "hided") {
-        list.remove("hided");
-        makeFriendList();
-    } else {
-        list.add("hided");
-        makeHideFriendList();
-    }
-};
-
 window.onload = () => {
-    makeFriendList();
-    friendList.detailImg = document.querySelectorAll(".friendList_details > img");
-    friendList.bookmark = document.querySelector("#friendList_bookmark");
-    friendList.addfriend = document.querySelector("#friendList_addfriend");
+    checkUserIsLogined();
+    const url = "/users/my/profile";
+    axiosGETWithToken(url).then((datas) => {
+        makeMyList(datas.data);
+        axiosGETWithToken("/users/my/friends").then((friends) => {
+            makeFriendList(friends.data);
+        }).finally(() => {
+            friendList.detailImg = document.querySelectorAll(".friendList_details > img");
+            friendList.bookmark = document.querySelector("#friendList_bookmark");
+            friendList.addfriend = document.querySelector("#friendList_addfriend");
+        })
+    }).catch((error) => {
+        const state = error.response.status;
+        if(state === 403)
+            axiosRefresh();
+    })
 };
+
+
+
+// ! 다른 페이지로 옮김
+
+// let img = `<img src="../img/blockFriend.svg" id="friendList_blockfriend" onclick="blockInit();" alt="blockFriend">
+// <img src="../img/hideFriend.svg" id="friendList_hidefriend" onclick="hideInit();" alt="hideFriend">`
+
+// const friendFrameTwo = (id, name, status_message, title) => {
+//     let frame =
+//         `<li class="friendList_profile_list">
+//             <img src="https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${id}.png" alt="userImage" />
+//             <div class="friendList_profile_userInfo">
+//                 <div>
+//                     <h3 class="friendList_profile_userInfo_name">${name}</h3>
+//                 </div>
+//                 <p class="friendList_profile_userInfo_status_message">${status_message}</p>
+//             </div>
+//             <div class="friendList_details">
+//                 <img src="../img/details.svg" alt="friendListDetails" onclick="detailImgInit(this);">
+//                 <nav class="friendList_details_nav">
+//                     <ul>
+//                         <li class="friendList_details_nav_item">
+//                             <img src="../img/blockFriend.svg" alt="block">
+//                             <span>${title} 해제하기</span>
+//                         </li>
+//                     </ul>
+//                 </nav>
+//             </div>
+//         </li>`;
+//     return frame;
+// };
+
+// const IsHided = (data) => {
+//     if (data.hide)
+//         return true;
+//     return false;
+// };
+
+// const IsBlocked = (data) => {
+//     if (data.block)
+//         return true;
+//     return false;
+// };
+
+// const makeHideFriendList = (list = {}) => {
+//     setPageTitle("숨김 목록 보기");
+//     friendList.block.classList.add("hided");
+//     Object.keys(list).filter(IsHided).map((info) => {
+//         info !== null
+//             && friendList.otherprofile.insertAdjacentHTML(
+//                 "beforeend",
+//                 friendFrameTwo(info.id, info.nickname, info.status_message, "숨김")
+//             );
+//     });
+// };
+
+// const makeBlockFriendList = (list = {}) => {
+//     removeOtherprofileInnerHTML();
+//     defaultStar();
+//     setPageTitle("차단 목록 보기");
+//     friendList.block.classList.add("blocked");
+//     Object.keys(list).filter(IsBlocked).map((info) => {
+//         info !== null
+//             && friendList.otherprofile.insertAdjacentHTML(
+//                 "beforeend",
+//                 friendFrameTwo(info.id, info.nickname, info.status_message, "차단")
+//             );
+//     });
+// };
+
+// const hideInit = () => {
+//     const list = friendList.hide.classList;
+//     if (list[0] === "hided") {
+//         list.remove("hided");
+//         makeFriendList();
+//     } else {
+//         list.add("hided");
+//         makeHideFriendList();
+//     }
+// };
+
+// const blockInit = () => {
+//     const list = friendList.block.classList;
+//     if (list[0] === "blocked") {
+//         list.remove("blocked");
+//         makeFriendList();
+//     } else {
+//         list.add("blocked");
+//         makeBlockFriendList();
+//     }
+// };

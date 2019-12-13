@@ -7,7 +7,7 @@ const login = {
 
 const setTextDisplay = (el, dis) => {
     el.style.display = dis;
-};
+}
 
 const axiosPost = (url, data) => {
     return axios({
@@ -15,7 +15,7 @@ const axiosPost = (url, data) => {
         url: `${server}${url}`,
         data: data,
     })
-};
+}
 
 const signin = () => {
     const errorText = login.errorText[0];
@@ -45,8 +45,7 @@ const signin = () => {
 
 window.onload = () => {
     login.password.addEventListener("keyup", () => {
-        if (event.keyCode === 13) {
+        if (event.keyCode === 13)
             signin();
-        }
-    });
-};
+    })
+}

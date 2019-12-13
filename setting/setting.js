@@ -3,7 +3,7 @@ const setting = {
     "idSpan": document.querySelector("#setting_userId"),
     "modal": document.querySelector("#setting_modal"),
     "modalClose": document.querySelector("#setting_show_id_close"),
-    "logout": document.querySelector("setting_logout"),
+    "logout": document.querySelector("#setting_logout"),
 };
 
 const showUserIdModal = () => {
@@ -22,11 +22,12 @@ const getUserId = () => {
 
 const logout = () => {
     localStorage.removeItem("access_token");
-
 };
 
 window.onload = () => {
+    // ? for Clipboard -> copy user id
     new ClipboardJS("#setting_show_id_clipboard");
     setting.idLi.addEventListener("click", showUserIdModal);
+    setting.logout.addEventListener("click", logout);
     getUserId();
 };

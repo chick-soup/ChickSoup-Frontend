@@ -52,7 +52,7 @@ const axiosGET = (url) => {
 
 const axiosPOSTWithToken = (url, data) => {
     return axios({
-        method: "GET",
+        method: "POST",
         url: `${server}${url}`,
         data: data,
         headers: {
@@ -63,7 +63,7 @@ const axiosPOSTWithToken = (url, data) => {
 
 const axiosPOST = (url, data) => {
     return axios({
-        method: "GET",
+        method: "POST",
         url: `${server}${url}`,
         data: data,
     })
@@ -86,4 +86,11 @@ const axiosRefresh = () => {
 
 const setTextDisplay = (el, dis) => {
     el.style.display = dis;
+};
+
+const checkUserIsLogined = () => {
+    if (!localStorage.getItem("access_token")) {
+        alert("로그인 후 이용해주시기 바랍니다.");
+        location.href = "../login/login.html";
+    }
 };
