@@ -1,9 +1,8 @@
 const friendList = {
+    "searchInput": document.querySelector("#friendList_searchmyfriend_input"),
     "myprofile": document.querySelector("#friendList_myprofile > div > div"),
     "pageTitle": document.querySelector("#friendList_seemyfriend > h1"),
     "otherprofile": document.querySelector("#friendList_otherprofile"),
-    "block": document.querySelector("#friendList_blockfriend"),
-    "hide": document.querySelector("#friendList_hidefriend"),
 };
 
 const friendFrame = (info) => {
@@ -83,28 +82,42 @@ const IsOnDetails = (el) => {
     return false;
 };
 
+const IsMatched = (friend) => {
+    const value = friendList.searchInput.value.trim();
+    if (friendList.myFriendsList[friend].nickname.indexOf(value) !== -1)
+        return true;
+    return false;
+};
+
+const insertHTMLIntoOther = (info) => {
+    friendList.otherprofile.insertAdjacentHTML(
+        "beforeend",
+        friendFrame(info)
+    );
+};
+
+const makeSearchFrinedList = (list) => {
+    removeOtherprofileInnerHTML();
+    Object.keys(list).filter(IsMatched).map((friend) => {
+        insertHTMLIntoOther(friendList.myFriendsList[friend]);
+    })
+};
+
 const makeBookmarkFriendList = (list) => {
     removeOtherprofileInnerHTML();
     Object.keys(list).filter(IsOnBookmark && IsBlocked && IsHided).map((info) => {
-        info !== null
-            && friendList.otherprofile.insertAdjacentHTML(
-                "beforeend",
-                friendFrame(info)
-            );
+        if (info !== null)
+            insertHTMLIntoOther(info);
     });
 };
 
-const makeFriendList = (list = {}) => {
+const makeFriendList = (list) => {
     removeOtherprofileInnerHTML();
     setPageTitle("내 친구 보기");
     Object.keys(list).map((key) => {
         const info = list[key];
-        IsBlocked(info)
-            && IsHided(info)
-            && friendList.otherprofile.insertAdjacentHTML(
-                "beforeend",
-                friendFrame(info)
-            );
+        if (IsBlocked(info) && IsHided(info))
+            insertHTMLIntoOther(info);
     });
 };
 
@@ -125,10 +138,10 @@ const disShowDetails = (el) => {
 const detailImgInit = (el) => {
     if (IsOnDetails(el)) {
         disShowDetails(el);
-    } else {
-        defaultDetails();
-        showDetails(el);
+        return;
     }
+    defaultDetails();
+    showDetails(el);
 };
 
 const setBookmarkStar = (path) => {
@@ -139,10 +152,10 @@ const bookmarkInit = () => {
     if (friendList.bookmark.getAttribute("src").split("/")[2] === "star.svg") {
         setBookmarkStar("../img/starYellow.svg");
         makeBookmarkFriendList();
-    } else {
-        setBookmarkStar("../img/star.svg");
-        makeFriendList();
+        return;
     }
+    setBookmarkStar("../img/star.svg");
+    makeFriendList();
 };
 
 window.onload = () => {
@@ -151,6 +164,7 @@ window.onload = () => {
     axiosGETWithToken(url).then((datas) => {
         makeMyList(datas.data);
         axiosGETWithToken("/users/my/friends").then((friends) => {
+            friendList.myFriendsList = friends.data;
             makeFriendList(friends.data);
         }).finally(() => {
             friendList.detailImg = document.querySelectorAll(".friendList_details > img");
@@ -159,9 +173,17 @@ window.onload = () => {
         })
     }).catch((error) => {
         const state = error.response.status;
-        if(state === 403)
+        if (state === 403)
             axiosRefresh();
     })
+    friendList.searchInput.addEventListener("keyup", function (e) {
+        const value = this.value.trim();
+        const list = friendList.myFriendsList;
+        if (value === "")
+            makeFriendList(list);
+        if (e.keyCode === 13)
+            makeSearchFrinedList(list);
+    });
 };
 
 
@@ -189,7 +211,7 @@ window.onload = () => {
 //                             <img src="../img/blockFriend.svg" alt="block">
 //                             <span>${title} 해제하기</span>
 //                         </li>
-//                     </ul>
+//                     </ul>    
 //                 </nav>
 //             </div>
 //         </li>`;
