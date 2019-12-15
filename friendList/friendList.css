@@ -70,9 +70,9 @@
     padding: 24px 0 32px 0;
 }
 .friendList_profile_list > img {
-    width: 70px;
+    height: 100px;
+    max-height: 100px;
     margin-right: 8px;
-    border-radius: 16px;
 }
 .friendList_profile_userInfo > div {
     display: flex;

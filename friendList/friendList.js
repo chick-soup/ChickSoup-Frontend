@@ -3,6 +3,8 @@ const friendList = {
     "myprofile": document.querySelector("#friendList_myprofile > div > div"),
     "pageTitle": document.querySelector("#friendList_seemyfriend > h1"),
     "otherprofile": document.querySelector("#friendList_otherprofile"),
+    "addfriend": document.querySelector("#friendList_addfriend"),
+    "bookmark": document.querySelector("#friendList_bookmark"),
 };
 
 const friendFrame = (info) => {
@@ -43,81 +45,56 @@ const removeOtherprofileInnerHTML = () => {
     friendList.otherprofile.innerHTML = "";
 };
 
-const defaultDetails = () => {
-    friendList.detailImg.forEach((el) => {
-        el.parentNode.childNodes[3].classList.remove("showDetails");
-    })
-};
-
-const defaultStar = () => {
-    let star = document.querySelector("#friendList_bookmark");
-    star.setAttribute("src", "../img/star.svg");
-};
-
-const setPageTitle = (title) => {
-    friendList.pageTitle.innerHTML = title;
-};
-
-const IsHided = (data) => {
-    if (!data.hidden)
+const IsMutedAndHided = (list) => {
+    if(list.mute || list.hidden)
         return true;
     return false;
 };
 
-const IsBlocked = (data) => {
-    if (!data.mute)
+const IsOnBookmark = (list) => {
+    if (list.bookmark)
         return true;
     return false;
 };
 
-const IsOnBookmark = (data) => {
-    if (!data.bookmark)
-        return true;
-    return false;
-};
-
-const IsOnDetails = (el) => {
-    if (el.parentNode.childNodes[3].classList[1])
-        return true;
-    return false;
-};
-
-const IsMatched = (friend) => {
+const IsMatched = (list) => {
     const value = friendList.searchInput.value.trim();
-    if (friendList.myFriendsList[friend].nickname.indexOf(value) !== -1)
+    if (list.nickname.indexOf(value) !== -1)
         return true;
     return false;
 };
 
-const insertHTMLIntoOther = (info) => {
+const insertHTMLIntoOther = (infoObj) => {
     friendList.otherprofile.insertAdjacentHTML(
         "beforeend",
-        friendFrame(info)
+        friendFrame(infoObj)
     );
 };
 
 const makeSearchFrinedList = (list) => {
     removeOtherprofileInnerHTML();
-    Object.keys(list).filter(IsMatched).map((friend) => {
-        insertHTMLIntoOther(friendList.myFriendsList[friend]);
-    })
+    Object.keys(list).map((key) => {
+        const userList = list[key];
+        if (IsMatched(userList))
+            insertHTMLIntoOther(userList);
+    });
 };
 
 const makeBookmarkFriendList = (list) => {
     removeOtherprofileInnerHTML();
-    Object.keys(list).filter(IsOnBookmark && IsBlocked && IsHided).map((info) => {
-        if (info !== null)
-            insertHTMLIntoOther(info);
+    Object.keys(list).map((key) => {
+        const userList = list[key];
+        if (IsOnBookmark(userList) && !IsMutedAndHided(userList))
+            insertHTMLIntoOther(userList);
     });
 };
 
 const makeFriendList = (list) => {
     removeOtherprofileInnerHTML();
-    setPageTitle("내 친구 보기");
     Object.keys(list).map((key) => {
-        const info = list[key];
-        if (IsBlocked(info) && IsHided(info))
-            insertHTMLIntoOther(info);
+        const userList = list[key];
+        if (!IsMutedAndHided(userList))
+            insertHTMLIntoOther(userList);
     });
 };
 
@@ -135,6 +112,18 @@ const disShowDetails = (el) => {
     el.parentNode.childNodes[3].classList.remove("showDetails");
 };
 
+const defaultDetails = () => {
+    friendList.detailImg.forEach((el) => {
+        el.parentNode.childNodes[3].classList.remove("showDetails");
+    })
+};
+
+const IsOnDetails = (el) => {
+    if (el.parentNode.childNodes[3].classList[1])
+        return true;
+    return false;
+};
+
 const detailImgInit = (el) => {
     if (IsOnDetails(el)) {
         disShowDetails(el);
@@ -148,16 +137,6 @@ const setBookmarkStar = (path) => {
     friendList.bookmark.setAttribute("src", path);
 };
 
-const bookmarkInit = () => {
-    if (friendList.bookmark.getAttribute("src").split("/")[2] === "star.svg") {
-        setBookmarkStar("../img/starYellow.svg");
-        makeBookmarkFriendList();
-        return;
-    }
-    setBookmarkStar("../img/star.svg");
-    makeFriendList();
-};
-
 window.onload = () => {
     checkUserIsLogined();
     const url = "/users/my/profile";
@@ -168,14 +147,13 @@ window.onload = () => {
             makeFriendList(friends.data);
         }).finally(() => {
             friendList.detailImg = document.querySelectorAll(".friendList_details > img");
-            friendList.bookmark = document.querySelector("#friendList_bookmark");
-            friendList.addfriend = document.querySelector("#friendList_addfriend");
         })
     }).catch((error) => {
         const state = error.response.status;
         if (state === 403)
             axiosRefresh();
     })
+
     friendList.searchInput.addEventListener("keyup", function (e) {
         const value = this.value.trim();
         const list = friendList.myFriendsList;
@@ -183,6 +161,16 @@ window.onload = () => {
             makeFriendList(list);
         if (e.keyCode === 13)
             makeSearchFrinedList(list);
+    });
+
+    friendList.bookmark.addEventListener("click", () => {
+        if (friendList.bookmark.getAttribute("src").indexOf("star.svg") !== -1) {
+            setBookmarkStar("../img/starYellow.svg");
+            makeBookmarkFriendList(friendList.myFriendsList);
+            return;
+        }
+        setBookmarkStar("../img/star.svg");
+        makeFriendList(friendList.myFriendsList);
     });
 };
 
@@ -224,10 +212,19 @@ window.onload = () => {
 //     return false;
 // };
 
-// const IsBlocked = (data) => {
+// const IsMuted = (data) => {
 //     if (data.block)
 //         return true;
 //     return false;
+// };
+
+// const defaultStar = () => {
+//     const star = document.querySelector("#friendList_bookmark");
+//     star.setAttribute("src", "../img/star.svg");
+// };
+
+// const setPageTitle = (title) => {
+//     friendList.pageTitle.innerHTML = title;
 // };
 
 // const makeHideFriendList = (list = {}) => {
@@ -247,7 +244,7 @@ window.onload = () => {
 //     defaultStar();
 //     setPageTitle("차단 목록 보기");
 //     friendList.block.classList.add("blocked");
-//     Object.keys(list).filter(IsBlocked).map((info) => {
+//     Object.keys(list).filter(IsMuted).map((info) => {
 //         info !== null
 //             && friendList.otherprofile.insertAdjacentHTML(
 //                 "beforeend",

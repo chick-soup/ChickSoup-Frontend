@@ -18,10 +18,7 @@ body {
 }
 #search_div {
     position: relative;
-    padding-top: 5%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+    padding-top: 16px;
     font-size: 30px;
 }
 #search_div > h2 {
@@ -64,7 +61,8 @@ body {
     padding: 16px 0;
 }
 .friendList_profile_list > img {
-    height: 150px;
+    height: 75px;
+    width: 75px;
     padding: 24px;
     background-color: #969696;
 }
