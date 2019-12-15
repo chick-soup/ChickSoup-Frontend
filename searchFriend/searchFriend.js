@@ -1,5 +1,6 @@
 const searchFriend = {
     "result": document.querySelector("#search_result"),
+    "person": document.querySelector("#search_person"),
     "input": document.querySelector("#search_div_div > input"),
     "searchButton": document.querySelector("#search_div_div > img"),
     "detailButton": document.querySelector(".friendList_details_button"),
@@ -45,8 +46,7 @@ const showSearchResult = (kakaoId) => {
     axiosGETWithToken(url).then((datas) => {
         const data = datas.data;
         const buttonText = getButtonText(data);
-        const main = document.querySelector("#searchFriend_main");
-        main.insertAdjacentHTML("beforeend", resultFrame(data.nickname, data.id, buttonText));
+        searchFriend.person.innerHTML = resultFrame(data.nickname, data.id, buttonText);
     }).catch(() => {
         setResultText("오류가 발생하였습니다. 다시 시도해주세요.");
     }).finally(() => {
