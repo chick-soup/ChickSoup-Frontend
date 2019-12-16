@@ -1,0 +1,79 @@
+#friendList_head, #friendList_body {
+    width: 1220px;
+    margin: 0 auto;
+}
+#friendList_head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 0;
+    border-bottom: 2px solid #FAE100;
+}
+#friendList_seemyfriend {
+    font-size: 24px;
+}
+#friendList_searchmyfriend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 240px;
+    height: 32px;
+    padding: 0 16px;
+    background-color: #F1F1F1;
+    border: 1px solid #F1F1F1;
+    border-radius: 15px;
+}
+#friendList_searchmyfriend > label > img {
+    width: 15px;
+    margin-right: 8px;
+}
+#friendList_searchmyfriend_input {
+    height: 100%;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 15px;
+    background-color: inherit;
+    outline: none;
+}
+#friendList_body > * {
+    margin-left: 16px;
+}
+#friendList_sideicon {
+    text-align: right;
+}
+#friendList_sideicon > img {
+    width: 16px;
+    margin-top: 16px;
+    cursor: pointer;
+}
+#friendList_viewroom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 32px 24px;
+}
+.friendList_room {
+    text-align: center;
+    margin: 0 40px 24px;
+    cursor: pointer;
+}
+.friendList_room > img {
+    width: 150px;
+}
+.friendList_room > h1 {
+    font-size: 24px;
+    border-bottom: 1px solid #1E1E1E;
+    padding-bottom: 8px;
+}
+.friendList_room > p {
+    padding-top: 8px;
+}
+.newchatting {
+    width: 150px;
+}
+.newchatting > img {
+    width: 48px;
+}
+.newchatting > p {
+    font-size: 16px;
+}

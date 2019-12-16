@@ -1,0 +1,121 @@
+body {
+    content: "";
+    background-color: #F6F6F6;
+    background-image: url('../img/settingBackImg.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+#setting {
+    height: 100vh;
+}
+#setting_wrap {
+    position: relative;
+    width: 1220px;
+    margin: 100px auto 0;
+}
+#setting_title {
+    padding-bottom: 25px;
+    border-bottom: 3px solid #FAE100;
+    font-size: 30px;
+    font-weight: bold;
+}
+#setting_title > span > span {
+    font-size: 35px;
+}
+#setting_nav {
+    margin-top: 50px;
+}
+#setting_nav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#setting_nav ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    border-radius: 30px;
+    background-color: white;
+    box-shadow: 0 3px 5px hsla(0, 0%, 0%, 0.16);
+    transition: 0.3s;
+    cursor: pointer;
+}
+#setting_nav ul li:hover {
+    transform: scale(1.1);
+}
+#setting_nav ul li > img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 10px;
+}
+#setting_nav ul li > p {
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+}
+#setting_modal {
+    display: none;
+}
+.show_modal {
+    display: block;
+}
+#setting_show_id {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 26px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    z-index: 101;
+}
+#setting_show_id_close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    cursor: pointer;
+    transform: rotate(90deg);
+    z-index: 1;
+}
+#setting_show_id > p {
+    width: 500px;
+    padding: 150px 80px;
+    margin: auto;
+    border-radius: 10px;
+    background-color: white;
+    opacity: 0.8;
+}
+#setting_show_id_clipboard {
+    position: absolute;
+    left: 50%;
+    bottom: 100px;
+    transform: translateX(-50%);
+    text-decoration: underline;
+    color: hsl(0, 36%, 17%);
+    font-size: 10px;
+    cursor: pointer;
+}
+#setting_show_id_back {
+    width: 100vw;
+    min-width: 1220px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: hsl(0, 0%, 68%);
+    opacity: 0.5;
+    -webkit-filter: blur(14px);
+    -moz-filter: blur(14px);
+    -ms-filter: blur(14px);
+    -o-filter: blur(14px);
+    filter: blur(14px);
+    z-index: 100;
+}

@@ -1,0 +1,9 @@
+<svg id="구성_요소_4" data-name="구성 요소 4" xmlns="http://www.w3.org/2000/svg" width="92" height="92" viewBox="0 0 92 92">
+  <g id="그룹_194" data-name="그룹 194">
+    <rect id="사각형_17" data-name="사각형 17" width="92" height="92" rx="22" fill="#393939"/>
+    <g id="그룹_41" data-name="그룹 41" transform="translate(-125 -340)">
+      <path id="패스_23" data-name="패스 23" d="M12016.338,1510.959s.052-11.216,11.2-11.216,12.067,9.414,12.067,11.216a12.571,12.571,0,0,1-6.488,11.4,10.508,10.508,0,0,0-5.579,9.889" transform="translate(-11857 -1136.742)" fill="none" stroke="#fee100" stroke-linecap="round" stroke-width="6"/>
+      <circle id="타원_11" data-name="타원 11" cx="3.5" cy="3.5" r="3.5" transform="translate(167 403)" fill="#fee100"/>
+    </g>
+  </g>
+</svg>

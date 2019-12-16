@@ -1,0 +1,139 @@
+#friendList_head, #friendList_body {
+    width: 1220px;
+    margin: 0 auto;
+}
+#friendList_head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 0;
+    border-bottom: 2px solid #FAE100;
+}
+#friendList_seemyfriend {
+    font-size: 24px;
+}
+#friendList_searchmyfriend {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 240px;
+    height: 32px;
+    padding: 0 16px;
+    background-color: #F1F1F1;
+    border: 1px solid #F1F1F1;
+    border-radius: 15px;
+}
+#friendList_searchmyfriend > label > img {
+    width: 15px;
+    margin-right: 8px;
+}
+#friendList_searchmyfriend_input {
+    height: 100%;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 15px;
+    background-color: inherit;
+    outline: none;
+}
+#friendList_body > * {
+    margin-left: 16px;
+}
+#friendList_sideicon {
+    text-align: right;
+}
+#friendList_sideicon img {
+    width: 16px;
+    height: 16px;
+    margin: 16px 4px 0 0;
+    cursor: pointer;
+}
+#friendList_myprofile > div > h1 {
+    font-size: 20px;
+}
+#friendList_myprofile .friendList_profile_list {
+    border-bottom: 2px solid #FAE100;
+}
+#friendList_otherprofile .friendList_profile_list {
+    border-bottom: 2px solid #393939;
+}
+#friendList_otherprofile {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: 32px;
+}
+.friendList_profile_list {
+    position: relative;
+    width: 500px;
+    display: flex;
+    align-items: center;
+    padding: 24px 0 32px 0;
+}
+.friendList_profile_list > img {
+    height: 100px;
+    max-height: 100px;
+    margin-right: 8px;
+}
+.friendList_profile_userInfo > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.friendList_profile_userInfo > div > img {
+    cursor: pointer;
+}
+.friendList_profile_userInfo > p {
+    font-size: 13px;
+    font-weight: 600;
+}
+.friendList_details {
+    position: absolute;
+    right: 0;
+}
+.friendList_details > img {
+    width: 40px;
+    height: 50px;
+    cursor: pointer;
+}
+.friendList_details_nav {
+    position: relative;
+    display: none;
+}
+.showDetails {
+    display: block;
+}
+.friendList_details_nav > ul {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    padding: 20px;
+    border-radius: 10px;
+    color: #ffffff;
+    background-image: url('../img/friendDegailBackImg.svg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+.friendList_details_nav_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 24px 0;
+    cursor: pointer;
+}
+.friendList_details_nav_item > span {
+    font-size: 12px;
+}
+.friendList_details_button {
+    border-radius: 24px;
+    border: 1.5px solid #3B1C1C;
+    font-size: 20px;
+    font-weight: bold;
+    color: #3B1C1C;
+    padding: 8px 16px;
+    background-color: white;
+    outline: none;
+    cursor: pointer;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../common/header.css">
+    <link rel="stylesheet" href="../common/reset.css">
+    <link rel="stylesheet" href="friendList.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Chick Soup: 차단 숨김 리스트</title>
+    <link rel=" shortcut icon" href="../img/favicon.ico">
+    <link rel="icon" href="../img/favicon.ico">
+</head>
+<body>
+    <main id="friendList">
+        <nav id="friendList_head">
+            <div id="friendList_seemyfriend">
+                <h1></h1>
+            </div>
+            <div id="friendList_searchmyfriend">
+                <label for="friendList_searchmyfriend_input">
+                    <img src="../img/search.svg" alt="magnifier">
+                </label>
+                <input type="text" id="friendList_searchmyfriend_input" placeholder="친구 검색">
+            </div>
+        </nav>
+        <div id="friendList_body">
+            <nav id="friendList_sideicon">
+                <img src="../img/star.svg" id="friendList_bookmark" alt="bookmark">
+                <a href="../searchFriend/searchFriend.html">
+                    <img src="../img/addFriend.svg" id="friendList_addfriend" alt="addAsAFriend" />
+                </a>
+            </nav>
+            <section id="friendList_viewprofile">
+                <ul id="friendList_otherprofile"></ul>
+            </section>
+        </div>
+    </main>
+    <script src="muteOrHiddenFriendList.js"></script>
+    <script src="../common/header.js"></script>
+</body>
+</html>
