@@ -86,11 +86,18 @@
     font-size: 13px;
     font-weight: 600;
 }
-.hiddenList_otherprofile {
+.hiddenList_otherprofile, 
+.reqResList_otherprofile {
     display: block !important;
 }
-.hiddenList_otherprofile > ul {
+.hiddenList_otherprofile > ul, 
+.reqResList_otherprofile > ul {
+    margin-top: 24px;
     min-height: 320px;
+}
+.hiddenList_otherprofile > ul > h3, 
+.reqResList_otherprofile > ul > h3 {
+    font-size: 18px;
 }
 .friendList_details {
     position: absolute;

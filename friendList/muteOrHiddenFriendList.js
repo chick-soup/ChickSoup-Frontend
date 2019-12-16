@@ -21,7 +21,7 @@ const muteHiddenFrame = (info, title) => {
                         
                         <li class="friendList_details_nav_item" onclick="${title === "숨김" ? "releaseHiddenFriend(" + info.id + ")" : "releaseMuteFriend(" + info.id + ")"}">
                             <img src="../img/blockFriend.svg" alt="block">
-                            <span>차단 해제하기</span>
+                            <span>${title} 해제하기</span>
                         </li>
                     </ul>    
                 </nav>
