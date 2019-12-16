@@ -54,7 +54,9 @@ const sideFeature = (method, userId, data = "") => {
         location.reload();
     }).catch((error) => {
         const state = error.response.status;
-        if (state === 470)
+        if (state === 403)
+            axiosRefresh();
+        else if (state === 470)
             alert("존재하지 않는 유저입니다.");
         else if (state === 471)
             alert("해당 사용자와 친구 관계가 아닙니다.");
@@ -63,7 +65,7 @@ const sideFeature = (method, userId, data = "") => {
         else if (state === 473)
             alert("자기 자신에게 친구 삭제를 할 수 없습니다.");
         else
-            alert("오류가 발생하였습니다. 나중에 다시 시도해 주세요.");
+            alert("오류가 발생하였습니다. 다시 시도해 주세요.");
     })
 };
 
@@ -218,8 +220,6 @@ window.onload = () => {
         makeFriendList(friendList.myFriendsList);
     });
 };
-
-
 
 // ! 다른 페이지로 옮김
 

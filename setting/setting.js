@@ -17,6 +17,12 @@ const closeUserIdModal = () => {
 const getUserId = () => {
     axiosGETWithToken("/users/my/kakao-id").then((datas) => {
         setting.idSpan.innerHTML = datas.data.kakao_id;
+    }).catch((error) => {
+        const state = error.response.status;
+        if(state === 403) {
+            alert("오류가 발생하였습니다. 다시 시도해 주세요.");
+            axiosRefresh();
+        }
     })
 };
 
