@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +9,16 @@
     <link rel="stylesheet" href="../common/reset.css">
     <link rel="stylesheet" href="friendList.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <title>Chick Soup: 친구 리스트</title>
+    <title>Chick Soup: 요청 리스트</title>
     <link rel=" shortcut icon" href="../img/favicon.ico">
     <link rel="icon" href="../img/favicon.ico">
 </head>
+
 <body>
     <main id="friendList">
         <nav id="friendList_head">
             <div id="friendList_seemyfriend">
-                <h1>내 친구 보기</h1>
+                <h1>요청 리스트 보기</h1>
             </div>
             <div id="friendList_searchmyfriend">
                 <label for="friendList_searchmyfriend_input">
@@ -27,34 +29,17 @@
         </nav>
         <div id="friendList_body">
             <nav id="friendList_sideicon">
-                <img src="../img/star.svg" id="friendList_bookmark" alt="bookmark">
                 <a href="../searchFriend/searchFriend.html">
                     <img src="../img/addFriend.svg" id="friendList_addfriend" alt="addAsAFriend" />
                 </a>
-                <a href="../friendList/reqResFreindList.html">
-                    <img src="../img/question.png" id="friendList_reqfriend" alt="requestFriend">
-                </a>
             </nav>
             <section id="friendList_viewprofile">
-                <div id="friendList_myprofile">
-                    <div>
-                        <h1>내 프로필</h1>
-                        <div class="friendList_profile_list">
-                            <img alt="userImage">
-                            <div class="friendList_profile_userInfo">
-                                <div>
-                                    <h3 class="friendList_profile_userInfo_name"></h3>
-                                </div>
-                                <p class="friendList_profile_userInfo_status_message"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <ul id="friendList_otherprofile"></ul>
             </section>
         </div>
     </main>
-    <script src="friendList.js"></script>
+    <script src="reqResFreindList.js"></script>
     <script src="../common/header.js"></script>
 </body>
+
 </html>
