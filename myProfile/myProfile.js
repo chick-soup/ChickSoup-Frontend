@@ -4,10 +4,10 @@ const profileObj = {
     "content": document.querySelector("#myprofile_content"),
 }
 
-const myFrame = (id, name, message) => {
+const myFrame = (info) => {
     const my = `<div id="myprofile_userinfo">
-        <h1 id="myprofile_userinfo_name">${name}</h1>
-        <p id="myprofile_userinfo_message">${message}</p>
+        <h1 id="myprofile_userinfo_name">${info.name}</h1>
+        <p id="myprofile_userinfo_message">${info.message}</p>
     </div>
     <div id="myprofile_userinfo_nav">
         <ul>
@@ -15,7 +15,7 @@ const myFrame = (id, name, message) => {
                 <img src="../img/chatting.svg" alt="chatting">
                 <p>나와의 채팅</p>
             </li>
-            <li onclick="setEditprofile(${id}, '${name}', '${message}');">
+            <li onclick="setEditprofile(${info});">
                 <img src="../img/setting.svg" alt="profileEdit">
                 <p>프로필 수정</p>
             </li>
@@ -24,10 +24,10 @@ const myFrame = (id, name, message) => {
     return my;
 };
 
-const otherFrame = (id, name, message) => {
+const otherFrame = (info) => {
     const other = `<div id="myprofile_userinfo">
-        <h1 id="myprofile_userinfo_name">${name}</h1>
-        <p id="myprofile_userinfo_message">${message}</p>
+        <h1 id="myprofile_userinfo_name">${info.name}</h1>
+        <p id="myprofile_userinfo_message">${info.message}</p>
     </div>
     <div id="otherprofile_userinfo_nav">
         <ul>
@@ -40,7 +40,7 @@ const otherFrame = (id, name, message) => {
     return other;
 };
 
-const editFrame = (id, name, message) => {
+const editFrame = (info) => {
     const edit = `<div id="editprofile_change_photo">
         <label for="editprofile_profilephoto">프로필 사진 변경</label>
         <input type="file" onchange="changeImageFile()" id="editprofile_profilephoto">
@@ -48,8 +48,8 @@ const editFrame = (id, name, message) => {
         <input type="file" onchange="changeBackImageFile()" id="editprofile_backphoto">
     </div>
     <div id="editprofile_change_info">
-        <input type="text" id="editprofile_change_name" placeholder="이름" value="${name}">
-        <input type="text" id="editprofile_change_message" placeholder="상태 메세지" value="${message}">
+        <input type="text" id="editprofile_change_name" placeholder="이름" value="${info.name}">
+        <input type="text" id="editprofile_change_message" placeholder="상태 메세지" value="${info.message}">
         <span class="error_text"></span>
     </div>
     <div id="myprofile_userinfo_nav">
@@ -91,23 +91,25 @@ const editMyProfile = () => {
             "Authorization": localStorage.getItem("access_token"),
             "Content-Type": "multipart/form-data",
         }
+    }).then(() => {
+        location.reload();
     }).catch((error) => {
-        if(error.response.status === 403)
+        const state = error.response.status;
+        if (state === 403)
             axiosRefresh();
     })
-    location.reload();
 };
 
 const changeImageFile = () => {
     const file = profileObj.file.files[0];
     const fileSplit = file.name.split('.');
     const fileExtension = fileSplit[fileSplit.length - 1];
+    let reader = new FileReader();
     if (!(fileExtension === "png"
         || fileExtension === "jpg"
         || fileExtension === "jpeg")) {
         return alert("파일 형식은 png, jpg, jpeg만 허용합니다. ");
     }
-    let reader = new FileReader();
     reader.onloadend = (e) => profileObj.photo.setAttribute("src", e.target.result);
     reader.readAsDataURL(file);
     // ? For editMyProfile
@@ -118,12 +120,12 @@ const changeBackImageFile = () => {
     const file = profileObj.backFile.files[0];
     const fileSplit = file.name.split('.');
     const fileExtension = fileSplit[fileSplit.length - 1];
+    let reader = new FileReader();
     if (!(fileExtension === "png"
         || fileExtension === "jpg"
         || fileExtension === "jpeg")) {
         return alert("파일 형식은 png, jpg, jpeg만 허용합니다. ");
     }
-    let reader = new FileReader();
     reader.onloadend = (e) => profileObj.backImg.style.backgroundImage = `url("${e.target.result}")`
     reader.readAsDataURL(file);
     // ? For editMyProfile
@@ -140,17 +142,17 @@ const setUserBackImg = (id) => {
         = `url("${S3HOST}/media/image/user/background/web/${id}.png")`
 }
 
-const setMyprofile = (id, name, message) => {
-    setUserImg(id);
-    setUserBackImg(id);
-    profileObj.content.insertAdjacentHTML("beforeend", myFrame(id, name, message));
+const setMyprofile = (info) => {
+    setUserImg(info.id);
+    setUserBackImg(info.id);
+    profileObj.content.insertAdjacentHTML("beforeend", myFrame(info));
 };
 
-const setEditprofile = (id, name, message) => {
-    setUserImg(id);
+const setEditprofile = (info) => {
+    setUserImg(info.id);
     sessionStorage.removeItem("chicksoup_profile");
     sessionStorage.removeItem("chicksoup_profileBack");
-    profileObj.content.insertAdjacentHTML("beforeend", editFrame(id, name, message));
+    profileObj.content.insertAdjacentHTML("beforeend", editFrame(info));
     profileObj.changeMessage = document.querySelector("#editprofile_change_message");
     profileObj.changeName = document.querySelector("#editprofile_change_name");
     profileObj.backFile = document.querySelector("#editprofile_backphoto");
@@ -159,8 +161,8 @@ const setEditprofile = (id, name, message) => {
     profileObj.errorText = document.querySelector(".error_text");
 };
 
-const setOtherprofile = (id, name, message) => {
-    otherFrame(id, name, message);
+const setOtherprofile = (info) => {
+    otherFrame(info);
 };
 
 const getUserInfo = () => {
@@ -170,9 +172,11 @@ const getUserInfo = () => {
         axiosGETWithToken(`/users/${data.id}`).then((users) => {
             const user = users.data;
             if (user.myself) {
-                setMyprofile(user.id, user.nickname, user.status_message);
+                setMyprofile(user);
             } else {
-                setOtherprofile(user.id, user.nickname, user.status_message);
+                // TODO: show other profile page
+                // TODO: setOtherprofile need to be modified
+                setOtherprofile(user);
                 console.log("남 프로필 상태");
             }
         }).catch((error) => {
@@ -183,10 +187,11 @@ const getUserInfo = () => {
                 axiosRefresh();
             else if (state === 404)
                 alert("존재하지 않는 유저입니다.");
-            // location.href = "../friendList/friendList.html";
+            location.href = "../friendList/friendList.html";
         })
     }).catch((error) => {
-        if (error.response.status === 403)
+        const state = error.response.status;
+        if (state === 403)
             axiosRefresh();
     })
 };
@@ -195,6 +200,10 @@ const getUserBackground = () => {
     const url = "/users/my/profile";
     axiosGETWithToken(url).then((datas) => {
         setUserBackImg(datas.data.id);
+    }).catch((error) => {
+        const state = error.response.status;
+        if (state === 403)
+            axiosRefresh();
     })
 };
 
@@ -202,5 +211,3 @@ window.onload = () => {
     getUserInfo();
     profileObj.nav = document.querySelector("#myprofile_userinfo_nav");
 };
-
-// 9ralFCE2WvorY7jh

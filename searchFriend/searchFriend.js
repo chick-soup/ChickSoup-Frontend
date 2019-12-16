@@ -17,16 +17,16 @@ const setResultText = (value) => {
     searchFriend.result.innerHTML = value;
 };
 
-const resultFrame = (name, img, buttonText) => {
+const resultFrame = (info) => {
     let frame = `<div class="friendList_profile_list">
-        <img src="${S3HOST}/media/image/user/profile/${img}.png" alt="profileImage">
+    <img src="${S3HOST}/media/image/user/profile/${info.img}.png" alt="profileImage">
         <div class="friendList_profile_userInfo">
             <div>
-                <h3 class="friendList_profile_userInfo_name">${name}</h3>
+                <h3 class="friendList_profile_userInfo_name">${info.name}</h3>
             </div>
         </div>
         <div class="friendList_details">
-            <button class="friendList_details_button" onclick="showButtonResult();">${buttonText}</button>
+            <button class="friendList_details_button" onclick="showButtonResult();">${getButtonText(info)}</button>
         </div>
     </div>`;
     return frame;
@@ -44,11 +44,9 @@ const showSearchResult = (kakaoId) => {
     const div = document.querySelector("#search_div_div");
     div.insertAdjacentHTML("beforeend", "<img src='../img/DualRing.gif' id='loadingRing' />");
     axiosGETWithToken(url).then((datas) => {
-        const data = datas.data;
-        const buttonText = getButtonText(data);
-        searchFriend.person.innerHTML = resultFrame(data.nickname, data.id, buttonText);
+        searchFriend.person.innerHTML = resultFrame(datas.data);
     }).catch(() => {
-        setResultText("오류가 발생하였습니다. 다시 시도해주세요.");
+        setResultText("오류가 발생하였습니다. 다시 시도해 주세요.");
     }).finally(() => {
         document.querySelector("#loadingRing").remove();
     })
@@ -65,21 +63,22 @@ const showButtonResult = () => {
             setResultText("친구 추가 요청을 수락했습니다.");
     }).catch((error) => {
         const state = error.response.status;
-        if (state === 470) {
+        if(state === 403)
+            axiosRefresh();
+        else if (state === 470) {
             shakeElement();
             setResultText("존재하지 않는 아이디입니다.");
             document.querySelector(".friendList_profile_list").remove();
         }
+        else if (state === 471)
+            setResultText("이미 친구 추가 요청을 보냈습니다.");
         else if (state === 473) {
             shakeElement();
             setResultText("자기 자신은 친구 추가할 수 없습니다.");
             document.querySelector(".friendList_profile_list").remove();
         }
-        else if (state === 471)
-            setResultText("이미 친구 추가 요청을 보냈습니다.");
         else if (state === 472)
             setResultText("이미 해당 사용자와 친구 관계입니다.");
-        
     })
 };
 
@@ -89,6 +88,7 @@ const showResult = () => {
 };
 
 window.onload = () => {
+    checkUserIsLogined();
     searchFriend.input.addEventListener("keyup", (e) => e.keyCode === 13 && showResult());
     searchFriend.searchButton.addEventListener("click", showResult);
 };
