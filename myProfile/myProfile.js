@@ -6,8 +6,8 @@ const profileObj = {
 
 const myFrame = (info) => {
     const my = `<div id="myprofile_userinfo">
-        <h1 id="myprofile_userinfo_name">${info.name}</h1>
-        <p id="myprofile_userinfo_message">${info.message}</p>
+        <h1 id="myprofile_userinfo_name">${info.nickname}</h1>
+        <p id="myprofile_userinfo_message">${info.status_message}</p>
     </div>
     <div id="myprofile_userinfo_nav">
         <ul>
@@ -15,7 +15,7 @@ const myFrame = (info) => {
                 <img src="../img/chatting.svg" alt="chatting">
                 <p>나와의 채팅</p>
             </li>
-            <li onclick="setEditprofile(${info});">
+            <li onclick='setEditprofile(${JSON.stringify(info)});'>
                 <img src="../img/setting.svg" alt="profileEdit">
                 <p>프로필 수정</p>
             </li>
@@ -26,8 +26,8 @@ const myFrame = (info) => {
 
 const otherFrame = (info) => {
     const other = `<div id="myprofile_userinfo">
-        <h1 id="myprofile_userinfo_name">${info.name}</h1>
-        <p id="myprofile_userinfo_message">${info.message}</p>
+        <h1 id="myprofile_userinfo_name">${info.nickname}</h1>
+        <p id="myprofile_userinfo_message">${info.status_message}</p>
     </div>
     <div id="otherprofile_userinfo_nav">
         <ul>
@@ -48,8 +48,8 @@ const editFrame = (info) => {
         <input type="file" onchange="changeBackImageFile()" id="editprofile_backphoto">
     </div>
     <div id="editprofile_change_info">
-        <input type="text" id="editprofile_change_name" placeholder="이름" value="${info.name}">
-        <input type="text" id="editprofile_change_message" placeholder="상태 메세지" value="${info.message}">
+        <input type="text" id="editprofile_change_name" placeholder="이름" value="${info.nickname}">
+        <input type="text" id="editprofile_change_message" placeholder="상태 메세지" value="${info.status_message}">
         <span class="error_text"></span>
     </div>
     <div id="myprofile_userinfo_nav">
@@ -179,15 +179,6 @@ const getUserInfo = () => {
                 setOtherprofile(user);
                 console.log("남 프로필 상태");
             }
-        }).catch((error) => {
-            const state = error.response.status;
-            if (state === 471)
-                alert("볼 수 없는 프로필 입니다.");
-            else if (state === 403)
-                axiosRefresh();
-            else if (state === 404)
-                alert("존재하지 않는 유저입니다.");
-            location.href = "../friendList/friendList.html";
         })
     }).catch((error) => {
         const state = error.response.status;
@@ -208,6 +199,7 @@ const getUserBackground = () => {
 };
 
 window.onload = () => {
+    checkUserIsLogined();
     getUserInfo();
     profileObj.nav = document.querySelector("#myprofile_userinfo_nav");
 };

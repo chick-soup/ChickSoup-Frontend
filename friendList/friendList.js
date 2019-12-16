@@ -13,7 +13,9 @@ const friendFrame = (info) => {
             <img src="https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${info.id}.png" alt="userImage" />
             <div class="friendList_profile_userInfo">
                 <div>
-                    <img src="../img/${info.bookmark ? "starYellow.svg" : "star.svg"}" onclick="bookmarkFriend(${info.id})" alt="bookmark">
+                    
+                    <img src="../img/${info.bookmark ? "starYellow.svg" : "star.svg"}" 
+                        onclick="${info.bookmark ? "releaseBookmarkFriend(" + info.id + ")" : "bookmarkFriend(" + info.id + ")"}"
                     <h3 class="friendList_profile_userInfo_name">${info.nickname}</h3>
                 </div>
                 <p class="friendList_profile_userInfo_status_message">${info.status_message}</p>
@@ -41,8 +43,10 @@ const friendFrame = (info) => {
     return frame;
 };
 
-const sideFeature = (method, userId, data = "") => {
+const sideFeature = (method, userId, data) => {
     const url = `${server}/users/my/friends/${userId}`;
+    if (!confirm("정말 하시겠습니까?"))
+        return;
     axios({
         method: `${method}`,
         url: url,
@@ -69,18 +73,23 @@ const sideFeature = (method, userId, data = "") => {
     })
 };
 
+const releaseBookmarkFriend = (userId) => {
+    const data = { "bookmark": "0" };
+    sideFeature("PUT", userId, data);
+};
+
 const bookmarkFriend = (userId) => {
-    const data = { "bookmark": 1 };
+    const data = { "bookmark": "1" };
     sideFeature("PUT", userId, data);
 };
 
 const hideFriend = (userId) => {
-    const data = { "hidden": 1 };
+    const data = { "hidden": "1" };
     sideFeature("PUT", userId, data);
 };
 
 const muteFriend = (userId) => {
-    const data = { "mute": 1 };
+    const data = { "mute": "1" };
     sideFeature("PUT", userId, data);
 };
 
@@ -220,102 +229,3 @@ window.onload = () => {
         makeFriendList(friendList.myFriendsList);
     });
 };
-
-// ! 다른 페이지로 옮김
-
-// let img = `<img src="../img/blockFriend.svg" id="friendList_blockfriend" onclick="blockInit();" alt="blockFriend">
-// <img src="../img/hideFriend.svg" id="friendList_hidefriend" onclick="hideInit();" alt="hideFriend">`
-
-// const friendFrameTwo = (id, name, status_message, title) => {
-//     let frame =
-//         `<li class="friendList_profile_list">
-//             <img src="https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${id}.png" alt="userImage" />
-//             <div class="friendList_profile_userInfo">
-//                 <div>
-//                     <h3 class="friendList_profile_userInfo_name">${name}</h3>
-//                 </div>
-//                 <p class="friendList_profile_userInfo_status_message">${status_message}</p>
-//             </div>
-//             <div class="friendList_details">
-//                 <img src="../img/details.svg" alt="friendListDetails" onclick="detailImgInit(this);">
-//                 <nav class="friendList_details_nav">
-//                     <ul>
-//                         <li class="friendList_details_nav_item">
-//                             <img src="../img/blockFriend.svg" alt="block">
-//                             <span>${title} 해제하기</span>
-//                         </li>
-//                     </ul>    
-//                 </nav>
-//             </div>
-//         </li>`;
-//     return frame;
-// };
-
-// const IsHided = (data) => {
-//     if (data.hide)
-//         return true;
-//     return false;
-// };
-
-// const IsMuted = (data) => {
-//     if (data.block)
-//         return true;
-//     return false;
-// };
-
-// const defaultStar = () => {
-//     const star = document.querySelector("#friendList_bookmark");
-//     star.setAttribute("src", "../img/star.svg");
-// };
-
-// const setPageTitle = (title) => {
-//     friendList.pageTitle.innerHTML = title;
-// };
-
-// const makeHideFriendList = (list = {}) => {
-//     setPageTitle("숨김 목록 보기");
-//     friendList.block.classList.add("hided");
-//     Object.keys(list).filter(IsHided).map((info) => {
-//         info !== null
-//             && friendList.otherprofile.insertAdjacentHTML(
-//                 "beforeend",
-//                 friendFrameTwo(info.id, info.nickname, info.status_message, "숨김")
-//             );
-//     });
-// };
-
-// const makeBlockFriendList = (list = {}) => {
-//     removeOtherprofileInnerHTML();
-//     defaultStar();
-//     setPageTitle("차단 목록 보기");
-//     friendList.block.classList.add("blocked");
-//     Object.keys(list).filter(IsMuted).map((info) => {
-//         info !== null
-//             && friendList.otherprofile.insertAdjacentHTML(
-//                 "beforeend",
-//                 friendFrameTwo(info.id, info.nickname, info.status_message, "차단")
-//             );
-//     });
-// };
-
-// const hideInit = () => {
-//     const list = friendList.hide.classList;
-//     if (list[0] === "hided") {
-//         list.remove("hided");
-//         makeFriendList();
-//     } else {
-//         list.add("hided");
-//         makeHideFriendList();
-//     }
-// };
-
-// const blockInit = () => {
-//     const list = friendList.block.classList;
-//     if (list[0] === "blocked") {
-//         list.remove("blocked");
-//         makeFriendList();
-//     } else {
-//         list.add("blocked");
-//         makeBlockFriendList();
-//     }
-// };

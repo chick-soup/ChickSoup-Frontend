@@ -86,6 +86,12 @@
     font-size: 13px;
     font-weight: 600;
 }
+.hiddenList_otherprofile {
+    display: block !important;
+}
+.hiddenList_otherprofile > ul {
+    min-height: 320px;
+}
 .friendList_details {
     position: absolute;
     right: 0;

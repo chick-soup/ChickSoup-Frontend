@@ -19,10 +19,10 @@ const setResultText = (value) => {
 
 const resultFrame = (info) => {
     let frame = `<div class="friendList_profile_list">
-    <img src="${S3HOST}/media/image/user/profile/${info.img}.png" alt="profileImage">
+    <img src="${S3HOST}/media/image/user/profile/${info.id}.png" alt="profileImage">
         <div class="friendList_profile_userInfo">
             <div>
-                <h3 class="friendList_profile_userInfo_name">${info.name}</h3>
+                <h3 class="friendList_profile_userInfo_name">${info.nickname}</h3>
             </div>
         </div>
         <div class="friendList_details">
@@ -45,7 +45,9 @@ const showSearchResult = (kakaoId) => {
     div.insertAdjacentHTML("beforeend", "<img src='../img/DualRing.gif' id='loadingRing' />");
     axiosGETWithToken(url).then((datas) => {
         searchFriend.person.innerHTML = resultFrame(datas.data);
-    }).catch(() => {
+    }).catch((error) => {
+        if (error.response.status === 403)
+            axiosRefresh();
         setResultText("오류가 발생하였습니다. 다시 시도해 주세요.");
     }).finally(() => {
         document.querySelector("#loadingRing").remove();
@@ -58,14 +60,12 @@ const showButtonResult = () => {
     const url = `/users/${id}`;
     axiosPOSTWithToken(url).then((datas) => {
         if (datas.status === 200)
-            setResultText("친구 추가 요청을 요청했습니다.");
+            setResultText("친구 추가를 요청했습니다."); 
         else
             setResultText("친구 추가 요청을 수락했습니다.");
     }).catch((error) => {
         const state = error.response.status;
-        if(state === 403)
-            axiosRefresh();
-        else if (state === 470) {
+        if (state === 470) {
             shakeElement();
             setResultText("존재하지 않는 아이디입니다.");
             document.querySelector(".friendList_profile_list").remove();

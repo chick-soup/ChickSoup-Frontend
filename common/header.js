@@ -1,7 +1,6 @@
 const server = "http://ec2-13-209-99-114.ap-northeast-2.compute.amazonaws.com:8080";
 const S3HOST = "https://chicksoup.s3.ap-northeast-2.amazonaws.com";
 const childNodesOne = document.body.childNodes[1];
-
 const IsSetting = () => {
     const cId = childNodesOne.getAttribute("id");
     if (cId === "friendList"
@@ -10,7 +9,6 @@ const IsSetting = () => {
         return true;
     return false;
 };
-
 const headerObj = {
     "header": `<header id="header_header">
         <main>
@@ -92,7 +90,7 @@ const axiosRefresh = () => {
         url: `${server}/refresh`,
         headers: {
             "Authorization": localStorage.getItem("refresh_token"),
-        },
+        }
     }).then((datas) => {
         localStorage.setItem("access_token", datas.data.access_token);
         location.reload();
