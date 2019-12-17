@@ -8,7 +8,24 @@ const moreFunction = document.getElementById('more-function');
 const chatInput = document.querySelector('#chat-sentence > input');
 const hashButton = document.querySelector('#hash_tag-btn');
 const emoticonList = document.querySelectorAll('#emoticon-list > .center-view > ul > div > li > div > img');
-console.log(emoticonList);
+const sendButton = document.querySelector('#hash_tag-btn > img');
+sendButton.addEventListener('click', () => {
+    console.log(chatInput.value);
+    chattingTemplate(chatInput.value);
+});
+
+function chattingTemplate(text) {
+    let li = document.createElement('li');
+    let div = document.createElement('div');
+    let h2 = document.createElement('h2');
+    let span = document.createElement('span');
+    span.innerText = text;
+    h2.insertAdjacentElement('afterbegin', span);
+    div.insertAdjacentElement('afterbegin', h2);
+    li.insertAdjacentElement('afterbegin', div);
+    // document.querySelectorAll('.my-chat-list > ul > li:nth-last-child(1)').
+    document.querySelector('.my-chat-list:nth-last-child(1) > ul').appendChild(li);
+}
 
 menuButton.addEventListener('click', () => {
     const hiddenDiv = document.getElementById('hidden-div');
