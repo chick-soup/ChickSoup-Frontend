@@ -605,6 +605,10 @@ ul li div h2 span {
     margin-top: 24px;
 }
 
+.emo-show {
+    display: block !important;
+}
+
 .emo-hidden {
     -webkit-animation: emo-down .3s ease-out;
     -moz-animation: emo-down .3s ease-out;

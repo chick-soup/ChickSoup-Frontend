@@ -79,12 +79,13 @@ const showModeOption = (mode) => {
     }
 };
 
-chatting.chatInput.addEventListener('input', () => {
+const checkUserDidInput = () => {
     const inputValue = chatting.chatInput.value;
     const hashButtonImg = chatting.hashButton.childNodes[1];
     if (inputValue.length >= 1)
     hashButtonImg.src = '../img/moreOptionOn.png';
     else
+<<<<<<< Updated upstream
     hashButtonImg.src = '../img/hashtag.png';
 });
 
@@ -99,6 +100,15 @@ chatting.emoticonList.forEach(emo => {
         hashButtonImg.src = '../img/moreOptionOn.png';
     });
 });
+=======
+        hashButtonImg.src = '../img/hashtag.png';
+}
+const getClickedEmo = (e) => {
+    const emoPath = e.target.getAttribute("src").split("/");
+    const emo = emoPath[emoPath.length - 1].split(".")[0];
+    return emo;
+};
+>>>>>>> Stashed changes
 
 chatting.sendButton.addEventListener('click', () => {
     chattingTemplate(chatting.chatInput.value);
@@ -109,7 +119,15 @@ window.onload = () => {
     chatting.menuButton.addEventListener('click', showHiddenDiv);
     chatting.changeDiv.addEventListener('click', toggleReadonly);
     chatting.hiddenDiv.addEventListener('click', disShowHiddenDiv);
+    chatting.chatInput.addEventListener('input', checkUserDidInput);
     chatting.chatMain.addEventListener('click', () => showModeOption("main"));
     chatting.emoButton.addEventListener('click', () => showModeOption("emo"));
     chatting.moreOption.addEventListener('click', () => showModeOption("func"));
+    chatting.emoticonList.forEach(emo => {
+        emo.addEventListener('click', (e) => {
+            // ? get Emoticon And push it into the value
+            chatting.chatInput.value += getClickedEmo(e);
+            checkUserDidInput();
+        });
+    });
 };
