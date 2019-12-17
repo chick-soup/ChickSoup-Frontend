@@ -16,7 +16,7 @@
     <main id="friendList">
         <nav id="friendList_head">
             <div id="friendList_seemyfriend">
-                <h1></h1>
+                <h1>차단, 숨김 리스트 보기</h1>
             </div>
             <div id="friendList_searchmyfriend">
                 <label for="friendList_searchmyfriend_input">
@@ -27,13 +27,19 @@
         </nav>
         <div id="friendList_body">
             <nav id="friendList_sideicon">
-                <img src="../img/star.svg" id="friendList_bookmark" alt="bookmark">
                 <a href="../searchFriend/searchFriend.html">
                     <img src="../img/addFriend.svg" id="friendList_addfriend" alt="addAsAFriend" />
                 </a>
             </nav>
             <section id="friendList_viewprofile">
-                <ul id="friendList_otherprofile"></ul>
+                <div id="friendList_otherprofile" class="hiddenList_otherprofile">
+                    <ul id="hiddenList">
+                        <h3 id="muteList_title">숨긴 친구 보기</h3>
+                    </ul>
+                    <ul id="muteList">
+                        <h3 id="muteList_title">차단한 친구 보기</h3>
+                    </ul>
+                </div>
             </section>
         </div>
     </main>

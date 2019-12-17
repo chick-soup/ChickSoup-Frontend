@@ -31,6 +31,7 @@ const logout = () => {
 };
 
 window.onload = () => {
+    checkUserIsLogined();
     // ? for Clipboard -> copy user id
     new ClipboardJS("#setting_show_id_clipboard");
     setting.idLi.addEventListener("click", showUserIdModal);
