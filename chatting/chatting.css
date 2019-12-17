@@ -321,13 +321,11 @@ ul li div h2 span {
 }
 
 #hidden-div {
-    right: -100000000%;
     position: absolute;
     width: 100%;
     height: 100%;
     background-color: rgba(123, 123, 123, 0.7);
     z-index: 2;
-    
 }
 
 .hidden {
@@ -343,26 +341,24 @@ ul li div h2 span {
     -webkit-animation: slide-down .3s ease-out;
     -moz-animation: slide-down .3s ease-out;
 }
-    
 
 @-webkit-keyframes slide-down {
-      0% { opacity: 0; -webkit-transform: translateX(100%); }   
+    0% { opacity: 0; -webkit-transform: translateX(100%); }   
     100% { opacity: 1; -webkit-transform: translateX(0); }
 }
 @-moz-keyframes slide-down {
-      0% { opacity: 0; -moz-transform: translateX(100%); }   
+    0% { opacity: 0; -moz-transform: translateX(100%); }   
     100% { opacity: 1; -moz-transform: translateX(0); }
 }
 
 @-webkit-keyframes slide-up {
-      0% { opacity: 1; -webkit-transform: translateX(0); }   
+    0% { opacity: 1; -webkit-transform: translateX(0); }   
     100% { opacity: 0; -webkit-transform: translateX(100%); }
 }
 @-moz-keyframes slide-up {
-      0% { opacity: 1; -moz-transform: translateX(0); }   
+    0% { opacity: 1; -moz-transform: translateX(0); }   
     100% { opacity: 0; -moz-transform: translateX(100%); }
 }
-
 
 #side-bar {
     float: right;
@@ -407,6 +403,7 @@ ul li div h2 span {
     outline: none;
     width: 100%;
     height: 100%;
+    text-align: center;
     font-size: 24px;
     font-weight: bold;
     cursor: auto;
@@ -610,32 +607,32 @@ ul li div h2 span {
     -webkit-animation: emo-down .3s ease-out;
     -moz-animation: emo-down .3s ease-out;
     transition: visibility 0.3s;
-    visibility: hidden; 
+    visibility: hidden;
 }
 
 .emo-show {
+    display: block !important;
     visibility: visible;
     opacity: 1 !important;
     -webkit-animation: emo-up .3s ease-out;
     -moz-animation: emo-up .3s ease-out;
 }
-    
 
 @-webkit-keyframes emo-down {
-      0% { opacity: 1; -webkit-transform: translateY(0); }   
+    0% { opacity: 1; -webkit-transform: translateY(0); }   
     100% { opacity: 0; -webkit-transform: translateY(100%); }
 }
 @-moz-keyframes emo-down {
-      0% { opacity: 1; -moz-transform: translateY(0); }   
+    0% { opacity: 1; -moz-transform: translateY(0); }   
     100% { opacity: 0; -moz-transform: translateY(100%); }
 }
 
 @-webkit-keyframes emo-up {
-      0% { opacity: 0; -webkit-transform: translateY(100%); }   
+    0% { opacity: 0; -webkit-transform: translateY(100%); }   
     100% { opacity: 1; -webkit-transform: translateY(0); }
 }
 @-moz-keyframes emo-up {
-      0% { opacity: 0; -moz-transform: translateY(100%); }   
+    0% { opacity: 0; -moz-transform: translateY(100%); }   
     100% { opacity: 1; -moz-transform: translateY(0); }
 }
 
