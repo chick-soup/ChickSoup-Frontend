@@ -127,11 +127,13 @@ body {
 }
 
 .my-chat-list > ul {
+    height: auto;
     margin-top: 11px;
     margin-left: 10px;
 }
 
 .other-chat-list > ul {
+    height: auto;
     margin-top: 11px;
     margin-right: 10px;
 }
@@ -204,6 +206,10 @@ ul > h4 {
     left: 148px;
 }
 
+.my-chat-list > ul > li {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 
 .my-chat-list > ul > li > div {
     background-color: #FEE100;
