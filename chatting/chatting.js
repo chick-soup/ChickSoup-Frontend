@@ -11,14 +11,30 @@ const chatting = {
     "moreFunction": document.querySelector('#more-function'),
     "chatInput": document.querySelector('#chat-sentence > input'),
     "emoticonList": document.querySelectorAll('#emoticon-list > .center-view > ul > div > li > div > img'),
+    "sendButton": document.querySelector('#hash_tag-btn > img'),
 };
+
+
+const chattingTemplate = (text) => {
+    let li = document.createElement('li');
+    let div = document.createElement('div');
+    let h2 = document.createElement('h2');
+    let span = document.createElement('span');
+    span.innerText = text;
+    h2.insertAdjacentElement('afterbegin', span);
+    div.insertAdjacentElement('afterbegin', h2);
+    li.insertAdjacentElement('afterbegin', div);
+    // document.querySelectorAll('.my-chat-list > ul > li:nth-last-child(1)').
+    document.querySelector('.my-chat-list:nth-last-child(1) > ul').appendChild(li);
+}
+
 
 const alarmSwitch = () => {
     const alarmImg = chatting.alarmButton.childNodes[1];
     if (alarmImg.getAttribute('src') === '../img/alarmOn.png')
-        alarmImg.src = '../img/alarmOff.png';
+    alarmImg.src = '../img/alarmOff.png';
     else
-        alarmImg.src = '../img/alarmOn.png';
+    alarmImg.src = '../img/alarmOn.png';
 };
 
 const toggleReadonly = () => {
@@ -32,7 +48,7 @@ const showHiddenDiv = () => {
 
 const disShowHiddenDiv = (event) => {
     if (event.target !== event.currentTarget)
-        return;
+    return;
     chatting.hiddenDiv.classList.remove('show');
 };
 
@@ -67,9 +83,9 @@ chatting.chatInput.addEventListener('input', () => {
     const inputValue = chatting.chatInput.value;
     const hashButtonImg = chatting.hashButton.childNodes[1];
     if (inputValue.length >= 1)
-        hashButtonImg.src = '../img/moreOptionOn.png';
+    hashButtonImg.src = '../img/moreOptionOn.png';
     else
-        hashButtonImg.src = '../img/hashtag.png';
+    hashButtonImg.src = '../img/hashtag.png';
 });
 
 chatting.emoticonList.forEach(emo => {
@@ -82,6 +98,10 @@ chatting.emoticonList.forEach(emo => {
         input.value += emo;
         hashButtonImg.src = '../img/moreOptionOn.png';
     });
+});
+
+chatting.sendButton.addEventListener('click', () => {
+    chattingTemplate(chatting.chatInput.value);
 });
 
 window.onload = () => {
