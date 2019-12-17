@@ -60,35 +60,28 @@ const showButtonResult = () => {
     const url = `/users/${id}`;
     axiosPOSTWithToken(url).then((datas) => {
         if (datas.status === 200)
-            setResultText("친구 추가를 요청했습니다."); 
+            setResultText("친구 추가를 요청했습니다.");
         else
             setResultText("친구 추가 요청을 수락했습니다.");
     }).catch((error) => {
         const state = error.response.status;
-        if (state === 470) {
-            shakeElement();
+        document.querySelector(".friendList_profile_list").remove();
+        shakeElement();
+        if (state === 470)
             setResultText("존재하지 않는 아이디입니다.");
-            document.querySelector(".friendList_profile_list").remove();
-        }
         else if (state === 471)
             setResultText("이미 친구 추가 요청을 보냈습니다.");
-        else if (state === 473) {
-            shakeElement();
-            setResultText("자기 자신은 친구 추가할 수 없습니다.");
-            document.querySelector(".friendList_profile_list").remove();
-        }
         else if (state === 472)
             setResultText("이미 해당 사용자와 친구 관계입니다.");
+        else if (state === 473)
+            setResultText("자기 자신은 친구 추가할 수 없습니다.");
     })
-};
-
-const showResult = () => {
-    const kakaoId = searchFriend.input.value;
-    showSearchResult(kakaoId);
 };
 
 window.onload = () => {
     checkUserIsLogined();
-    searchFriend.input.addEventListener("keyup", (e) => e.keyCode === 13 && showResult());
-    searchFriend.searchButton.addEventListener("click", showResult);
+    searchFriend.input.addEventListener("keyup", 
+        (e) => e.keyCode === 13 && showSearchResult(searchFriend.input.value));
+    searchFriend.searchButton.addEventListener("click", 
+        () => showSearchResult(searchFriend.input.value));
 };
