@@ -14,27 +14,24 @@ const chatting = {
     "sendButton": document.querySelector('#hash_tag-btn > img'),
 };
 
-
-const chattingTemplate = (text) => {
+const chattingTemplate = () => {
     let li = document.createElement('li');
     let div = document.createElement('div');
     let h2 = document.createElement('h2');
     let span = document.createElement('span');
-    span.innerText = text;
+    span.innerText = chatting.chatInput.value;
     h2.insertAdjacentElement('afterbegin', span);
     div.insertAdjacentElement('afterbegin', h2);
     li.insertAdjacentElement('afterbegin', div);
-    // document.querySelectorAll('.my-chat-list > ul > li:nth-last-child(1)').
     document.querySelector('.my-chat-list:nth-last-child(1) > ul').appendChild(li);
-}
-
+};
 
 const alarmSwitch = () => {
     const alarmImg = chatting.alarmButton.childNodes[1];
     if (alarmImg.getAttribute('src') === '../img/alarmOn.png')
-    alarmImg.src = '../img/alarmOff.png';
+        alarmImg.src = '../img/alarmOff.png';
     else
-    alarmImg.src = '../img/alarmOn.png';
+        alarmImg.src = '../img/alarmOn.png';
 };
 
 const toggleReadonly = () => {
@@ -48,7 +45,7 @@ const showHiddenDiv = () => {
 
 const disShowHiddenDiv = (event) => {
     if (event.target !== event.currentTarget)
-    return;
+        return;
     chatting.hiddenDiv.classList.remove('show');
 };
 
@@ -83,25 +80,36 @@ const checkUserDidInput = () => {
     const inputValue = chatting.chatInput.value;
     const hashButtonImg = chatting.hashButton.childNodes[1];
     if (inputValue.length >= 1)
-    hashButtonImg.src = '../img/moreOptionOn.png';
+        hashButtonImg.src = '../img/moreOptionOn.png';
     else
         hashButtonImg.src = '../img/hashtag.png';
-}
+};
+
 const getClickedEmo = (e) => {
     const emoPath = e.target.getAttribute("src").split("/");
     const emo = emoPath[emoPath.length - 1].split(".")[0];
     return emo;
 };
 
+const addClickEvent = (el, callback) => {
+    el.addEventListener("click", callback);
+};
+
+const addClickEventPlusArg = (el, callback, argu) => {
+    el.addEventListener("click", () => callback(argu));
+};
+
 window.onload = () => {
-    chatting.alarmButton.addEventListener('click', alarmSwitch);
-    chatting.menuButton.addEventListener('click', showHiddenDiv);
-    chatting.changeDiv.addEventListener('click', toggleReadonly);
-    chatting.hiddenDiv.addEventListener('click', disShowHiddenDiv);
-    chatting.chatInput.addEventListener('input', checkUserDidInput);
-    chatting.chatMain.addEventListener('click', () => showModeOption("main"));
-    chatting.emoButton.addEventListener('click', () => showModeOption("emo"));
-    chatting.moreOption.addEventListener('click', () => showModeOption("func"));
+    addClickEvent(chatting.alarmButton, alarmSwitch);
+    addClickEvent(chatting.alarmButton, alarmSwitch);
+    addClickEvent(chatting.menuButton, showHiddenDiv);
+    addClickEvent(chatting.changeDiv, toggleReadonly);
+    addClickEvent(chatting.hiddenDiv, disShowHiddenDiv);
+    addClickEvent(chatting.chatInput, checkUserDidInput);
+    addClickEvent(chatting.sendButton, chattingTemplate);
+    addClickEventPlusArg(chatting.chatMain, showModeOption, "main");
+    addClickEventPlusArg(chatting.emoButton, showModeOption, "emo");
+    addClickEventPlusArg(chatting.moreOption, showModeOption, "func");
     chatting.emoticonList.forEach(emo => {
         emo.addEventListener('click', (e) => {
             // ? get Emoticon And push it into the value
