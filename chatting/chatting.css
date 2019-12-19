@@ -140,7 +140,7 @@ ul > h4 {
     margin-bottom: 10px;
 }
 
-.other-chat-list ul  li  div, .my-chat-list ul  li  div {
+.other-chat-list ul  li  div:not(.other-chat-time), .my-chat-list ul  li  div {
     width: auto;
     height: auto;
     min-height: 20px;
@@ -153,7 +153,6 @@ ul > h4 {
     z-index: initial;
     position: relative;
     float: left;
-    margin-bottom: 10px ;
 }
 
 .other-first-message::before {
@@ -180,7 +179,7 @@ ul > h4 {
     left: -66px;
 }
 
-.my-first-message::before {
+/* .my-first-message::before {
     content: '';
     position: absolute;
     height: 50px;
@@ -202,45 +201,44 @@ ul > h4 {
     background: #B2C7D9;
     top: -15px;
     left: 148px;
-}
+} */
 
 .my-chat-list > ul > li {
-    overflow-x: hidden;
-    overflow-y: auto;
+    height: auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+.other-chat-list > ul > li {
+    height: auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-bottom: 10px;
 }
 
 .my-chat-list > ul > li > div {
     background-color: #FEE100;
-    float: right;
+}
+
+.other-chat-time, .my-chat-time {
+    margin: 0 8px;
+    width: 85px;
+}
+
+.other-chat-time > h4:nth-child(1) {
+    color: #FEE100;
 }
 
 ul li div h2 span {
     word-break: break-all;
     line-height: 20px;
-}
-
-.my-first-message ul li + li, .other-first-message ul li + li {
-    margin-top: 10px;
-}
-
-.other-chat-time, .my-chat-time {
-    position: relative;
-    width: 85px;
-}
-
-.other-chat-time > h4:nth-child(2), .my-chat-time > h4:nth-child(1) {
-    position: absolute;
-    width: 100% ;
-    bottom: 0px;
-    margin-bottom: 2px;
-}
-
-.other-chat-time > h4:nth-child(1) {
-    position: absolute;
-    color: #FEE100;
-    width: 100% ;
-    bottom: 20px;
-    margin-bottom: 2px;
 }
 
 #chat-footer {
@@ -603,10 +601,6 @@ ul li div h2 span {
 
 #emoticon-list > .center-view > ul > div {
     margin-top: 24px;
-}
-
-.emo-show {
-    display: block !important;
 }
 
 .emo-hidden {
