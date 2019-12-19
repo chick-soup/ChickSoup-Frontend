@@ -41,10 +41,13 @@
 #friendList_sideicon {
     text-align: right;
 }
+#friendList_sideicon > * {
+    margin-top: 16px;
+    margin-right: 4px;
+}
 #friendList_sideicon img {
     width: 16px;
     height: 16px;
-    margin: 16px 4px 0 0;
     cursor: pointer;
 }
 #friendList_myprofile > div > h1 {

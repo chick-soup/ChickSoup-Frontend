@@ -18,19 +18,15 @@ const headerObj = {
             <nav id="header_nav">
                 <ul>
                     <li><a href="../friendList/friendList.html">친구목록보기</a></li>
-                    <li><a>채팅하기</a></li>
+                    <li><a href="../chattingRoom/chattingRoom.html">채팅하기</a></li>
                     <li><a href="../setting/setting.html"><img id="header_nav_setting" 
                     src="../img/${IsSetting()
-            ? "settingBlack"
-            : "setting"}.svg" alt="setting"></a>
+                        ? "settingBlack"
+                        : "setting"}.svg" alt="setting"></a>
                     </li>
                 </ul>
             </nav>
-            ${IsSetting()
-            ? ""
-            : `<div id="go_back">
-                <img src="../img/${IsSetting() ? "leftArrowBrown" : "leftArrow"}.svg" alt="leftArrow">
-            </div>`}
+            ${IsSetting() ? "" : `<div id="go_back"><img src="../img/${IsSetting() ? "leftArrowBrown" : "leftArrow"}.svg" alt="leftArrow"></div>`}
         </main>
     </header>`
 };
@@ -84,7 +80,6 @@ const checkUserIsLogined = () => {
 };
 
 const axiosRefresh = () => {
-    alert("오류가 발생하였습니다. 다시 시도해 주세요.");
     axios({
         method: "GET",
         url: `${server}/refresh`,
@@ -94,5 +89,11 @@ const axiosRefresh = () => {
     }).then((datas) => {
         localStorage.setItem("access_token", datas.data.access_token);
         location.reload();
+    }).catch((error) => {
+        if (error.response.status === 403) {
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("refresh_token");
+            checkUserIsLogined();
+        }
     })
 };

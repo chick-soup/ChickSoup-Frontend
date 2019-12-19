@@ -10,7 +10,7 @@ body {
     height: 100%;
     background-color: #B2C7D9;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     box-sizing: border-box;
 }
 
