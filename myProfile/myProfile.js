@@ -79,7 +79,7 @@ const checkNicknameLength = () => {
 const editMyProfile = () => {
     let fd = new FormData();
     fd.append("nickname", profileObj.changeName.value.trim());
-    fd.append("status_message", profileObj.changeMessage.value.trim());
+    fd.append("status_message", profileObj.changeMessage.value);
     fd.append("where", "web")
     if (sessionStorage.getItem("chicksoup_profile"))
         fd.append("profile", profileObj.file.files[0]);
@@ -101,9 +101,9 @@ const editMyProfile = () => {
 };
 
 const changeImageFile = () => {
-    const file = profileObj.file.files[0];
-    const fileSplit = file.name.split('.');
-    const fileExtension = fileSplit[fileSplit.length - 1];
+    const file = profileObj.file.files[0],
+        fileSplit = file.name.split('.'),
+        fileExtension = fileSplit[fileSplit.length - 1];
     let reader = new FileReader();
     if (!(fileExtension === "png"
         || fileExtension === "jpg"
@@ -117,9 +117,9 @@ const changeImageFile = () => {
 };
 
 const changeBackImageFile = () => {
-    const file = profileObj.backFile.files[0];
-    const fileSplit = file.name.split('.');
-    const fileExtension = fileSplit[fileSplit.length - 1];
+    const file = profileObj.backFile.files[0],
+        fileSplit = file.name.split('.'),
+        fileExtension = fileSplit[fileSplit.length - 1];
     let reader = new FileReader();
     if (!(fileExtension === "png"
         || fileExtension === "jpg"

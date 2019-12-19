@@ -24,7 +24,6 @@ const reqResFrame = (info, mode) => {
 const acceptFriendRequest = (userId) => {
     const url = `/users/${userId}`;
     axiosPOSTWithToken(url).then((datas) => {
-        console.log(datas);
         setResultText("친구 추가 요청을 수락했습니다.");
     }).catch((error) => {
         const state = error.response.status;
@@ -108,15 +107,11 @@ window.onload = () => {
     checkUserIsLogined();
     // ? make req list
     axiosGETWithToken(reqUrl).then((datas) => {
-        const data = datas.data;
-        console.log(data, "요청");
-        makeReqFriendList(data);
+        makeReqFriendList(datas.data);
     })
     // ? make res list
     axiosGETWithToken(resUrl).then((datas) => {
-        const data = datas.data;
-        console.log(data, "응답");
-        makeResFriendList(data);
+        makeResFriendList(datas.data);
     }).catch((error) => {
         const state = error.response.status;
         if (state === 403)

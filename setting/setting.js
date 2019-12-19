@@ -27,14 +27,17 @@ const getUserId = () => {
 };
 
 const logout = () => {
+    localStorage.removeItem("refresh_token");
     localStorage.removeItem("access_token");
 };
 
 window.onload = () => {
     checkUserIsLogined();
-    // ? for Clipboard -> copy user id
-    new ClipboardJS("#setting_show_id_clipboard");
-    setting.idLi.addEventListener("click", showUserIdModal);
-    setting.logout.addEventListener("click", logout);
     getUserId();
+    // ? for Clipboard -> copy user id
+    // setting_show_id_clipboard에 생성자로 객체 생성
+    new ClipboardJS("#setting_show_id_clipboard");
+    setting.logout.addEventListener("click", logout);
+    setting.idLi.addEventListener("click", showUserIdModal);
+    setting.modalClose.addEventListener("click", closeUserIdModal);
 };
