@@ -98,7 +98,7 @@ const addClickEvent = (el, callback) => {
 const addClickEventPlusArg = (el, callback, argu) => {
     el.addEventListener("click", () => callback(argu));
 };
-
+ 
 window.onload = () => {
     addClickEvent(chatting.alarmButton, alarmSwitch);
     addClickEvent(chatting.alarmButton, alarmSwitch);
