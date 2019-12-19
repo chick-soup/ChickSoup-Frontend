@@ -97,3 +97,11 @@ const axiosRefresh = () => {
         }
     })
 };
+
+const addClassToAllaTag = () => {
+    document.querySelectorAll("a").forEach((el) => {
+        el.classList.add("aTag");
+    });
+};
+
+addClassToAllaTag();
