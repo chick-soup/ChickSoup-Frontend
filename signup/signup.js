@@ -126,7 +126,7 @@ const registerSignup = () => {
 const checkNicknameLength = () => {
     const errorText = userInfo.errorText[3],
         len = userInfo.nickname.value.length;
-    if (len < 3 || len > 13) {
+    if (len < 3 || len > 12) {
         setTextDisplay(errorText, "inline");
         errorText.innerHTML = "닉네임은 최소 3자 최대 12자입니다.";
         return false;
