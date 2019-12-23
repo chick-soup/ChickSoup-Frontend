@@ -44,6 +44,7 @@
 #friendList_sideicon > img {
     width: 16px;
     margin-top: 16px;
+    margin-left: 8px;
     cursor: pointer;
 }
 #friendList_viewroom {
@@ -52,13 +53,32 @@
     align-items: center;
     padding: 32px 24px;
 }
+#friendList_viewroom > a {
+    color: black;
+}
 .friendList_room {
+    position: relative;
     text-align: center;
     margin: 0 40px 24px;
     cursor: pointer;
 }
-.friendList_room > img {
+.friendList_room_preview {
+    position: relative;
+    height: 150px;
+    line-height: 220px;
+}
+.friendList_room_preview > img {
     width: 150px;
+}
+.friendList_bookmark_circle {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #FAE100;
+    z-index: 5;
 }
 .friendList_room > h1 {
     font-size: 24px;

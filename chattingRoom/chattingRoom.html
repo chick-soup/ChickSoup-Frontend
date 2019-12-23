@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="../common/header.css">
     <link rel="stylesheet" href="../common/reset.css">
     <link rel="stylesheet" href="chattingRoom.css">
-    <title>Chick Soup: 친구 리스트</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Chick Soup: 채팅방 목록</title>
     <link rel=" shortcut icon" href="../img/favicon.ico">
     <link rel="icon" href="../img/favicon.ico">
 </head>
@@ -15,57 +16,21 @@
     <main id="friendList">
         <nav id="friendList_head">
             <div id="friendList_seemyfriend">
-                <h1>내 친구 보기</h1>
+                <h1>채팅하기</h1>
             </div>
             <div id="friendList_searchmyfriend">
                 <label for="friendList_searchmyfriend_input">
                     <img src="../img/search.svg" alt="magnifier">
                 </label>
-                <input type="text" id="friendList_searchmyfriend_input" placeholder="친구 검색">
+                <input type="text" id="friendList_searchmyfriend_input" placeholder="채팅방 검색">
             </div>
         </nav>
         <div id="friendList_body">
             <nav id="friendList_sideicon">
-                <img src="../img/star.svg" id="friendList_bookmark" alt="bookmark">
                 <img src="../img/bell.svg" id="friendList_bell" alt="bell">
+                <img src="../img/star.svg" id="friendList_bookmark" alt="bookmark">
             </nav>
-            <section id="friendList_viewroom">
-                <div class="friendList_room">
-                    <img src="../img/DMSLogo.svg" alt="DMSLogo">
-                    <h1>DMS</h1>
-                    <p>32명</p>
-                </div>
-                <div class="friendList_room">
-                    <img src="../img/DMSLogo.svg" alt="DMSLogo">
-                    <h1>DMS</h1>
-                    <p>32명</p>
-                </div>
-                <div class="friendList_room">
-                    <img src="../img/DMSLogo.svg" alt="DMSLogo">
-                    <h1>DMS</h1>
-                    <p>32명</p>
-                </div>
-                <div class="friendList_room">
-                    <img src="../img/DMSLogo.svg" alt="DMSLogo">
-                    <h1>DMS</h1>
-                    <p>32명</p>
-                </div>
-                <div class="friendList_room">
-                    <img src="../img/DMSLogo.svg" alt="DMSLogo">
-                    <h1>DMS</h1>
-                    <p>32명</p>
-                </div>
-                <div class="friendList_room">
-                    <img src="../img/DMSLogo.svg" alt="DMSLogo">
-                    <h1>DMS</h1>
-                    <p>32명</p>
-                </div>
-                <div class="friendList_room">
-                    <img src="../img/DMSLogo.svg" alt="DMSLogo">
-                    <h1>DMS</h1>
-                    <p>32명</p>
-                </div>
-            </section>
+            <section id="friendList_viewroom"></section>
         </div>
     </main>
     <script src="chattingRoom.js"></script>
