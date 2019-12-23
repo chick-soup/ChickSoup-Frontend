@@ -6,77 +6,45 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Email</title>
     <link rel="stylesheet" href="../common/reset.css">
-    <style>
-        body {
-            content: "";
+</head>
+<body style="content: '';
             background-color: #F6F6F6;
             background-image: url('../img/defaultBackImg.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            z-index: -1;
-        }
-        #email {
-            position: relative;
-            height: 100vh;
-        }
-        #email > div {
-            position: absolute;
+            z-index: -1;">
+    <main style="position: relative;
+            height: 100vh;">
+        <div style="position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        #email_modal {
-            width: 521px;
+            transform: translate(-50%, -50%);">
+            <section style="width: 521px;
             padding: 32px;
             background-color: white;
-            border: 1px solid #9e9e9e;
-        }
-        #email_modal > header {
-            font-size: 28px;
-            margin-bottom: 64px;
-        }
-        #email_modal > header > p > span {
-            color: #FAE100;
+            border: 1px solid #9e9e9e;">
+                <header style="font-size: 28px;
+            margin-bottom: 64px;">
+                    <p><span style="color: #FAE100;
             font-size: 36px;
-            font-weight: bold;
-        }
-        #email_modal > div {
-            color: hsl(0, 0%, 51%);
-            font-size: 20px;
-            line-height: 1.5;
-        }
-        #email_modal > div > p > span {
-            color: #005EFE;
-        }
-        #email_logo {
-            display: block;
-            width: 100px;
-            margin: 48px auto 0;
-        }
-        #email > div > div {
-            font-size: 12px;
-            margin-top: 32px;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <main id="email">
-        <div>
-            <section id="email_modal">
-                <header>
-                    <p><span>Chick Soup</span> 이메일 인증 코드입니다.</p>
+            font-weight: bold;">Chick Soup</span> 이메일 인증 코드입니다.</p>
                 </header>
-                <div>
+                <div style="color: hsl(0, 0%, 51%);
+            font-size: 20px;
+            line-height: 1.5;">
                     <p>If you want to go through the certification process for our service, you need to read this article.</p>
                     <p>Hello, customer with e-mail {USEREMAIL}?</p>
                     <p>Thank you very much for your email certification to use our service.</p>
-                    <p>The authentication number for your email we provided is <span>{CODE}</span></p>
+                    <p>The authentication number for your email we provided is <span style="color: #005EFE;">{CODE}</span></p>
                 </div>
-                <img src="../img/chickSoupLogoRaw.svg" id="email_logo" alt="chicksoupLogo">
+                <img src="../img/chickSoupLogoRaw.svg" style="display: block;
+            width: 100px;
+            margin: 48px auto 0;" alt="chicksoupLogo">
             </section>
-            <div>본 메일은 발송전용이며 회신되지 않습니다.</div>
+            <div style="font-size: 12px;
+            margin-top: 32px;
+            text-align: center;">본 메일은 발송전용이며 회신되지 않습니다.</div>
         </div>
     </main>
 </body>
