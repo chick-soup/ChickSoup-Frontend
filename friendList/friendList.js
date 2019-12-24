@@ -10,10 +10,9 @@ const friendList = {
 const friendFrame = (info) => {
     let frame =
         `<li class="friendList_profile_list">
-            <img src="https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${info.id}.png" alt="userImage" />
+            <img src="http://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${info.id}.png" onclick="goFriendProfile(${info.id})" alt="userImage" />
             <div class="friendList_profile_userInfo">
                 <div>
-                    
                     <img src="../img/${info.bookmark ? "starYellow.svg" : "star.svg"}" 
                         onclick="${info.bookmark ? "releaseBookmarkFriend(" + info.id + ")" : "bookmarkFriend(" + info.id + ")"}"
                     <h3 class="friendList_profile_userInfo_name">${info.nickname}</h3>
@@ -70,6 +69,22 @@ const sideFeature = (method, userId, data) => {
             alert("자기 자신에게 친구 삭제를 할 수 없습니다.");
         else
             alert("오류가 발생하였습니다. 다시 시도해 주세요.");
+    })
+};
+
+const goFriendProfile = (id) => {
+    axiosGETWithToken(`/users/${id}`).then((users) => {
+        const user = users.data;
+        console.log(user);
+        if (user.myself) {
+            setMyprofile(user);
+        } else {
+            setOtherprofile(user);
+        }
+    }).catch ((error) => {
+        const state = error.response.status;
+        if (state === 403)
+            axiosRefresh();
     })
 };
 
@@ -155,7 +170,7 @@ const makeFriendList = (list) => {
 };
 
 const makeMyList = (myData) => {
-    friendList.myprofile.querySelector("img").setAttribute("src", `https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${myData.id}.png`);
+    friendList.myprofile.querySelector("img").setAttribute("src", `http://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${myData.id}.png`);
     friendList.myprofile.querySelector(".friendList_profile_userInfo_name").innerHTML = myData.nickname;
     friendList.myprofile.querySelector(".friendList_profile_userInfo_status_message").innerHTML = myData.status_message;
 };
