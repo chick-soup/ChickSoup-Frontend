@@ -33,10 +33,14 @@ const removeRooms = () => {
 };
 
 const addNewButton = () => {
-    const chatting = `<div class="friendList_room newchatting">
-        <img src="../img/newChatting.svg" alt="newChatting">
-        <p>새 채팅</p>
-    </div>`;
+    const chatting = `<a href="newRoom.html">
+        <div class="friendList_room newchatting newRoomButton">
+            <div>
+                <img src="../img/newChatting.svg" alt="newChatting">
+                <p>새 채팅</p>
+            </div>
+        </div>
+    </a>`;
     chattingRoom.veiwroom.insertAdjacentHTML("beforeend", chatting);
 };
 
