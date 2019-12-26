@@ -93,20 +93,6 @@ const createNewRoom = () => {
     })
 };
 
-const getRooms = () => {
-    axios({
-        method: "GET",
-        url: "http://10.156.147.139:3000/room",
-        headers: {
-            "Authorization": localStorage.getItem("access_token"),
-        }
-    }).then((datas) => {
-        console.log(datas);
-    }).catch((error) => {
-        console.log(error);
-    })
-};
-
 window.onload = () => {
     checkUserIsLogined();
     axiosGETWithToken("/users/my/profile").then(() => {

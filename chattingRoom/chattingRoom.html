@@ -32,6 +32,21 @@
                 <img src="../img/star.svg" id="friendList_bookmark" alt="bookmark">
             </nav>
             <section id="friendList_viewroom"></section>
+            <section id="friendList_newRoomModal">
+                <div>
+                    <div id="cancel_modal">
+                        <i id="cancel_modal_icon"></i>
+                    </div>
+                    <div>
+                        <input type="text" autocomplete="off" placeholder="방 이름" maxlength="16" id="modalRoomNameInput">
+                    </div>
+                    <div>
+                        <input type="text" autocomplete="off" placeholder="친구 검색" id="modalSearchFriendInput">
+                    </div>
+                    <ul id="friendList_otherprofile"></ul>
+                    <button id="make_room">방 만들기</button>
+                </div>
+            </section>
         </div>
     </main>
     <script src="chattingRoom.js"></script>

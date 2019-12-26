@@ -54,6 +54,7 @@
     padding: 32px 24px;
 }
 #friendList_viewroom > a {
+    width: 230px;
     color: black;
 }
 .friendList_room {
@@ -68,7 +69,8 @@
     line-height: 220px;
 }
 .friendList_room_preview > img {
-    width: 150px;
+    min-width: 100px;
+    max-width: 150px;
 }
 .friendList_bookmark_circle {
     position: absolute;
@@ -104,4 +106,162 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+#friendList_newRoomModal {
+    display: none;
+}
+.showModal {
+    display: block !important;
+}
+#friendList_newRoomModal > div {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 32px;
+    border: 1px solid #1E1E1E;
+    border-radius: 16px;
+    background-color: white;
+}
+#cancel_modal {
+    position: relative;
+    width: 100% !important;
+    border: 0 !important;
+}
+#cancel_modal_icon {
+    background-image: url('../img/close.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+#friendList_newRoomModal > div > div {
+    width: 50%;
+    margin: 0 auto 16px;
+    padding: 2px 8px;
+    border-bottom: 1px solid #1E1E1E;
+}
+#modalRoomNameInput {
+    font-size: 20px;
+    font-weight: bold;
+}
+#friendList_newRoomModal > div > div > input {
+    display: block;
+    width: 100%;
+    margin: 8px 4px;
+    border: 0;
+    outline: none;
+}
+#friendList_newRoomModal > div > button {
+    display: block;
+    width: 50%;
+    margin: 16px auto;
+    padding: 10px;
+    border: 0;
+    border-radius: 16px;
+    background-color: #FAE100;
+    cursor: pointer;
+}
+#friendList_otherprofile {
+    width: 560px;
+    border: 1px solid #1E1E1E;
+    min-height: 160px;
+    max-height: 320px;
+    overflow-y: scroll;
+}
+.friendList_profile_preview > img {
+    width: 100px;
+}
+.friendList_profile_list {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.friendList_profile_list {
+    position: relative;
+    display: flex;
+    margin: 20px;
+    align-items: center;
+    padding: 24px 0 32px 0;
+}
+.friendList_profile_preview {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+}
+.friendList_profile_preview > img {
+    align-self: center;
+    max-height: 100px;
+    max-width: 300px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+.friendList_profile_userInfo {
+    margin: 0 4px;
+}
+.friendList_profile_userInfo > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.friendList_profile_userInfo > div > img {
+    cursor: pointer;
+}
+.friendList_profile_userInfo > p {
+    font-size: 13px;
+    font-weight: 600;
+}
+.friendList_details {
+    position: absolute;
+    right: 0;
+}
+.friendList_details > img {
+    width: 40px;
+    height: 50px;
+    cursor: pointer;
+}
+.friendList_details_nav > ul {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    padding: 20px;
+    border-radius: 10px;
+    color: #ffffff;
+    background-image: url('../img/friendDegailBackImg.svg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+.friendList_details_nav_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 24px 0;
+    cursor: pointer;
+}
+.friendList_details_nav_item > span {
+    font-size: 12px;
+}
+.friendList_details_button {
+    border-radius: 24px;
+    border: 1.5px solid #3B1C1C;
+    font-size: 20px;
+    font-weight: bold;
+    color: #3B1C1C;
+    padding: 8px 16px;
+    background-color: white;
+    outline: none;
+    cursor: pointer;
+}
+.added {
+    background-color: #3B1C1C;
+    color: white;
 }
