@@ -5,7 +5,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="../common/reset.css">
     <link rel="stylesheet" href="chatting.css">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <title>Chick Soup: 채팅방</title>
     <link rel=" shortcut icon" href="../img/favicon.ico">
@@ -31,65 +32,6 @@
             </div>
         </div>
         <div id="chat-main">
-            <!-- <div class="chat-day">
-                <div class="line"></div>
-                <h4><span>2019년 1월 1일 월요일</span></h4>
-            </div> -->
-            <!--<div class="other-chat-list">
-                <div class="profile">
-                    <a href="">
-                        <img src="../img/profile.png" alt="">
-                    </a>
-                </div>
-                <ul>
-                    <h4>
-                        <span>박재훈</span></h4>
-                    <li>
-                        <div class="other-first-message">   
-                            <h2>
-                                <span>석현이가</span>
-                            </h2>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <h2>
-                                <span>석현이가 짱이야 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque pariatur officia nobis vero, earum voluptatum nostrum dolores, eum, error consequuntur voluptate corporis eius voluptatibus aperiam. Minus culpa facere facilis quos!</span>
-                            </h2>
-                        </div>
-                        <div class="other-chat-time">
-                            <h4>
-                                <span>99</span>
-                            </h4>
-                            <h4>
-                                <span>오후 12: 12</span>
-                            </h4>
-                        </div>
-                    </li>
-                </ul>
-            </div> -->
-            <!-- <div class="my-chat-list">
-                <ul>
-                    <li>
-                        <h4 class="my-chat-time">
-                            <span>오후 12: 12</span>
-                        </h4>
-                        <div class="my-first-message">
-                            <h2>
-                                <span>석현이가 짱이야</span>
-                            </h2>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <h2>
-                                <span>승교가 짱이아니야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야짱이야</span>
-                            </h2>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        -->
         </div>
         <div id="chat-footer">
             <div class="center-view">
@@ -175,7 +117,9 @@
                         <li>
                             <div>
                                 <div class="profile-img">
-                                    <img src="../img/addBtn.png" alt="">
+                                    <a href="./login.html">
+                                        <img src="../img/addBtn.png" alt="">
+                                    </a>
                                 </div>
                                 <div class="profile-name">
                                     <span>대화상대 초대</span>
@@ -185,89 +129,11 @@
                         <li>
                             <div>
                                 <div class="profile-img">
-                                    <img src="../img/addBtn.png" alt="">
+                                    <a>
+                                        <img src="../img/addBtn.png" alt="">
+                                    </a>
                                 </div>
-                                <div class="profile-name">
-                                    <span>대화상대 초대</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="profile-img">
-                                    <img src="../img/addBtn.png" alt="">
-                                </div>
-                                <div class="profile-name">
-                                    <span>대화상대 초대</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="profile-img">
-                                    <img src="../img/addBtn.png" alt="">
-                                </div>
-                                <div class="profile-name">
-                                    <span>대화상대 초대</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="profile-img">
-                                    <img src="../img/addBtn.png" alt="">
-                                </div>
-                                <div class="profile-name">
-                                    <span>대화상대 초대</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="profile-img">
-                                    <img src="../img/addBtn.png" alt="">
-                                </div>
-                                <div class="profile-name">
-                                    <span>대화상대 초대</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="profile-img">
-                                    <img src="../img/addBtn.png" alt="">
-                                </div>
-                                <div class="profile-name">
-                                    <span>대화상대 초대</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="profile-img">
-                                    <img src="../img/addBtn.png" alt="">
-                                </div>
-                                <div class="profile-name">
-                                    <span>대화상대 초대</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="profile-img">
-                                    <img src="../img/addBtn.png" alt="">
-                                </div>
-                                <div class="profile-name">
-                                    <span>대화상대 초대</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <div class="profile-img">
-                                    <img src="../img/addBtn.png" alt="">
-                                </div>
-                                <div class="profile-name">
+                                <div id="inviteMember">
                                     <span>대화상대 초대</span>
                                 </div>
                             </div>
