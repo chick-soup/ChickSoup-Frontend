@@ -229,7 +229,9 @@ const showModeOption = (mode) => {
 const checkUserDidInput = (e) => {
     const inputValue = chatting.chatInput.value;
     const hashButtonImg = chatting.hashButton.childNodes[1];
-    if (inputValue.length >= 1) 
+    const imageValue = document.querySelector('.image > img');
+    console.log(imageValue);
+    if (inputValue.length >= 1 || imageValue !== null) 
         hashButtonImg.src = '../img/moreOptionOn.png';
     else
         hashButtonImg.src = '../img/hashtag.png';
@@ -458,12 +460,14 @@ const readURL = (input) => {
             chatting.chatDiv.insertAdjacentElement('beforeend', div);
             const deleteButton = document.querySelectorAll('.image > button');
             console.log(deleteButton);
+            checkUserDidInput({ keyCode: null });
             deleteButton.forEach(e => {
                 console.log(e);
                 e.addEventListener('click', (e) => {
                     console.log(e.target.parentNode);
                     if (confirm('지울거니?'))
                         e.target.parentNode.remove();
+                    chatting.hashButton.childNodes[1].src = '../img/hashtag.png';
                     });
                 });
                 // const formData = new FormData();
