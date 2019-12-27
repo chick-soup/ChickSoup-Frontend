@@ -20,7 +20,7 @@ const chatting = {
 let socket;
 const accessToken = localStorage.getItem('access_token');
 const userId = localStorage.getItem("userId");
-const roomId = "61953";
+const roomId = localStorage.getItem("chicksoup-roomId");
 // const usernickname = localStorage.getItem('username');
 
 const otherChatListTemplate = (name, text, time, type) => {
@@ -78,7 +78,7 @@ const myChatListTemplate = (text, type) => {
 
 const chattingItemTemplate = (text, time, way = 'i', type) => {
     console.log(text, time, way, type);
-    if (chatting.sendButton.getAttribute('src').split('/')[2] !== 'hashtag.png' || chat)
+    if (chatting.sendButton.getAttribute('src').split('/')[2] !== 'hashtag.png' || !text) {
         if (way === 'i') {
             const template = `<li>
                 <div>
@@ -94,7 +94,7 @@ const chattingItemTemplate = (text, time, way = 'i', type) => {
             const chatTime = document.querySelectorAll('.other-chat-time');
             if (chatTime.length !== 0)
                 lastTime = chatTime[chatTime.length - 1].children[1].children[0].innerText;
-            const timeSentence = `${date.getHours() <= 11 ? '오전' : '오후'}` + ` ${date.getHours()}: ${date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`}`;    
+            const timeSentence = `${date.getHours() <= 11 ? '오전' : '오후'}` + ` ${date.getHours()}: ${date.getMinutes() < 10 ? `0${date.getMinutes()}` : `${date.getMinutes()}`}`;
             const template = `<li>
                 <div>
                     <h2>
@@ -112,6 +112,7 @@ const chattingItemTemplate = (text, time, way = 'i', type) => {
             </li>`;
             return template;
         }
+    }
 // document.querySelector('.my-chat-list').insertAdjacentHTML('afterend', testFrame(text));
 };
 
