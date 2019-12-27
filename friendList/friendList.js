@@ -74,14 +74,9 @@ const sideFeature = (method, userId, data) => {
 
 const goFriendProfile = (id) => {
     axiosGETWithToken(`/users/${id}`).then((users) => {
-        const user = users.data;
-        console.log(user);
-        if (user.myself) {
-            setMyprofile(user);
-        } else {
-            setOtherprofile(user);
-        }
-    }).catch ((error) => {
+        sessionStorage.setItem("chicksoup-profile", JSON.stringify(users.data));
+        location.href = "../myProfile/myProfile.html";
+    }).catch((error) => {
         const state = error.response.status;
         if (state === 403)
             axiosRefresh();

@@ -18,12 +18,10 @@ const removeRooms = () => {
 };
 
 const removeFrinedInRoom = (id) => {
-    console.log("remove", id);
     chattingRoom.roomArr.splice(chattingRoom.roomArr.indexOf(id), 1);
 };
 
 const appendFriendInRoom = (id) => {
-    console.log("append", id);
     chattingRoom.roomArr.push(id);
 };
 
@@ -49,25 +47,6 @@ const addNewButton = () => {
     chattingRoom.veiwroom.insertAdjacentHTML("beforeend", chatting);
 };
 
-const goFriendProfile = (id) => {
-    axiosGETWithToken(`/users/${id}`).then((users) => {
-        const user = users.data;
-        // todo: 이거 해야 했네..?
-        // localStorage 이용해서 데이터 값 넘겨서 프로필 띄우기
-        if (user.myself) {
-            console.log("내 프로필 가기");
-            // setMyprofile(user);
-        } else {
-            console.log("남 프로필 가기");
-            // setOtherprofile(user);
-        }
-    }).catch((error) => {
-        const state = error.response.status;
-        if (state === 403)
-            axiosRefresh();
-    })
-};
-
 const IsBookmarked = (room) => {
     if (room.bookmarked)
         return true;
@@ -90,7 +69,7 @@ const friendFrame = (info) => {
     let frame =
         `<li class="friendList_profile_list">
             <div class="friendList_profile_preview">
-                <img src="http://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${info.id}.png" onclick="goFriendProfile(${info.id})" alt="userImage" />
+                <img src="http://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${info.id}.png" alt="userImage" />
             </div>
             <div class="friendList_profile_userInfo">
                 <div>
@@ -223,14 +202,9 @@ window.onload = () => {
     chattingRoom.cancleModalIcon.addEventListener("click", removeShowModal);
     chattingRoom.searchRoomInput.addEventListener("keyup", chattingRoomInit);
     chattingRoom.makeRoom.addEventListener("click", () => {
-        const roomArr = chattingRoom.roomArr;
-        const roomName = chattingRoom.modalRoomNameInput.value;
-        if (roomName === "") {
-            alert("채팅방 이름을 입력해주세요.");
-            chattingRoom.modalRoomNameInput.focus();
-            return;
-        }
-        if (roomArr.length === 0)
+        if (chattingRoom.modalRoomNameInput.value === "")
+            return alert("채팅방 이름을 입력해주세요.");
+        if (chattingRoom.roomArr.length === 0)
             return alert("채팅방 인원을 추가해주세요.(최소 1명)");
         createNewRoom(roomArr, roomName);
     });

@@ -162,7 +162,9 @@ const setEditprofile = (info) => {
 };
 
 const setOtherprofile = (info) => {
-    otherFrame(info);
+    setUserImg(info.id);
+    setUserBackImg(info.id);
+    profileObj.content.insertAdjacentHTML("beforeend", otherFrame(info));
 };
 
 const getUserInfo = () => {
@@ -171,14 +173,7 @@ const getUserInfo = () => {
         const data = datas.data;
         axiosGETWithToken(`/users/${data.id}`).then((users) => {
             const user = users.data;
-            if (user.myself) {
-                setMyprofile(user);
-            } else {
-                // TODO: show other profile page
-                // TODO: setOtherprofile need to be modified
-                setOtherprofile(user);
-                console.log("남 프로필 상태");
-            }
+            setMyprofile(user);
         })
     }).catch((error) => {
         const state = error.response.status;
@@ -200,6 +195,10 @@ const getUserBackground = () => {
 
 window.onload = () => {
     checkUserIsLogined();
-    getUserInfo();
+    const profile = JSON.parse(sessionStorage.getItem("chicksoup-profile"));
+    if(profile !== null)
+        if (profile.myself) setMyprofile(profile)
+        else                setOtherprofile(profile);
+    else                    getUserInfo();
     profileObj.nav = document.querySelector("#myprofile_userinfo_nav");
 };
