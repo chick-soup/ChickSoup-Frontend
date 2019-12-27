@@ -63,6 +63,13 @@ const editFrame = (info) => {
     return edit;
 };
 
+const convertQuotionToAvailable = (str) => {
+    let splitStr = str.split("");
+    while (splitStr.indexOf("'") !== -1)
+        splitStr[splitStr.indexOf("'")] = "";
+    return splitStr.join("");
+};
+
 const checkNicknameLength = () => {
     const errorText = profileObj.errorText;
     const nameLen = profileObj.changeName.value.length;
@@ -78,8 +85,8 @@ const checkNicknameLength = () => {
 
 const editMyProfile = () => {
     let fd = new FormData();
-    fd.append("nickname", profileObj.changeName.value.trim());
-    fd.append("status_message", profileObj.changeMessage.value);
+    fd.append("nickname", convertQuotionToAvailable(profileObj.changeName.value.trim()));
+    fd.append("status_message", convertQuotionToAvailable(profileObj.changeMessage.value));
     fd.append("where", "web")
     if (sessionStorage.getItem("chicksoup_profile"))
         fd.append("profile", profileObj.file.files[0]);

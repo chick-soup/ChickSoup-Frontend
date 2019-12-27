@@ -85,16 +85,14 @@ const friendFrame = (info) => {
 };
 
 const roomFrame = (rInfo) => {
-    const room = `<a href="#">
-        <div class="friendList_room">
+    const room = `<div class="friendList_room" onclick="goChatting(${rInfo.roomId});">
             <div class="friendList_room_preview">
                 <img src="http://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${parseInt(rInfo.people[0])}.png" alt="${parseInt(rInfo.people[0])}">
                 ${rInfo.bookmarked ? '<div class="friendList_bookmark_circle"></div>' : ""}
             </div>
             <h1>${rInfo.roomName}</h1>
             <p>${rInfo.people.length}명</p>
-        </div>
-    </a>`;
+        </div>`;
     return room;
 };
 
@@ -133,6 +131,7 @@ const makeRoom = (rooms) => {
 };
 
 const createNewRoom = (roomArr, roomName) => {
+    console.log(roomArr, roomName);
     const data = {
         "people": roomArr,
         "roomName": roomName,
@@ -195,6 +194,11 @@ const chattingRoomInit = () => {
     makeSearchRoom();
 };
 
+const goChatting = (roomId) => {
+    localStorage.setItem("chicksoup-roomId", roomId);
+    location.href = "../chatting/chatting.html";
+};
+
 window.onload = () => {
     checkUserIsLogined();
     getRooms();
@@ -206,7 +210,7 @@ window.onload = () => {
             return alert("채팅방 이름을 입력해주세요.");
         if (chattingRoom.roomArr.length === 0)
             return alert("채팅방 인원을 추가해주세요.(최소 1명)");
-        createNewRoom(roomArr, roomName);
+        createNewRoom(chattingRoom.roomArr, chattingRoom.modalRoomNameInput.value);
     });
 };
 
