@@ -13,7 +13,7 @@ const headerObj = {
     "header": `<header id="header_header">
         <main>
             <div id="header_chicksoup">
-                <h1><a href="../login/login.html">Chick Soup</a></h1>
+                <h1><a href="../friendList/friendList.html">Chick Soup</a></h1>
             </div>
             <nav id="header_nav">
                 <ul>

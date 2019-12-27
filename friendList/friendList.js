@@ -165,9 +165,18 @@ const makeFriendList = (list) => {
 };
 
 const makeMyList = (myData) => {
-    friendList.myprofile.querySelector("img").setAttribute("src", `http://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${myData.id}.png`);
-    friendList.myprofile.querySelector(".friendList_profile_userInfo_name").innerHTML = myData.nickname;
-    friendList.myprofile.querySelector(".friendList_profile_userInfo_status_message").innerHTML = myData.status_message;
+    friendList.myprofile.querySelector("img")
+        .setAttribute("src", 
+            `http://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${myData.id}.png`);
+    friendList.myprofile.querySelector("img")
+        .addEventListener("click", () => {
+            sessionStorage.removeItem("chicksoup-profile");
+            location.href = "../myProfile/myProfile.html";
+    });
+    friendList.myprofile.querySelector(".friendList_profile_userInfo_name")
+        .innerHTML = myData.nickname;
+    friendList.myprofile.querySelector(".friendList_profile_userInfo_status_message")
+        .innerHTML = myData.status_message;
 };
 
 const showDetails = (el) => {
