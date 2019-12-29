@@ -90,7 +90,7 @@ const roomFrame = (rInfo) => {
                 <img src="http://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${parseInt(rInfo.people[0])}.png" alt="${parseInt(rInfo.people[0])}">
                 ${rInfo.bookmarked ? '<div class="friendList_bookmark_circle"></div>' : ""}
             </div>
-            <h1>${rInfo.roomName}</h1>
+            <h1>${rInfo.people.length === 1 ? `<span id="myChattingRoom">나</span>` : ""} ${rInfo.roomName}</h1>
             <p>${rInfo.people.length}명</p>
         </div>`;
     return room;
@@ -131,7 +131,6 @@ const makeRoom = (rooms) => {
 };
 
 const createNewRoom = (roomArr, roomName) => {
-    console.log(roomArr, roomName);
     const data = {
         "people": roomArr,
         "roomName": roomName,
