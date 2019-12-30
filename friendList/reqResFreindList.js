@@ -7,7 +7,9 @@ const reqResList = {
 const reqResFrame = (info, mode) => {
     let frame =
         `<li class="friendList_profile_list">
-            <img src="https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${info.id}.png" alt="userImage" />
+            <div class="friendList_profile_list_img_wrap">
+                <img src="https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${info.id}.png" alt="userImage" />
+            </div>
             <div class="friendList_profile_userInfo">
                 <div>
                     <h3 class="friendList_profile_userInfo_name">${info.nickname}</h3>

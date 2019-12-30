@@ -1,4 +1,4 @@
-const server = "http://ec2-13-209-99-114.ap-northeast-2.compute.amazonaws.com:8080",
+const server = "http://ec2-13-125-190-40.ap-northeast-2.compute.amazonaws.com:8080";
     register = {
         "inputEmail": document.querySelector("#register_input_email"),
         "inputEmailCheck": document.querySelector("#register_input_email_check"),
