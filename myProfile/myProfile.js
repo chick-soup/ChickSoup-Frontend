@@ -29,9 +29,9 @@ const otherFrame = (info) => {
         <h1 id="myprofile_userinfo_name">${info.nickname}</h1>
         <p id="myprofile_userinfo_message">${info.status_message}</p>
     </div>
-    <div id="otherprofile_userinfo_nav">
+    <div id="myprofile_userinfo_nav">
         <ul>
-            <li>
+            <li onclick="getOneOnOneRoom(${info.id});">
                 <img src="../img/chatting.svg" alt="chatting">
                 <p>1 대 1 채팅</p>
             </li>
@@ -200,10 +200,10 @@ const getUserBackground = () => {
     })
 };
 
-const createMyChat = (userName) => {
+const createOneOnOneChat = (userId, roomName) => {
     const data = {
-        "people": [],
-        "roomName": `${userName}`,
+        "people": [`${+userId}`],
+        "roomName": `${roomName}`,
     };
     axios({
         method: "POST",
@@ -212,14 +212,42 @@ const createMyChat = (userName) => {
         headers: {
             "Authorization": localStorage.getItem("access_token"),
         }
-    }).then(() => {
-        getRooms();
     })
 };
+
 
 const goChatting = (roomId) => {
     localStorage.setItem("chicksoup-roomId", roomId);
     location.href = "../chatting/chatting.html";
+};
+
+const getOneOnOneRoom = (id) => {
+    axios({
+        method: "GET",
+        url: "http://10.156.147.139:3000/room",
+        headers: {
+            "Authorization": localStorage.getItem("access_token"),
+        }
+    }).then((datas) => {
+        const userId = localStorage.getItem("userId");
+        datas.data.rooms.map(
+            (room) => {
+                let flag = 0;
+                const people = room.people;
+                people.length === 2 
+                    && (people[0] === `${id}` || people[0] === userId)
+                    && (people[1] === `${id}` || people[1] === userId) 
+                    && flag++;
+                flag === 1 
+                    && goChatting(room.roomId)
+            }
+        );
+    }).catch((error) => {
+        if (error.response.status === 403)
+            axiosRefresh();
+        // 1대1 채팅이 없을 시
+        createOneOnOneChat(id, document.querySelector("#myprofile_userinfo_name").innerHTML);
+    })
 };
 
 const getRooms = () => {
@@ -233,7 +261,7 @@ const getRooms = () => {
         const myRoomData = datas.data.rooms.filter((room) => room.people.length === 1);
         goChatting(myRoomData[0].roomId);
     }).catch(() => {
-        // 나와의 채팅이 없는 사람 -> 채팅방 만듬 
+        // 나와의 채팅이 없는 시 
         createMyChat(document.querySelector("#myprofile_userinfo_name").innerHTML);
     })
 };
