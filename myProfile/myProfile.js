@@ -11,7 +11,7 @@ const myFrame = (info) => {
     </div>
     <div id="myprofile_userinfo_nav">
         <ul>
-            <li>
+            <li onclick="getRooms();">
                 <img src="../img/chatting.svg" alt="chatting">
                 <p>나와의 채팅</p>
             </li>
@@ -215,22 +215,6 @@ const createOneOnOneChat = (userId, roomName) => {
     })
 };
 
-const createMyChat = (userName) => {
-    const data = {
-        "people": [],
-        "roomName": `${userName}`,
-    };
-    axios({
-        method: "POST",
-        url: "http://10.156.147.139:3000/room",
-        data: data,
-        headers: {
-            "Authorization": localStorage.getItem("access_token"),
-        }
-    }).then(() => {
-        getRooms();
-    })
-};
 
 const goChatting = (roomId) => {
     localStorage.setItem("chicksoup-roomId", roomId);
@@ -285,9 +269,11 @@ const getRooms = () => {
 window.onload = () => {
     checkUserIsLogined();
     const profile = JSON.parse(sessionStorage.getItem("chicksoup-profile"));
-    if(profile !== null)
-        if (profile.myself) setMyprofile(profile)
-        else                setOtherprofile(profile);
-    else                    getUserInfo();
+    if(profile !== null) {
+        if (profile.myself) 
+            setMyprofile(profile)
+        else
+            setOtherprofile(profile);
+    } else  getUserInfo();
     profileObj.nav = document.querySelector("#myprofile_userinfo_nav");
 };

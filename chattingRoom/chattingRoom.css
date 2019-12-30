@@ -66,7 +66,7 @@
 .friendList_room_preview {
     position: relative;
     height: 150px;
-    line-height: 220px;
+    overflow: hidden;
 }
 .friendList_room_preview > img {
     min-width: 100px;
@@ -83,9 +83,22 @@
     z-index: 5;
 }
 .friendList_room > h1 {
-    font-size: 24px;
-    border-bottom: 1px solid #1E1E1E;
+    width: 150px;
+    min-height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     padding: 8px 0;
+    border-bottom: 1px solid #1E1E1E;
+    font-size: 24px;
+}
+#myChattingRoom {
+    display: inline-block;
+    padding: 4px;
+    border-radius: 50%;
+    color: white;
+    background-color: #707070;
+    font-size: 20px;
 }
 .friendList_room > p {
     padding-top: 8px;

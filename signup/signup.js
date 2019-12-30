@@ -122,6 +122,23 @@ const registerSignup = () => {
 };
 
 // about userInfo
+
+const createMyChat = (userName) => {
+    const data = {
+        "people": [],
+        "roomName": `${userName}`,
+    };
+    axios({
+        method: "POST",
+        url: "http://10.156.147.139:3000/room",
+        data: data,
+        headers: {
+            "Authorization": localStorage.getItem("access_token"),
+        }
+    }).then(() => {
+        location.href = "../login/login.html";
+    })
+};
 // 닉네임 길이가 적합한지 확인함
 const checkNicknameLength = () => {
     const errorText = userInfo.errorText[3],
@@ -152,7 +169,8 @@ const userInfoSignupProfile = () => {
             "Content-Type": "multipart/form-data",
         }
     }).then(() => {
-        location.href = "../login/login.html";
+        // 자신 채팅방을 만든 후에 로그인 페이지로 이동
+        createMyChat(userInfo.nickname.value.trim());
     }).catch(() => {
         setTextDisplay(userInfo.errorText[0], "inline");
         userInfo.errorText[3].innerHTML = "오류가 발생하였습니다. 다시 시도해 주세요.";
@@ -191,10 +209,6 @@ const addKeyupEvent = (el, callback) => {
 
 const addClickEvent = (el, callback) => {
     el.addEventListener("click", callback);
-};
-
-const test = (a, b) => {
-    a.addEventListener("change", b);
 };
 
 window.onload = () => {
