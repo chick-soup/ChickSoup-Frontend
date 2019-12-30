@@ -1,9 +1,10 @@
 const setting = {
     "idLi": document.querySelector("#setting_id"),
-    "idSpan": document.querySelector("#setting_userId"),
     "modal": document.querySelector("#setting_modal"),
-    "modalClose": document.querySelector("#setting_show_id_close"),
+    "idSpan": document.querySelector("#setting_userId"),
     "logout": document.querySelector("#setting_logout"),
+    "profile": document.querySelector("#setting_profile"),
+    "modalClose": document.querySelector("#setting_show_id_close"),
 };
 
 const showUserIdModal = () => {
@@ -12,6 +13,10 @@ const showUserIdModal = () => {
 
 const closeUserIdModal = () => {
     setting.modal.style.display = "";
+};
+
+const removeProfileSession = () => {
+    sessionStorage.removeItem("chicksoup-profile");
 };
 
 const getUserId = () => {
@@ -40,4 +45,5 @@ window.onload = () => {
     setting.logout.addEventListener("click", logout);
     setting.idLi.addEventListener("click", showUserIdModal);
     setting.modalClose.addEventListener("click", closeUserIdModal);
+    setting.profile.addEventListener("click", removeProfileSession);
 };

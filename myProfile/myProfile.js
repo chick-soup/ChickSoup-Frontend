@@ -87,7 +87,7 @@ const editMyProfile = () => {
     let fd = new FormData();
     fd.append("nickname", convertQuotionToAvailable(profileObj.changeName.value.trim()));
     fd.append("status_message", convertQuotionToAvailable(profileObj.changeMessage.value));
-    fd.append("where", "web")
+    fd.append("where", "web");
     if (sessionStorage.getItem("chicksoup_profile"))
         fd.append("profile", profileObj.file.files[0]);
     if (sessionStorage.getItem("chicksoup_profileBack"))

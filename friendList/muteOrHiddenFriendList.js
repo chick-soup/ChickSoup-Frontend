@@ -7,7 +7,9 @@ const muteHiddenList = {
 const muteHiddenFrame = (info, title) => {
     let frame =
         `<li class="friendList_profile_list">
-            <img src="https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${info.id}.png" alt="userImage" />
+            <div class="friendList_profile_list_img_wrap">
+                <img src="https://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${info.id}.png" alt="userImage" />
+            </div>
             <div class="friendList_profile_userInfo">
                 <div>
                     <h3 class="friendList_profile_userInfo_name">${info.nickname}</h3>
@@ -60,14 +62,20 @@ const sideFeature = (method, userId, data) => {
     })
 };
 
+const removeMyFriendListSession = () => {
+    sessionStorage.removeItem("chicksoup-myFriendList");
+};
+
 const releaseHiddenFriend = (userId) => {
     const data = { "hidden": "0" };
     sideFeature("PUT", userId, data);
+    removeMyFriendListSession();
 };
 
 const releaseMuteFriend = (userId) => {
     const data = { "mute": "0" };
     sideFeature("PUT", userId, data);
+    removeMyFriendListSession();
 };
 
 const insertHTMLIntoMute = (infoObj) => {

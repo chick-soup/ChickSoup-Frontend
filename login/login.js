@@ -1,4 +1,4 @@
-const server = "http://ec2-13-209-99-114.ap-northeast-2.compute.amazonaws.com:8080";
+const server = "http://ec2-13-125-190-40.ap-northeast-2.compute.amazonaws.com:8080";
 const login = {
     "email": document.querySelector("#login_input_email"),
     "password": document.querySelector("#login_input_password"),

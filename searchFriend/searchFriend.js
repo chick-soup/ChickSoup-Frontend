@@ -40,8 +40,8 @@ const getButtonText = (data) => {
 };
 
 const showSearchResult = (kakaoId) => {
-    const url = `/kakao-id/${kakaoId}`;
-    const div = document.querySelector("#search_div_div");
+    const url = `/kakao-id/${kakaoId}`,
+        div = document.querySelector("#search_div_div");
     div.insertAdjacentHTML("beforeend", "<img src='../img/DualRing.gif' id='loadingRing' />");
     axiosGETWithToken(url).then((datas) => {
         searchFriend.person.innerHTML = resultFrame(datas.data);
@@ -55,9 +55,9 @@ const showSearchResult = (kakaoId) => {
 };
 
 const showButtonResult = () => {
-    const imgSrcSplit = document.querySelector(".friendList_profile_list > img").getAttribute("src").split("/");
-    const id = parseInt(imgSrcSplit[imgSrcSplit.length - 1]);
-    const url = `/users/${id}`;
+    const imgSrcSplit = document.querySelector(".friendList_profile_list > img").getAttribute("src").split("/"),
+        id = parseInt(imgSrcSplit[imgSrcSplit.length - 1]),
+        url = `/users/${id}`;
     axiosPOSTWithToken(url).then((datas) => {
         if (datas.status === 200)
             setResultText("친구 추가를 요청했습니다.");
