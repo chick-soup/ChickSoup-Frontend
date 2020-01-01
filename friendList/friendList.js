@@ -247,12 +247,11 @@ window.onload = () => {
             });
             makeFriendList(jsonMyFriendList);
         } catch (error) {
-            console.error(error);
             axiosGETWithToken("/users/my/friends").then((friends) => {
                 sessionStorage.setItem("chicksoup-myFriendList", JSON.stringify(friends.data));
                 friendList.myFriendsList = friends.data;
                 makeFriendList(friends.data);
-            })
+            });
         }
         friendList.detailImg = document.querySelectorAll(".friendList_details > img");
     }).catch((error) => {

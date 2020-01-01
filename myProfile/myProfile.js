@@ -215,6 +215,22 @@ const createOneOnOneChat = (userId, roomName) => {
     })
 };
 
+const createMyChat = (userName) => {
+    const data = {
+        "people": [],
+        "roomName": `${userName}`,
+    };
+    axios({
+        method: "POST",
+        url: "http://10.156.147.139:3000/room",
+        data: data,
+        headers: {
+            "Authorization": localStorage.getItem("access_token"),
+        }
+    }).then(() => {
+        getRooms();
+    })
+};
 
 const goChatting = (roomId) => {
     localStorage.setItem("chicksoup-roomId", roomId);
