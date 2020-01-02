@@ -85,37 +85,28 @@ const goFriendProfile = (id) => {
     })
 };
 
-const removeMyFriendListSession = () => {
-    sessionStorage.removeItem("chicksoup-myFriendList");
-};
-
 const releaseBookmarkFriend = (userId) => {
     const data = { "bookmark": "0" };
     sideFeature("PUT", userId, data);
-    removeMyFriendListSession();
 };
 
 const bookmarkFriend = (userId) => {
     const data = { "bookmark": "1" };
     sideFeature("PUT", userId, data);
-    removeMyFriendListSession();
 };
 
 const hideFriend = (userId) => {
     const data = { "hidden": "1" };
     sideFeature("PUT", userId, data);
-    removeMyFriendListSession();
 };
 
 const muteFriend = (userId) => {
     const data = { "mute": "1" };
     sideFeature("PUT", userId, data);
-    removeMyFriendListSession();
 };
 
 const deleteFriend = (userId) => {
     sideFeature("DELETE", userId);
-    removeMyFriendListSession();
 };
 
 const removeOtherprofileInnerHTML = () => {
@@ -187,18 +178,14 @@ const makeFriendList = (list) => {
 };
 
 const makeMyList = (myData) => {
-    friendList.myprofile.querySelector("img")
-        .setAttribute("src", 
-            `http://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${myData.id}.png`);
-    friendList.myprofile.querySelector("img")
-        .addEventListener("click", () => {
-            sessionStorage.removeItem("chicksoup-profile");
-            location.href = "../myProfile/myProfile.html";
+    const myImg = document.querySelector("img");
+    myImg.setAttribute("src", `http://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${myData.id}.png`);
+    myImg.addEventListener("click", () => {
+        sessionStorage.removeItem("chicksoup-profile");
+        location.href = "../myProfile/myProfile.html";
     });
-    friendList.myprofile.querySelector(".friendList_profile_userInfo_name")
-        .innerHTML = myData.nickname;
-    friendList.myprofile.querySelector(".friendList_profile_userInfo_status_message")
-        .innerHTML = myData.status_message;
+    document.querySelector(".friendList_profile_userInfo_name").innerHTML = myData.nickname;
+    document.querySelector(".friendList_profile_userInfo_status_message").innerHTML = myData.status_message;
 };
 
 const showDetails = (el) => {
@@ -236,23 +223,13 @@ const setBookmarkStar = (path) => {
 
 window.onload = () => {
     checkUserIsLogined();
+
     axiosGETWithToken("/users/my/profile").then((datas) => {
         makeMyList(datas.data);
-        try {
-            friendList.myFriendsList = sessionStorage.getItem("chicksoup-myFriendList");
-            const jsonMyFriendList = JSON.parse(friendList.myFriendsList);
-            Object.keys(jsonMyFriendList).map((idx) => {
-                if (!IsFriendListAvailable(jsonMyFriendList[idx])) 
-                    throw "myFriendList is an unavailable object.";
-            });
-            makeFriendList(jsonMyFriendList);
-        } catch (error) {
             axiosGETWithToken("/users/my/friends").then((friends) => {
-                sessionStorage.setItem("chicksoup-myFriendList", JSON.stringify(friends.data));
                 friendList.myFriendsList = friends.data;
                 makeFriendList(friends.data);
             });
-        }
         friendList.detailImg = document.querySelectorAll(".friendList_details > img");
     }).catch((error) => {
         const state = error.response.status;
@@ -262,7 +239,7 @@ window.onload = () => {
 
     friendList.searchInput.addEventListener("keyup", function (e) {
         const value = this.value.trim(),
-            list = JSON.parse(friendList.myFriendsList);
+            list = friendList.myFriendsList;
         if (value === "")
             makeFriendList(list);
         if (e.keyCode === 13)
@@ -270,13 +247,13 @@ window.onload = () => {
     });
 
     friendList.bookmark.addEventListener("click", () => {
-        const jsonMyFriendList = JSON.parse(friendList.myFriendsList);
+        const myFriendsList = friendList.myFriendsList;
         if (friendList.bookmark.getAttribute("src").indexOf("star.svg") !== -1) {
             setBookmarkStar("../img/starYellow.svg");
-            makeBookmarkFriendList(jsonMyFriendList);
+            makeBookmarkFriendList(myFriendsList);
             return;
-        }
+        }   
         setBookmarkStar("../img/star.svg");
-        makeFriendList(jsonMyFriendList);
+        makeFriendList(myFriendsList);
     });
 };
