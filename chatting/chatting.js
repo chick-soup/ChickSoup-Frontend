@@ -274,7 +274,7 @@ const sendChatting = () => {
     } else if (image) {
         socket.emit('chatting', { 'roomId': roomId, "userId": userId, "chat": image.src, 'token': localStorage.getItem('access_token'), 'type': 'img' })
         image.parentNode.remove();
-    } else {
+    } else if (inputValue) {
         socket.emit('chatting', { 'roomId': roomId, "userId": userId, "chat": inputValue, 'token': localStorage.getItem('access_token'), 'type': 'str' })
     }
     chatting.chatInput.value = "";
