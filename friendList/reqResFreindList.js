@@ -17,24 +17,26 @@ const reqResFrame = (info, mode) => {
                 <p class="friendList_profile_userInfo_status_message">${info.status_message}</p>
             </div>
             ${mode === "res" ? `<div class="friendList_details">
-                <button class="friendList_details_button" onclick="acceptFriendRequest(${info.id})">수락</button>
+                <button class="friendList_details_button" onclick="acceptFriendRequest(${info.id}); removeRequestItem(this);">수락</button>
             </div>` : ""}
         </li>`;
     return frame;
 };
 
+const removeRequestItem = (el) => {
+    el.parentNode.parentNode.remove();
+};
+
 const acceptFriendRequest = (userId) => {
     const url = `/users/${userId}`;
-    axiosPOSTWithToken(url).then((datas) => {
-        setResultText("친구 추가 요청을 수락했습니다.");
-    }).catch((error) => {
+    axiosPOSTWithToken(url).catch((error) => {
         const state = error.response.status;
         if (state === 403)
             axiosRefresh();
         else if (state === 472)
             setResultText("이미 해당 사용자와 친구 관계입니다.");
     })
-}
+};
 
 const sideFeature = (method, userId, data) => {
     const url = `${server}/users/my/friends/${userId}`;
