@@ -13,16 +13,25 @@ const chatting = {
     "emoticonList": document.querySelectorAll('#emoticon-list > .center-view > ul > div > li > div > img'),
     "sendButton": document.querySelector('#hash_tag-btn > img'),
     "files": document.querySelector('#camera-file'),
-},
-    accessToken = localStorage.getItem('access_token'),
-    userId = localStorage.getItem("userId"),
-    roomId = localStorage.getItem("chicksoup-roomId");
+};
 let socket;
 // const usernickname = localStorage.getItem('username');
+
+const getLastTime = (chatTime) => {
+    // const chatTime = document.querySelectorAll('.other-chat-time');
+    if (chatTime.length !== 0)
+        return chatTime[chatTime.length - 1].children[1].children[0].innerText;
+};
 
 const numberWithTenDigit = (n, width = 2) => { // 10자리 숫자로 만드는 함수
     n = n + "";
     return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
+};
+
+const getCurrentTime = (time) => {
+    const date = new Date(time * 1000),
+        timeSentence = `${date.getHours() <= 11 ? '오전' : '오후'} ${date.getHours()}: ${numberWithTenDigit(date.getMinutes())}`;
+    return timeSentence;
 };
 
 const axiosRefresh = () => {
@@ -45,15 +54,12 @@ const axiosRefresh = () => {
 };
 
 const otherChatListTemplate = (name, text, time, type) => {
-    const date = new Date(time * 1000),
-        chatTime = document.querySelectorAll('.other-chat-time'),
-        lastTime = chatTime.length !== 0 ? chatTime[chatTime.length - 1].children[1].children[0].innerText : "",
-        timeSentence = `${date.getHours() <= 11 ? '오전' : '오후'} 
-            ${date.getHours()}: ${numberWithTenDigit(date.getMinutes())}`,
+    const chatTime = document.querySelectorAll('.other-chat-time'),
+        lastTime = getLastTime(chatTime),
+        timeSentence = getCurrentTime(time),
         template = `<div class="other-chat-list">
         <div class="profile">
-            <a href="#">
-            <!-- 프로필 이동 -->
+            <a href="#"><!-- 프로필 이동 -->
                 <img src="http://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${1}.png" alt="profileImage">
             </a>
         </div>
@@ -75,15 +81,11 @@ const otherChatListTemplate = (name, text, time, type) => {
 
 const myChatListTemplate = (text, type) => {
     const template = `<div class="my-chat-list">
-        <ul>
-            <li>
-                <div ${text ? `class="my-first-message"` : ""}>
-                    <h2>
-                        ${type === 'str' ? `<span>${text}</span>` : type === 'img' ? `<img src=${text} />` : ''}
-                    </h2>
-                </div>
-            </li>
-        </ul>
+        <ul><li>
+            <div ${text ? `class="my-first-message"` : ""}>
+                <h2>${type === 'str' ? `<span>${text}</span>` : type === 'img' ? `<img src=${text} />` : ''}</h2>
+            </div>
+        </li></ul>
     </div>`;
     return template
 };
@@ -91,19 +93,30 @@ const myChatListTemplate = (text, type) => {
 const chattingItemTemplate = (text, time, way, type) => {
     if (chatting.sendButton.getAttribute('src').split('/')[2] !== 'hashtag.png' || text) {
         if (way === 'i') {
-            const template = `<li>
+            // const template = `<li>
+            //     <div>
+            //         <h2>${type === 'str' ? `<span>${text}</span>` : type === 'img' ? `<img src=${text} />` : ''}</h2>
+            //     </div>
+            // </li>`;
+            const chatTime = document.querySelectorAll('.my-chat-time'),
+                lastTime = getLastTime(chatTime),
+                timeSentence = getCurrentTime(time),
+                template = `<li>
+                <div class="my-chat-time">
+                    <h4><span>99</span></h4>
+                    <h4><span>
+                        ${timeSentence === lastTime ? `${chatTime[chatTime.length - 1].children[1].innerText = ''}${timeSentence}` : timeSentence}
+                    </span></h4>
+                </div>
                 <div>
-                    <h2>
-                        ${type === 'str' ? `<span>${text}</span>` : type === 'img' ? `<img src=${text} />` : ''}
-                    </h2>
+                    <h2>${type === 'str' ? `<span>${text}</span>` : type === 'img' ? `<img src=${text} />` : ''}</h2>
                 </div>
             </li>`;
             return template;
         } else if (way === 'you') {
-            const date = new Date(time * 1000),
-                chatTime = document.querySelectorAll('.other-chat-time'),
-                lastTime = chatTime.length !== 0 || chatTime[chatTime.length - 1].children[1].children[0].innerHTML,
-                timeSentence = `${date.getHours() <= 11 ? '오전' : '오후'} ${date.getHours()}: ${numberWithTenDigit(date.getMinutes())}`,
+            const chatTime = document.querySelectorAll('.other-chat-time'),
+                lastTime = getLastTime(chatTime),
+                timeSentence = getCurrentTime(time),
                 template = `<li>
                 <div>
                     <h2>${type === 'str' ? `<span>${text}</span>` : type === 'img' ? `<img src=${text} />` : ''}</h2>
@@ -124,8 +137,8 @@ const chatDayTemplate = (time) => {
     const week = ['일', '월', '화', '수', '목', '금', '토'],
         date = new Date(time * 1000),
         template = `<div class="chat-day">
-            <div class="line"></div>
-            <h4><span>${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일 ${week[date.getDay()]}요일</span></h4>
+        <div class="line"></div>
+        <h4><span>${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일 ${week[date.getDay()]}요일</span></h4>
     </div>`;
     return template;
 };
@@ -153,18 +166,19 @@ const alarmSwitch = () => {
 };
 
 const toggleReadonly = () => {
-    const input = document.querySelector('#title > input');
+    const input = document.querySelector('#title > input'),
+        roomId = localStorage.getItem("chicksoup-roomId");
     input.readOnly = !input.readOnly;
     if (input.readOnly) {
         axios({
             method: 'put',
             url: 'http://10.156.147.139:3000/room',
             headers: {
-                Authorization: accessToken
+                Authorization: localStorage.getItem('access_token')
             },
             data: {
-                roomId: roomId,
-                roomName: input.value
+                "roomId": roomId,
+                "roomName": input.value
             }
         }).then(() => {
             input.readOnly = true;
@@ -248,6 +262,8 @@ const getClickedEmo = (e) => {
 
 const sendChatting = () => {
     const inputValue = chatting.chatInput.value,
+        userId = localStorage.getItem("userId"),
+        roomId = localStorage.getItem("chicksoup-roomId"),
         image = document.querySelector('.image > img');
     if ((image && inputValue)) {
         socket.emit('chatting', { 'roomId': roomId, "userId": userId, "chat": image.src, 'token': localStorage.getItem('access_token'), 'type': 'img' });
@@ -268,7 +284,7 @@ const axiosGETProfile = (url) => {
         url: `http://ec2-13-125-190-40.ap-northeast-2.compute.amazonaws.com:8080/users${url}`,
         method: "GET",
         headers: {
-            "Authorization": accessToken
+            "Authorization": localStorage.getItem('access_token')
         }
     });
 };
@@ -278,7 +294,7 @@ const getMyProfile = () => {
         method: "GET",
         url: "http://ec2-13-125-190-40.ap-northeast-2.compute.amazonaws.com:8080/users/my/profile",
         headers: {
-            "Authorization": accessToken
+            "Authorization": localStorage.getItem('access_token')
         }
     }).then((res) => {
         localStorage.setItem('userId', res.data.id);
@@ -332,22 +348,25 @@ const connectSocket = () => {
 };
 
 const connectGetChat = () => {
-    socket.emit("getChat", { roomId: roomId, token: accessToken });
+    const roomId = localStorage.getItem("chicksoup-roomId"),
+        access_token = localStorage.getItem("access_token");
+    socket.emit("getChat", { roomId: roomId, token: access_token });
     socket.on("chatData", (data) => {
         data.forEach((data) => {
             data.name = JSON.parse(data.name);
             const chk = document.querySelectorAll('.other-chat-list'),
                 chkArr = chk[chk.length - 1],
                 otherName = chkArr === undefined ? undefined : chkArr.children[1].children[0].children[0].innerText,
-                chatMainChildren = chatting.chatMain.children;
-            let lastChattingName = chatMainChildren[chatMainChildren.length - 1] === undefined
-                ? "chat-day"
-                : chatMainChildren[chatMainChildren.length - 1].className;
+                chatMainChildren = chatting.chatMain.children,
+                userId = localStorage.getItem("userId");
+            let lastChattingName = chatMainChildren[chatMainChildren.length - 1] === undefined ? "chat-day" : chatMainChildren[chatMainChildren.length - 1].className;
             insertChatDate(data.time);
             if (data.userId === userId) {
                 if (lastChattingName === 'other-chat-list' || lastChattingName === 'chat-day') {
+                    console.log(1);
                     chatting.chatMain.insertAdjacentHTML('beforeend', myChatListTemplate(data.chat, data.type));
                 } else if (lastChattingName === 'my-chat-list') {
+                    console.log(2);
                     const myChatList = document.querySelectorAll('.my-chat-list');
                     myChatList[myChatList.length - 1].children[myChatList[myChatList.length - 1].children.length - 1]
                         .insertAdjacentHTML('beforeend', chattingItemTemplate(data.chat, data.time, 'i', data.type));
@@ -355,8 +374,10 @@ const connectGetChat = () => {
             } else if (data.userId !== userId) {
                 lastChattingName = chatMainChildren[chatMainChildren.length - 1].className;
                 if (lastChattingName === 'chat-day' || (lastChattingName === 'my-chat-list' || otherName !== data.name.nickname)) {
+                    console.log(3);
                     chatting.chatMain.insertAdjacentHTML('beforeend', otherChatListTemplate(data.name.nickname, data.chat, data.time, data.type));
                 } else if (lastChattingName === 'other-chat-list') {
+                    console.log(4);
                     const otherChatList = document.querySelectorAll('.other-chat-list');
                     otherChatList[otherChatList.length - 1].children[otherChatList[otherChatList.length - 1].children.length - 1]
                         .insertAdjacentHTML('beforeend', chattingItemTemplate(data.chat, data.time, 'you', data.type));
@@ -368,27 +389,30 @@ const connectGetChat = () => {
 };
 
 const connectGetLiveChat = () => {
-    socket.on('realTimeChat', (data) => {
+    socket.on('realTimeChat', (data) => {   
         data.name = JSON.parse(data.name);
         const chatMainChildren = chatting.chatMain.children,
-            lastChattingName = chatMainChildren[chatMainChildren.length - 1] === undefined
-                ? 'chat-day'
-                : chatMainChildren[chatMainChildren.length - 1].className;
+            lastChattingName = chatMainChildren[chatMainChildren.length - 1] === undefined ? 'chat-day' : chatMainChildren[chatMainChildren.length - 1].className,
+            userId = localStorage.getItem("userId");
         insertChatDate(data.time);
         if (data.userId === userId) {
             if (lastChattingName === "other-chat-list" || lastChattingName === "chat-day") {
+                console.log(1);
                 chatting.chatMain.insertAdjacentHTML("beforeend",
                     myChatListTemplate(data.chat, data.type));
             } else if (lastChattingName === "my-chat-list") {
+                console.log(2);
                 const myChatList = document.querySelectorAll('.my-chat-list');
                 myChatList[myChatList.length - 1].children[myChatList[myChatList.length - 1].children.length - 1]
                     .insertAdjacentHTML('beforeend', chattingItemTemplate(data.chat, data.time, 'i', data.type));
             }
         } else if (data.userId !== userId) {
             if (lastChattingName === "my-chat-list" || lastChattingName === "chat-day") {
+                console.log(3);
                 chatting.chatMain.insertAdjacentHTML("beforeend",
                     otherChatListTemplate(data.name.nickname, data.chat, data.time, data.type));
             } else if (lastChattingName === "other-chat-list") {
+                console.log(4);
                 const otherChatList = document.querySelectorAll('.other-chat-list');
                 otherChatList[otherChatList.length - 1].children[otherChatList[otherChatList.length - 1].children.length - 1]
                     .insertAdjacentHTML('beforeend', chattingItemTemplate(data.chat, data.time, 'you', data.type));
