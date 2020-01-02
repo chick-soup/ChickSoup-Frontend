@@ -190,30 +190,6 @@ ul > h4 {
     left: -66px;
 }
 
- /* .my-first-message::before {
-    content: '';
-    position: absolute;
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
-    z-index: -1;
-    background: #FEE100;
-    left: 98px;
-    top: -11px;
-}
-
-.my-first-message::after {
-    content: '';
-    position: absolute;
-    height: 70px;
-    width: 70px;
-    border-radius: 25px;
-    z-index: -1;
-    background: #B2C7D9;
-    top: -15px;
-    left: 106px;
-} */
-
 .my-chat-list > ul > li {
     height: auto;
     box-sizing: border-box;
@@ -688,32 +664,23 @@ ul li div h2 > img {
 
 #more-function {
     background-color: #F0F0F0;
-    height: 350px;
+    height: 250px;
     display: none;
-    padding: 88px 180px;
     box-sizing: border-box;
 }
 
 #more-function > div {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    padding-top: 32px;
 }
 
-#more-function > div > div > div > label {
-    width: 100%;
-    height: 100%;
-}
 
-#more-function > div > div > div{
-    width: 150px;
-    height: 150px;
-    margin-bottom: 16px;
-}
-
-#more-function > div > div {
-    width: 150px;
-    height: 150px;
+#more-function > div > div > div {
+    width: 100px;
+    height: 100px;
+    margin: 16px 32px;
 }
 
 #more-function > div > div > h4 {
