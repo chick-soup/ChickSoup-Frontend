@@ -151,7 +151,7 @@ ul > h4 {
     margin-bottom: 10px;
 }
 
-.other-chat-list ul  li  div:not(.other-chat-time), .my-chat-list ul  li  div {
+.other-chat-list ul  li  div:not(.other-chat-time), .my-chat-list ul  li  div:not(.my-chat-time) {
     width: auto;
     height: auto;
     min-height: 20px;
@@ -234,8 +234,12 @@ ul > h4 {
     margin-bottom: 10px;
 }
 
-.my-chat-list > ul > li > div {
-    background-color: #FEE100;
+.my-chat-list > ul > li > div { 
+    text-align: right;
+}
+
+.my-chat-list > ul > li > div:nth-child(2), .my-first-message { 
+    background-color: #FEE100 !important;
 }
 
 .other-chat-time, .my-chat-time {
@@ -243,7 +247,7 @@ ul > h4 {
     width: 85px;
 }
 
-.other-chat-time > h4:nth-child(1) {
+.other-chat-time > h4:nth-child(1), .my-chat-time > h4:nth-child(1) {
     color: #FEE100;
 }
 
