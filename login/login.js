@@ -28,6 +28,10 @@ const signin = () => {
         };
     errorText.innerHTML = "잠시만 기다려 주세요.";
     axiosPost(url, data).then((datas) => {
+        sessionStorage.removeItem("chicksoup-myFriendList");
+        localStorage.removeItem("chicksoup-roomId");
+        localStorage.removeItem("userName");
+        localStorage.removeItem("userId");
         localStorage.setItem("access_token", datas.data.access_token);
         localStorage.setItem("refresh_token", datas.data.refresh_token);
         location.href = "../myProfile/myProfile.html";

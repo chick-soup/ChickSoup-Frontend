@@ -32,8 +32,12 @@ const getUserId = () => {
 };
 
 const logout = () => {
+    sessionStorage.removeItem("chicksoup-myFriendList");
     localStorage.removeItem("refresh_token");
     localStorage.removeItem("access_token");
+    localStorage.removeItem("chicksoup-roomId");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userId");
 };
 
 window.onload = () => {

@@ -147,7 +147,9 @@ const memberItemTemplate = (name, id) => {
     const template = `<li>
         <div>
             <div class="profile-img">
-                <a><img src="http://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${id}.png" alt=""></a>
+                <a>
+                    <img src="http://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${id}.png" alt="profileImage"/>
+                </a>
             </div>
             <div class="profile-name">
                 <span>${name}</span>
@@ -309,10 +311,11 @@ const getMyProfile = () => {
 };
 
 const getMemberProfile = (userId) => {
+    const memberList = document.querySelector("#member-list > ul");
     axiosGETProfile(`/${parseInt(userId)}`).then(res => {
-        document.querySelector("#member-list > ul").insertAdjacentHTML("afterbegin", memberItemTemplate(res.data.nickname, res.data.id));
-    }).catch(err => {
-        console.log(err);
+        memberList.insertAdjacentHTML("afterbegin", memberItemTemplate(res.data.nickname, res.data.id));
+    }).catch((err) => {
+        memberList.insertAdjacentHTML("afterbegin", memberItemTemplate("알 수 없는 상대", 1));
     })
 };
 
@@ -363,10 +366,8 @@ const connectGetChat = () => {
             insertChatDate(data.time);
             if (data.userId === userId) {
                 if (lastChattingName === 'other-chat-list' || lastChattingName === 'chat-day') {
-                    console.log(1);
                     chatting.chatMain.insertAdjacentHTML('beforeend', myChatListTemplate(data.chat, data.type));
                 } else if (lastChattingName === 'my-chat-list') {
-                    console.log(2);
                     const myChatList = document.querySelectorAll('.my-chat-list');
                     myChatList[myChatList.length - 1].children[myChatList[myChatList.length - 1].children.length - 1]
                         .insertAdjacentHTML('beforeend', chattingItemTemplate(data.chat, data.time, 'i', data.type));
@@ -374,10 +375,8 @@ const connectGetChat = () => {
             } else if (data.userId !== userId) {
                 lastChattingName = chatMainChildren[chatMainChildren.length - 1].className;
                 if (lastChattingName === 'chat-day' || (lastChattingName === 'my-chat-list' || otherName !== data.name.nickname)) {
-                    console.log(3);
                     chatting.chatMain.insertAdjacentHTML('beforeend', otherChatListTemplate(data.name.nickname, data.chat, data.time, data.type));
                 } else if (lastChattingName === 'other-chat-list') {
-                    console.log(4);
                     const otherChatList = document.querySelectorAll('.other-chat-list');
                     otherChatList[otherChatList.length - 1].children[otherChatList[otherChatList.length - 1].children.length - 1]
                         .insertAdjacentHTML('beforeend', chattingItemTemplate(data.chat, data.time, 'you', data.type));
@@ -397,22 +396,18 @@ const connectGetLiveChat = () => {
         insertChatDate(data.time);
         if (data.userId === userId) {
             if (lastChattingName === "other-chat-list" || lastChattingName === "chat-day") {
-                console.log(1);
                 chatting.chatMain.insertAdjacentHTML("beforeend",
                     myChatListTemplate(data.chat, data.type));
             } else if (lastChattingName === "my-chat-list") {
-                console.log(2);
                 const myChatList = document.querySelectorAll('.my-chat-list');
                 myChatList[myChatList.length - 1].children[myChatList[myChatList.length - 1].children.length - 1]
                     .insertAdjacentHTML('beforeend', chattingItemTemplate(data.chat, data.time, 'i', data.type));
             }
         } else if (data.userId !== userId) {
             if (lastChattingName === "my-chat-list" || lastChattingName === "chat-day") {
-                console.log(3);
                 chatting.chatMain.insertAdjacentHTML("beforeend",
                     otherChatListTemplate(data.name.nickname, data.chat, data.time, data.type));
             } else if (lastChattingName === "other-chat-list") {
-                console.log(4);
                 const otherChatList = document.querySelectorAll('.other-chat-list');
                 otherChatList[otherChatList.length - 1].children[otherChatList[otherChatList.length - 1].children.length - 1]
                     .insertAdjacentHTML('beforeend', chattingItemTemplate(data.chat, data.time, 'you', data.type));
