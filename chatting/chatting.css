@@ -474,6 +474,7 @@ ul li div h2 > img {
 #pictures {
     width: auto;
     height: 250px;
+    overflow-y: scroll;
     margin-left: 15px;
     margin-right: 15px;
 }
@@ -489,9 +490,19 @@ ul li div h2 > img {
 
 }
 
+#pictures_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+#pictures_wrapper > div {
+    display: flex;
+    margin-bottom: 9px;
+}
 .picture-list-items {
+    display: flex;
     width: 200px;
-    height: auto;
+    height: 200px;
     margin-right: 9px;
 }
 

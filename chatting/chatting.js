@@ -13,6 +13,9 @@ const chatting = {
     "emoticonList": document.querySelectorAll('#emoticon-list > .center-view > ul > div > li > div > img'),
     "sendButton": document.querySelector('#hash_tag-btn > img'),
     "files": document.querySelector('#camera-file'),
+    "images": [],
+    "imageDiv": document.querySelector('#pictures_wrapper'),
+    "exitButton": document.querySelector('#exit > img'),
 };
 let socket;
 // const usernickname = localStorage.getItem('username');
@@ -33,6 +36,26 @@ const getCurrentTime = (time) => {
         timeSentence = `${date.getHours() <= 11 ? '오전' : '오후'} ${date.getHours()}: ${numberWithTenDigit(date.getMinutes())}`;
     return timeSentence;
 };
+
+const saveImages = (src) => {
+    chatting.images.push(src);
+}
+
+const insertImages = (src) => {
+    const template = `
+    <div class="picture-list-items">
+        <img src="${src}" alt="">
+    </div>`,
+        checkCount = document.querySelectorAll('.picture-list-items').length;
+        console.log(checkCount);
+    if (checkCount % 3 === 0) {
+        const div = document.createElement('div');
+        div.insertAdjacentHTML('afterbegin', template);
+        chatting.imageDiv.insertAdjacentElement('beforeend', div);
+    } else {
+        chatting.imageDiv.children[chatting.imageDiv.children.length - 1].insertAdjacentHTML('beforeend', template);
+    }
+}
 
 const axiosRefresh = () => {
     axios({
@@ -248,8 +271,8 @@ const checkUserDidInput = (e) => {
         hashButtonImg.src = '../img/moreOptionOn.png';
     else
         hashButtonImg.src = '../img/hashtag.png';
-    if (inputValue === "")
-        return;
+    // if (inputValue === "")
+    //     return;
     if (e.keyCode === 13) {
         sendChatting();
         return;
@@ -279,6 +302,24 @@ const sendChatting = () => {
     }
     chatting.chatInput.value = "";
     checkUserDidInput({ keyCode: null });
+};
+
+const exitChatting = () => {
+    if (confirm('정말 떠나시겠습니까?'))
+        axios({
+            url: 'http://10.156.147.139:3000/room',
+            method: "delete",
+            headers: {
+                "Authorization": localStorage.getItem('access_token')
+            },
+            data: {
+                roomId: localStorage.getItem("chicksoup-roomId")
+            }
+        }).then(res => {
+            console.log(res);
+        }).catch(err => {
+                console.log(err);
+        })
 };
 
 const axiosGETProfile = (url) => {
@@ -356,6 +397,10 @@ const connectGetChat = () => {
     socket.emit("getChat", { roomId: roomId, token: access_token });
     socket.on("chatData", (data) => {
         data.forEach((data) => {
+            if (data.type === 'img') {
+                saveImages(data.chat);
+                insertImages(data.chat);
+            }
             data.name = JSON.parse(data.name);
             const chk = document.querySelectorAll('.other-chat-list'),
                 chkArr = chk[chk.length - 1],
@@ -390,6 +435,10 @@ const connectGetChat = () => {
 const connectGetLiveChat = () => {
     socket.on('realTimeChat', (data) => {   
         data.name = JSON.parse(data.name);
+        if (data.type === 'img') {
+            saveImages(data.chat);
+            insertImages(data.chat);
+        }
         const chatMainChildren = chatting.chatMain.children,
             lastChattingName = chatMainChildren[chatMainChildren.length - 1] === undefined ? 'chat-day' : chatMainChildren[chatMainChildren.length - 1].className,
             userId = localStorage.getItem("userId");
@@ -474,6 +523,8 @@ const addClickEventPlusArg = (el, callback, argu) => {
     el.addEventListener("click", () => callback(argu));
 };
 
+
+
 window.onload = () => {
     checkUserIsLogined();
     insertEmoList();
@@ -483,6 +534,7 @@ window.onload = () => {
     addClickEvent(chatting.changeDiv, toggleReadonly);
     addClickEvent(chatting.hiddenDiv, disShowHiddenDiv);
     addClickEvent(chatting.sendButton, sendChatting);
+    addClickEvent(chatting.exitButton, exitChatting);
     addClickEventPlusArg(chatting.chatMain, showModeOption, "main");
     addClickEventPlusArg(chatting.emoButton, showModeOption, "emo");
     addClickEventPlusArg(chatting.moreOption, showModeOption, "func");
