@@ -178,7 +178,7 @@ const makeFriendList = (list) => {
 };
 
 const makeMyList = (myData) => {
-    const myImg = document.querySelector("img");
+    const myImg = document.querySelector(".friendList_profile_myImage");
     myImg.setAttribute("src", `http://chicksoup.s3.ap-northeast-2.amazonaws.com/media/image/user/profile/${myData.id}.png`);
     myImg.addEventListener("click", () => {
         sessionStorage.removeItem("chicksoup-profile");
