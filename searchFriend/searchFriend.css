@@ -1,0 +1,102 @@
+body {
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-color: #F6F6F6;
+    background-image: url('../img/settingBackImg.svg');
+    z-index: -100;
+}
+#searchFriend_main {
+    width: 1220px;
+    margin: 0 auto;
+    flex: 1;
+}
+#search_div, #search_result, .friendList_profile_list {
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+}
+#search_div {
+    position: relative;
+    padding-top: 16px;
+    font-size: 30px;
+}
+#search_div > h2 {
+    color: #FEE100;
+}
+#search_div_div {
+    width: 100%;
+    position: relative;
+}
+#search_div_div > input {
+    margin-top: 32px;
+    width: 100%;
+    height: 70px;
+    padding: 15px 22px 11px;
+    border: none;
+    border-bottom: 4px solid #FEE100;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 20px;
+    outline: none;
+}
+#search_div_div > img {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+}
+#loadingRing {
+    bottom: 5px !important;
+    right: 4px !important;
+    height: 64px !important;
+    width: 64px !important;
+}
+#search_result {
+    width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 16px 0;
+}
+.friendList_profile_list > img {
+    max-height: 100px;
+    max-width: 150px;
+    padding: 24px;
+    background-color: #969696;
+}
+.friendList_profile_userInfo_name {
+    margin: 16px 0;
+    font-size: 20px;
+}
+.friendList_details_button {
+    padding: 8px 16px;
+    border-radius: 24px;
+    border: 1.5px solid #3B1C1C;
+    font-size: 16px;
+    color: #3B1C1C;
+    background-color: white;
+    outline: none;
+    cursor: pointer;
+}
+
+.shake {
+    /* Start the shake animation and make the animation last for 0.5 seconds */
+    animation: shake 0.5s;
+    /* When the animation is finished, start again */
+    animation-iteration-count: infinite;
+}
+@keyframes shake {
+    0%  { transform: translate(1px, 1px); }
+    10% { transform: translate(-1px, -2px); }
+    20% { transform: translate(-3px, 0px); }
+    30% { transform: translate(3px, 2px); }
+    40% { transform: translate(1px, -1px); }
+    50% { transform: translate(-1px, 2px); }
+    60% { transform: translate(-3px, 1px); }
+    70% { transform: translate(3px, 1px); }
+    80% { transform: translate(-1px, -1px); }
+    90% { transform: translate(1px, 2px); }
+    100% { transform: translate(1px, -2px); }
+}
